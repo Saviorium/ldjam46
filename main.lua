@@ -4,7 +4,7 @@ require 'conf'
 states = {game = require "game.states.game"}
 
 function love.load()
-    love.window.setTitle("Ludum Dare 43 Game")
+    love.window.setTitle("Ludum Dare 46 Game")
     StateManager.switch( states.game )
 end
 
