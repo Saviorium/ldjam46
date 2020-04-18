@@ -2,11 +2,12 @@ Class = require "lib.hump.class"
 Vector = require "lib.hump.vector"
 
 PhysicsObject = Class {
-    init = function(self, x, y, height, width)
+    init = function(self, x, y, image)
         self.curr_pos = Vector( x, y )
         self.cur_speed = Vector( 0, 0)
-        self.height = height
-        self.width  = width
+        self.image = image
+        self.height = self.image:getHeight()
+        self.width  = self.image:getWidth()
     end,
     minGroundNormal = 0.05,
     minMove         = 0.01
@@ -23,16 +24,17 @@ end
 
 function PhysicsObject:move( moveVector )
   self.curr_pos = self.curr_pos + moveVector
-  self.collider:move(moveVector)
+  --self.collider:move(moveVector)
 end
 
 function PhysicsObject:draw()
-    love.graphics.circle("fill", 
-                         self.curr_pos.x, 
-                         self.curr_pos.y, 
-                         self.width)
+    love.graphics.draw(self.image,
+                       self.curr_pos.x,
+                       self.curr_pos.y, 
+                       0, 
+                       scale, 
+                       scale )
     self:debugDraw()
-    self.cur_speed:projectOn( self.deltaVector:perpendicular()) 
 end
 
 function PhysicsObject:onCollide()
@@ -54,5 +56,7 @@ function PhysicsObject:debugDraw()
         love.graphics.setColor(0,0,255)
         love.graphics.line( x, y, x+self.deltaVector:perpendicular().x*10, y+self.deltaVector:perpendicular().y*10)
     end 
+    love.graphics.setColor(255,255,255)
+end
 
 return PhysicsObject
