@@ -1,6 +1,7 @@
 local game = {}
 Player = require "game/classes/player"
 Asteroid = require "game/classes/asteroid"
+Map = require "game/classes/map/map"
 Camera = require "lib.hump.camera"
 
 function game:enter() -- Запускается при запуске приложения
@@ -14,6 +15,9 @@ function game:enter() -- Запускается при запуске прило
 	background_image = love.graphics.newImage('data/images/backgroud.jpg')
 	background_image:setFilter("nearest", "nearest")
 	camera = Camera(Player.curr_pos.x, Player.curr_pos.y)
+	Map = Map(love.graphics.newImage('data/images/map.png'),
+			  love.graphics.newImage('data/images/map.png'),
+			  love.graphics.newImage('data/images/map.png'))
 	-- Astreroids = {}
 	-- for i=1, 10 do
 	-- 	table.insert(Astreroids,
@@ -35,12 +39,7 @@ end
 
 function game:draw() -- отрисовка каждый кадр
     camera:attach()
-    love.graphics.draw(background_image,
-		               0,
-		               0, 
-		               0, 
-		               self.scale, 
-		               self.scale )
+    Map:draw()
 	Player:draw()	
 	-- for _,obj in pairs(Astreroids) do
 	-- 	obj:draw()
@@ -55,6 +54,7 @@ function game:update( dt ) -- Каждый кадр
 	-- end
     local dx,dy = Player.curr_pos.x - camera.x, Player.curr_pos.y - camera.y
     camera:move(dx/2, dy/2)
+    Map:update(dt)
 end
 
 return game

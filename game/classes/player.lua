@@ -10,13 +10,11 @@ Player = Class {
         self.angle = andgle
         self.turn_speed = 10
         self.speed = speed
-        self.camera = Camera(self.curr_pos.x, self.curr_pos.y)
     end
 }
 
 function Player:draw()
 
-    --self.camera:attach()
 
     love.graphics.draw(self.image,
                        self.curr_pos.x,
@@ -26,10 +24,6 @@ function Player:draw()
                        scale,
                        self.width/2,
                        self.height/2 )
-    --self:debugDraw()
-    love.graphics.print( self.camera.x..';'..self.camera.y, 0, 0)
-
-    --self.camera:detach()
 end
 
 function Player:update( dt )
