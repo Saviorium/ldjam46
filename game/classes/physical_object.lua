@@ -18,9 +18,8 @@ function PhysicsObject:registerCollider(hc_instance)
 end
 
 function PhysicsObject:update( dt )
-  self:onCollide()
-    self.collider:draw('fill')
   self:move( self.cur_speed )
+  self:onCollide()
 end
 
 function PhysicsObject:move( moveVector )
@@ -39,10 +38,8 @@ function PhysicsObject:draw()
 end
 
 function PhysicsObject:onCollide()
-    local collisions = HC:collisions(self.collider)
     for shape, delta in pairs(collisions) do
-      print('Touching '..shape:center()) 
-      shape:draw('fill')
+      self:destroy()
     end
 end
 

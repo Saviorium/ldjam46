@@ -9,7 +9,7 @@ Tile = Class {
         self.height = self.image:getHeight()*scale
         self.speed_koef = speed_koef
         local bool = 1
-        for _,asteroid in pairs(Astreroids) do
+        for _,asteroid in pairs(Asteroids) do
             if asteroid.curr_pos.x > x 
            and asteroid.curr_pos.x < x + self.width
            and asteroid.curr_pos.y > y 
@@ -31,10 +31,12 @@ Tile = Class {
                                     'iron'  -- type
                                    )
                     if next(HC:collisions(temp.collider)) == nil then
-                        table.insert(Astreroids,
+                        table.insert(Asteroids,
                                      temp
                                     )
                         bool = 0
+                    else
+                      HC:remove(temp.collider)
                     end
                 end
             end

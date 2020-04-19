@@ -8,6 +8,10 @@ Player = Class {
     init = function(self, x, y, andgle, image, speed, maxVolume, HP)
     	PhysicsObject.init(self, x, y, image)
         self.maxVolume = maxVolume
+
+        self.iron = 0
+        self.ice = 0
+        
         self.HP = HP
         self.angle = andgle
         self.turn_speed = 10/math.pi
@@ -15,7 +19,10 @@ Player = Class {
         self.strafe_speed = speed/2
         self.back_speed   = speed/10
         self.stop_speed   = 0.5
+        self.rate_of_fire   = 1
+        self.last_fire = 0
         self:registerCollider(HC)
+        self.collider.type = 'player'
         self.buttons = {up    = 'w',
                         down  = 's',
                         left  = 'a',
@@ -86,6 +93,7 @@ function Player:update( dt )
     self:onCollide()
     self:move( self.cur_speed )
     Bullets_handler:update(dt)
+    self.last_fire = self.last_fire+dt
 end
 
 function Player:debugDraw()
@@ -127,7 +135,25 @@ function Player:fireLazer()
 end
 
 function Player:fireGatling()
-    Bullets_handler:fire( self, 2, self.width/2, 0 ) 
+    if self.last_fire > self.rate_of_fire then
+        self.last_fire = 0
+        Bullets_handler:fire( self, 2, self.width, 0 ) 
+    end
+end
+
+function Player:onCollide()
+    for shape, delta in pairs(HC:collisions(self.collider)) do
+      if shape.type == 'asteroid' then 
+        if self.cur_speed:len() > 10 then
+          self.HP = self.HP - self.cur_speed:len()/10
+          print(self.HP)
+        end
+        self.curr_pos.x = self.curr_pos.x+delta.x
+        self.curr_pos.y = self.curr_pos.y+delta.y
+        self.collider:move( delta.x, delta.y )
+        self.cur_speed = -self.cur_speed*0.1
+      end
+    end
 end
 
 return Player

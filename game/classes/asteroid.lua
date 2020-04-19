@@ -1,7 +1,6 @@
 Class = require "lib.hump.class"
 PhysicsObject = require "game/classes/physical_object"
-Iron = require "game/classes/iron"
-Ice = require "game/classes/ice"
+Drop = require "game/classes/drop"
 
 Asteroid = Class {
     __includes = PhysicsObject,
@@ -11,12 +10,20 @@ Asteroid = Class {
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
         self:registerCollider(HC)
+        self.collider.type = 'asteroid'
     end
 }
 
 
 function Asteroid:destroy()
-    self:destroy_func()
+  for index, asteroid in pairs(Asteroids) do
+    if asteroid.curr_pos.x == self.curr_pos.x and
+       asteroid.curr_pos.y == self.curr_pos.y then
+      Asteroids[index] = nil
+    end
+  end
+  if self.destroy_func then self.destroy_func(self) end
+  HC:remove(self.collider)
 end
 
 function Asteroid:draw()
@@ -28,18 +35,24 @@ function Asteroid:draw()
                        scale,
                        self.width/2,
                        self.height/2 )
+    love.graphics.print(self.HP,
+                        self.curr_pos.x,
+                        self.curr_pos.y
+                       )
 end
 
-function Asteroid:dropIron()
-  table.insert(Loot,Iron(self.curr_pos.x, self.curr_pos.y, math.random(10,100)))
+function Asteroid.dropIron(self)
+  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(10,100),'iron'))
 end
-function Asteroid:dropIce()
-  table.insert(Loot,Ice(self.curr_pos.x, self.curr_pos.y, math.random(50,400)))
+
+function Asteroid.dropIce(self)
+  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(50,400),'ice'))
 
 end
-function Asteroid:dropAll()
-  table.insert(Loot,Iron(self.curr_pos.x, self.curr_pos.y, math.random(100,200)))
-  table.insert(Loot,Ice(self.curr_pos.x, self.curr_pos.y, math.random(100,500)))
+
+function Asteroid.dropAll(self)
+  table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, math.random(100,200) ,'iron'))
+  table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,500),'ice'))
 end
 
 function Asteroid:randomize()
@@ -60,6 +73,19 @@ function Asteroid:randomize()
     self.destroy_func = self.dropAll
     self.image = love.graphics.newImage('data/images/asteroid/all_'..(math.random(1,5))..'.png')
   end
+end
+
+function Asteroid:onCollide()
+    for shape, delta in pairs(HC:collisions(self.collider)) do
+      if shape.type == 'bullet' then 
+        self.HP = self.HP - 100
+        if self.HP < 0 then
+          self:destroy()
+        end
+        Bullets_handler.bullets_on_screen[shape.index] = nil
+        HC:remove(shape)
+      end
+    end
 end
 
 return Asteroid
