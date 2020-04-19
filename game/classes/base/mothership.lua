@@ -6,11 +6,11 @@ Module = require "game.classes.base.module"
 MotherShip = Class {
     init = function(self)
         self.storage = {
-            energy     = StorageUnit(3000, 2000),
-            water      = StorageUnit(3000, 2000),
-            foodVeg    = StorageUnit(100, 50),
-            foodAnimal = StorageUnit(100, 50),
-            oxygen     = StorageUnit(10000, 10000),
+            energy     = StorageUnit(3000, 2000, "Energy"),
+            water      = StorageUnit(3000, 2000, "Water"),
+            foodVeg    = StorageUnit(100, 50, "Vegetables"),
+            foodAnimal = StorageUnit(100, 50, "Animals"),
+            oxygen     = StorageUnit(10000, 10000, "Oxygen"),
         }
 
         local vegFarm = Farm(5, 10)
@@ -38,6 +38,10 @@ function MotherShip:update(dt)
     for _, module in pairs(self.modules) do
         module:update(dt)
 	end
+end
+
+function MotherShip:getStorage()
+    return self.storage
 end
 
 return MotherShip

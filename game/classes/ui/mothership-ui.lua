@@ -13,6 +13,11 @@ MotherShipUI = Class {
 function MotherShipUI:initUI()
     local button = ButtonPlus(20, 20, function() self.motherShip:addMaxVegFarm() end)
     table.insert(self.buttons, button)
+
+    --for id, object in pairs(motherShip:getStorage()) do
+    --    table.insert(self.labels, object:getName())
+    --end
+
 end
 
 function MotherShipUI:registerButtons(eventManager)
@@ -30,6 +35,13 @@ function MotherShipUI:draw()
     end
     for id, object in pairs(self.buttons) do
         object:draw()
+    end
+    local i = 0
+    for id, object in pairs(motherShip:getStorage()) do
+        i = i+1
+        love.graphics.print(object:getName(), 10, 20*i)
+        love.graphics.print(object:getValue(), 80, 20*i)
+        love.graphics.print(object:getMax(), 150, 20*i)
     end
 end
 

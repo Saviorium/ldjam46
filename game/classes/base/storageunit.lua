@@ -1,9 +1,10 @@
 Class = require "lib.hump.class"
 
 StorageUnit = Class {
-    init = function(self, max, initial)
+    init = function(self, max, initial, name)
         self.max = max
         self.value = initial
+        self.name = name
     end
 }
 
@@ -15,6 +16,18 @@ end
 
 function StorageUnit:getLevel()
     return self.value / self.max
+end
+
+function StorageUnit:getName()
+    return self.name
+end
+
+function StorageUnit:getMax()
+    return self.max
+end
+
+function StorageUnit:getValue()
+    return self.value
 end
 
 return StorageUnit
