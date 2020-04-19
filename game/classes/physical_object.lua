@@ -38,9 +38,9 @@ function PhysicsObject:draw()
 end
 
 function PhysicsObject:onCollide()
-    for shape, delta in pairs(collisions) do
-      self:destroy()
-    end
+    -- for shape, delta in pairs(self.hc:collisions(bullet.collider)) do
+    --   self:destroy()
+    -- end
 end
 
 function PhysicsObject:debugDraw()

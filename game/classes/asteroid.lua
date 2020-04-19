@@ -16,12 +16,6 @@ Asteroid = Class {
 
 
 function Asteroid:destroy()
-  for index, asteroid in pairs(Asteroids) do
-    if asteroid.curr_pos.x == self.curr_pos.x and
-       asteroid.curr_pos.y == self.curr_pos.y then
-      Asteroids[index] = nil
-    end
-  end
   if self.destroy_func then self.destroy_func(self) end
   self.hc:remove(self.collider)
 end
@@ -42,17 +36,16 @@ function Asteroid:draw()
 end
 
 function Asteroid.dropIron(self)
-  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(10,100),'iron', self.hc))
+  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(10,100),'iron', table.maxn(Loot)+1, self.hc))
 end
 
 function Asteroid.dropIce(self)
-  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(50,400),'ice', self.hc))
-
+  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(50,400),'ice', table.maxn(Loot)+1, self.hc))
 end
 
 function Asteroid.dropAll(self)
-  table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, math.random(100,200),'iron', self.hc))
-  table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,500),'ice', self.hc))
+  table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, math.random(100,200),'iron', table.maxn(Loot)+1, self.hc))
+  table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,500),'ice', table.maxn(Loot)+1, self.hc))
 end
 
 function Asteroid:randomize()
@@ -73,19 +66,6 @@ function Asteroid:randomize()
     self.destroy_func = self.dropAll
     self.image = love.graphics.newImage('data/images/asteroid/all_'..(math.random(1,5))..'.png')
   end
-end
-
-function Asteroid:onCollide()
-    for shape, delta in pairs(self.hc:collisions(self.collider)) do
-      if shape.type == 'bullet' then 
-        self.HP = self.HP - 100
-        if self.HP < 0 then
-          self:destroy()
-        end
-        Bullets_handler.bullets_on_screen[shape.index] = nil
-        self.hc:remove(shape)
-      end
-    end
 end
 
 return Asteroid

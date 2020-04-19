@@ -2,7 +2,7 @@
 
 MotherShip = require "game.classes.base.mothership"
 Clock = require "game.classes.clock"
-
+debug_physics = true
 local game = {}
 
 motherShip = nil

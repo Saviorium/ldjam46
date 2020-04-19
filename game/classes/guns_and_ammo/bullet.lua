@@ -3,16 +3,17 @@ Vector = require "lib.hump.vector"
 
 Bullet = Class {
     __includes = PhysicsObject,
-    init = function(self, x, y, image, speed, angle, index)
+    init = function(self, x, y, image, speed, angle, hc)
         PhysicsObject.init(self, x, y, image)
         self.speed = speed
         self.angle = angle
+        self.hc = hc
         self.cur_speed = Vector(speed*math.cos(angle),
                                 speed*math.sin(angle))
-        self:registerCollider(HC)
+        self:registerCollider(self.hc)
         self.collider.type = 'bullet'
-        self.collider.index = index
         self.time_to_live = 3
+        self.damage = 50
     end
 }
 
@@ -31,9 +32,6 @@ function Bullet:update( dt )
   self:move( self.cur_speed )
   if self.time_to_live > 0 then
     self.time_to_live = self.time_to_live - dt
-  else
-    Bullets_handler.bullets_on_screen[self.collider.index] = nil
-    HC:remove(self.collider)
   end
 end
 

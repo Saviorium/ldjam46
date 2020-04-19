@@ -13,7 +13,7 @@ function cosmos:enter() -- Запускается при запуске прил
 					0, --angle
 					love.graphics.newImage('data/images/shuttle.png'), 
 					4, --speed
-					100, --maxVolume
+					10000, --maxVolume
 					100,  -- HP
 					self.hc)
 	self.camera = Camera(self.player.curr_pos.x, self.player.curr_pos.y)
@@ -28,6 +28,9 @@ function cosmos:mousepressed(x, y)
 end
 
 function cosmos:keypressed( key ) -- кнопка нажата
+    if key == "space" then
+        StateManager.switch( states.base )
+    end
 end
 
 function cosmos:draw() -- отрисовка каждый кадр
@@ -37,12 +40,26 @@ function cosmos:draw() -- отрисовка каждый кадр
 	for _,obj in pairs(Asteroids) do
 		obj:draw()
 	end
+	for _,obj in pairs(Loot) do
+		obj:draw()
+	end
+	if debug_physics then
+		love.graphics.setColor(0, 0, 1)
+		local shapes = self.hc:hash():shapes()
+		for _, shape in pairs(shapes) do
+		    shape:draw()
+		end
+		love.graphics.setColor(255, 255, 255)
+	end
     self.camera:detach()
 end
 
 function cosmos:update( dt ) -- Каждый кадр
 	self.player:update(dt)
 	for _,obj in pairs(Asteroids) do
+		obj:update(dt)
+	end
+	for _,obj in pairs(Loot) do
 		obj:update(dt)
 	end
     local dx,dy = self.player.curr_pos.x - self.camera.x, self.player.curr_pos.y - self.camera.y

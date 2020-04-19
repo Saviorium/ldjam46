@@ -3,7 +3,8 @@ Vector = require "lib.hump.vector"
 Bullet = require 'game/classes/guns_and_ammo/bullet'
 
 Bullets_handler = Class {
-    init = function(self)
+    init = function(self, hc)
+        self.hc = hc
     end,
     bullets_on_screen = {}
 }
@@ -20,7 +21,7 @@ function Bullets_handler:fire( player, bullets_in_shoot, distance_between_bullet
                        love.graphics.newImage('data/images/bullet.png'), 
                        10, 
                        angle,
-                       table.maxn(self.bullets_on_screen)+1)
+                       self.hc)
         table.insert(self.bullets_on_screen, Bullet)
     end
 end
@@ -34,6 +35,27 @@ end
 function Bullets_handler:update( dt )
     for b_i, bullet in pairs(self.bullets_on_screen) do
         bullet:update( dt )
+        for shape, delta in pairs(self.hc:collisions(bullet.collider)) do
+          if shape.type == 'asteroid' then 
+              for index, asteroid in pairs(Asteroids) do
+                local cx, cy = shape:center()
+                if cx == asteroid.curr_pos.x and
+                   cy == asteroid.curr_pos.y then
+                  asteroid.HP = asteroid.HP - bullet.damage
+                  if asteroid.HP < 0 then
+                      Asteroids[index] = nil
+                      asteroid:destroy()
+                  end
+                end
+              end
+            self.bullets_on_screen[b_i] = nil
+            self.hc:remove(bullet.collider)
+          end
+        end
+        if self.time_to_live == 0 then
+            self.bullets_on_screen[b_i] = nil
+            self.hc:remove(bullet.collider)
+        end
     end
 end
 

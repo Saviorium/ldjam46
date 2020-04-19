@@ -22,6 +22,7 @@ Player = Class {
         self.rate_of_fire   = 1
         self.last_fire = 0
         self.HC = HC
+        self.bullets_handler = Bullets_handler(self.HC)
         self:registerCollider(self.HC)
         self.collider.type = 'player'
         self.buttons = {up    = 'w',
@@ -44,8 +45,16 @@ function Player:draw()
                        scale,
                        self.width/2,
                        self.height/2 )
-    Bullets_handler:draw()
-    self:debugDraw()
+    self.bullets_handler:draw()
+    love.graphics.print('Iron: '..self.iron,
+                        self.curr_pos.x+30,
+                       self.curr_pos.y+10 
+                       )
+    love.graphics.print('Ice: '..self.ice,
+                        self.curr_pos.x+30,
+                        self.curr_pos.y-10 
+                       )
+    if debug_physics then self:debugDraw() end
 end
 
 function Player:update( dt )
@@ -94,7 +103,7 @@ function Player:update( dt )
     self:setAngle(cursor, dt)
     self:onCollide()
     self:move( self.cur_speed )
-    Bullets_handler:update(dt)
+    self.bullets_handler:update(dt)
     self.last_fire = self.last_fire+dt
 end
 
@@ -139,7 +148,7 @@ end
 function Player:fireGatling()
     if self.last_fire > self.rate_of_fire then
         self.last_fire = 0
-        Bullets_handler:fire( self, 2, self.width, 0 ) 
+        self.bullets_handler:fire( self, 2, self.width, 0 ) 
     end
 end
 
@@ -154,6 +163,24 @@ function Player:onCollide()
         self.curr_pos.y = self.curr_pos.y+delta.y
         self.collider:move( delta.x, delta.y )
         self.cur_speed = -self.cur_speed*0.1
+      end
+      if shape.type == 'drop' then 
+        if self.maxVolume > (self.iron + self.ice + shape.count) then 
+          if shape.resource == 'ice' then
+            self.ice  = self.ice + shape.count
+          else
+            self.iron = self.iron + shape.count
+          end
+          shape.count = 0
+        elseif self.maxVolume > (self.iron + self.ice) then
+          local left_place = (self.maxVolume - (self.iron + self.ice))
+          shape.count = shape.count - left_place
+          if shape.resource == 'ice' then
+            self.ice  = self.ice + left_place
+          else
+            self.iron = self.iron + left_place
+          end
+        end
       end
     end
 end
