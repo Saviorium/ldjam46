@@ -8,6 +8,7 @@ states = {
 
 function love.load()
     love.window.setTitle("Ludum Dare 46 Game")
+    love.graphics.setDefaultFilter("nearest", "nearest")
     StateManager.switch( states.base )
 end
 
