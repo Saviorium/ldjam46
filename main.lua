@@ -1,6 +1,7 @@
 StateManager = require "lib.hump.gamestate"
 require 'conf'
 
+serpent = require "lib.debug.serpent"
 states = {
     game = require "game.states.game",
     base = require "game.states.base",

@@ -31,7 +31,8 @@ Player = Class {
                         right = 'd',
                         stop  = 'space',
                         fire1 = 'q',
-                        fire2 = 'e'}
+                        fire2 = 'e',
+                        use   = 'f'}
 
     end
 }
@@ -154,7 +155,7 @@ end
 
 function Player:onCollide()
     for shape, delta in pairs(self.HC:collisions(self.collider)) do
-      if shape.type == 'asteroid' then 
+      if shape.type == 'asteroid' or shape.type == 'solid' then 
         if self.cur_speed:len() > 10 then
           self.HP = self.HP - self.cur_speed:len()/10
           print(self.HP)
@@ -181,6 +182,9 @@ function Player:onCollide()
             self.iron = self.iron + left_place
           end
         end
+      end
+      if shape.type == "enterBase" and love.keyboard.isDown( self.buttons['use'] ) then
+          StateManager.switch(states.base)
       end
     end
 end

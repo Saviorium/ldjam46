@@ -15,7 +15,6 @@ function Farm:initOxygen(supplyUnit, sensitivity, consumption)
     self.oxygenSupply = supplyUnit
     self.oxygenSensitivity = sensitivity
     self.oxygenConsumption = consumption
-    print("init oxy")
 end
 
 function Farm:initStorage(inputStorage, outputStorage, consumption, production)

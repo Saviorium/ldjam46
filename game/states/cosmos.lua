@@ -1,4 +1,5 @@
 Player = require "game/classes/player"
+BaseShip = require "game/classes/base-ship"
 Asteroid = require "game/classes/asteroid"
 Map = require "game/classes/map/map"
 Camera = require "lib.hump.camera"
@@ -22,21 +23,20 @@ function cosmos:enter() -- Запускается при запуске прил
 				   love.graphics.newImage('data/images/map.png'),
 				   self.player,
 				   self.hc)
+	self.baseShip = BaseShip(0, 0, self.hc)
 end
 
 function cosmos:mousepressed(x, y)
 end
 
-function cosmos:keypressed( key ) -- кнопка нажата
-    if key == "space" then
-        StateManager.switch( states.base )
-    end
+function cosmos:keypressed( key )
 end
 
 function cosmos:draw() -- отрисовка каждый кадр
     self.camera:attach()
     self.map:draw()
-	self.player:draw()	
+	self.player:draw()
+	self.baseShip:draw()	
 	for _,obj in pairs(Asteroids) do
 		obj:draw()
 	end
@@ -56,6 +56,7 @@ end
 
 function cosmos:update( dt ) -- Каждый кадр
 	self.player:update(dt)
+	self.baseShip:update(dt)
 	for _,obj in pairs(Asteroids) do
 		obj:update(dt)
 	end

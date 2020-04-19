@@ -33,7 +33,9 @@ function PhysicsObject:draw()
                        self.curr_pos.y, 
                        0, 
                        scale, 
-                       scale )
+                       scale,
+                       self.width/2,
+                       self.height/2 )
     self:debugDraw()
 end
 

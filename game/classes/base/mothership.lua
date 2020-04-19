@@ -3,9 +3,6 @@ StorageUnit = require "game.classes.base.storageunit"
 Farm = require "game.classes.base.modules.farm"
 Module = require "game.classes.base.module"
 
-
-serpent = require "lib.debug.serpent"
-
 MotherShip = Class {
     init = function(self)
         self.storage = {
@@ -28,7 +25,6 @@ MotherShip = Class {
             vegFarm = vegFarm,
             animalFarm = animalFarm
         }
-        print(serpent.block(self))
     end
 }
 
