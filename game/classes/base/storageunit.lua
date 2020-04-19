@@ -9,9 +9,21 @@ StorageUnit = Class {
 }
 
 function StorageUnit:add(units)
+    self:addAndGetExcess(units)
+end
+
+function StorageUnit:addAndGetExcess(units)
     local newValue = self.value + units
-    self.value = math.max(0, math.min(newValue, self.max)); -- clamp(0, newValue, self.max)
-    print("oxygen" .. self.value)
+    if newValue > self.max then
+        self.value = self.max
+        return newValue - self.max
+    end
+    if newValue < 0 then
+        self.value = 0
+        return newValue
+    end
+    self.value = newValue
+    return 0
 end
 
 function StorageUnit:getLevel()

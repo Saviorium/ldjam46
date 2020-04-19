@@ -7,6 +7,7 @@ MotherShip = Class {
     init = function(self)
         self.storage = {
             energy     = StorageUnit(3000, 2000, "Energy"),
+            iron       = StorageUnit(3000, 100, "Iron"),
             water      = StorageUnit(3000, 2000, "Water"),
             foodVeg    = StorageUnit(100, 50, "Vegetables"),
             foodAnimal = StorageUnit(100, 50, "Animals"),
@@ -32,6 +33,10 @@ function MotherShip:addMaxVegFarm()
     value = self.modules.vegFarm.maxUnits + 1
     self.modules.vegFarm.maxUnits = value
     print(string.format("veg farm is now %d", value))
+end
+
+function MotherShip:addResources(type, value)
+    return self.storage[type]:addAndGetExcess(value)
 end
 
 function MotherShip:update(dt)

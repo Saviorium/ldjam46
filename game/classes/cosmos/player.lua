@@ -9,13 +9,11 @@ Player = Class {
     	PhysicsObject.init(self, x, y, image)
         self.maxVolume = maxVolume
 
-        self.inventory = {energy = 100,
-                          iron = 0,
-                          ice = 0,
-                          oxygen = 1000}
         self.maxEnergy = 100
         self.oxygenConsume = 10
-        
+
+        self.inventory = playerShip.inventory
+
         self.HP = HP
         self.angle = andgle
         self.turn_speed = 10/math.pi
@@ -176,6 +174,14 @@ function Player:checkFreeSpace()
     return freeSpace
 end
 
+function Player:enterBase()
+    local iceExcess = motherShip:addResources('water', self.inventory.ice)
+    self.inventory.ice = iceExcess
+    local ironExcess = motherShip:addResources('iron', self.inventory.iron)
+    self.inventory.iron = ironExcess
+    StateManager.switch(states.base)
+end
+
 function Player:onCollide()
     for shape, delta in pairs(self.HC:collisions(self.collider)) do
       if shape.type == 'asteroid' or shape.type == 'solid' then 
@@ -199,7 +205,7 @@ function Player:onCollide()
         end
       end
       if shape.type == "enterBase" and love.keyboard.isDown( self.buttons['use'] ) then
-          StateManager.switch(states.base)
+          self:enterBase()
       end
     end
 end
