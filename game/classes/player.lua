@@ -9,8 +9,10 @@ Player = Class {
     	PhysicsObject.init(self, x, y, image)
         self.maxVolume = maxVolume
 
-        self.iron = 0
-        self.ice = 0
+        self.inventory = {energy = 0,
+                          iron = 0,
+                          ice = 0,
+                          oxigen = 0}
         
         self.HP = HP
         self.angle = andgle
@@ -21,6 +23,7 @@ Player = Class {
         self.stop_speed   = 0.5
         self.rate_of_fire   = 1
         self.last_fire = 0
+        self.maxEnergy = 0
         self.HC = HC
         self.bullets_handler = Bullets_handler(self.HC)
         self:registerCollider(self.HC)
@@ -33,7 +36,6 @@ Player = Class {
                         fire1 = 'q',
                         fire2 = 'e',
                         use   = 'f'}
-
     end
 }
 
@@ -47,14 +49,6 @@ function Player:draw()
                        self.width/2,
                        self.height/2 )
     self.bullets_handler:draw()
-    love.graphics.print('Iron: '..self.iron,
-                        self.curr_pos.x+30,
-                       self.curr_pos.y+10 
-                       )
-    love.graphics.print('Ice: '..self.ice,
-                        self.curr_pos.x+30,
-                        self.curr_pos.y-10 
-                       )
     if debug_physics then self:debugDraw() end
 end
 
@@ -153,6 +147,14 @@ function Player:fireGatling()
     end
 end
 
+function Player:checkFreeSpace()
+    local freeSpace = self.maxVolume
+    for _, count in pairs(self.inventory) do
+      freeSpace = freeSpace - count
+    end
+    return freeSpace
+end
+
 function Player:onCollide()
     for shape, delta in pairs(self.HC:collisions(self.collider)) do
       if shape.type == 'asteroid' or shape.type == 'solid' then 
@@ -166,21 +168,13 @@ function Player:onCollide()
         self.cur_speed = -self.cur_speed*0.1
       end
       if shape.type == 'drop' then 
-        if self.maxVolume > (self.iron + self.ice + shape.count) then 
-          if shape.resource == 'ice' then
-            self.ice  = self.ice + shape.count
-          else
-            self.iron = self.iron + shape.count
-          end
+        local left = self:checkFreeSpace()
+        if left > shape.count then 
+          self.inventory[shape.resource] = self.inventory[shape.resource] + shape.count
           shape.count = 0
-        elseif self.maxVolume > (self.iron + self.ice) then
-          local left_place = (self.maxVolume - (self.iron + self.ice))
-          shape.count = shape.count - left_place
-          if shape.resource == 'ice' then
-            self.ice  = self.ice + left_place
-          else
-            self.iron = self.iron + left_place
-          end
+        elseif left < shape.count and left > 0 then
+          shape.count = shape.count - left
+          self.inventory[shape.resource] = self.inventory[shape.resource] + left_place
         end
       end
       if shape.type == "enterBase" and love.keyboard.isDown( self.buttons['use'] ) then

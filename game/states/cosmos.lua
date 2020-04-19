@@ -2,8 +2,10 @@ Player = require "game/classes/player"
 BaseShip = require "game/classes/base-ship"
 Asteroid = require "game/classes/asteroid"
 Map = require "game/classes/map/map"
+GUI = require "game/classes/gui"
 Camera = require "lib.hump.camera"
 HC = require 'lib/hardoncollider'
+fonts = require "data.fonts"
 
 local cosmos = {}
 
@@ -31,6 +33,9 @@ function cosmos:enter() -- Запускается при запуске прил
 					10000, --maxVolume
 					100,  -- HP
 					self.hc)
+
+	self.gui = GUI(love.graphics.newImage('data/images/guid.png'), 
+				   self.player)
 	self.camera = Camera(self.player.curr_pos.x, self.player.curr_pos.y)
 	self.map = Map(love.graphics.newImage('data/images/map.png'),
 				   love.graphics.newImage('data/images/map.png'),
@@ -66,6 +71,7 @@ function cosmos:draw() -- отрисовка каждый кадр
 		love.graphics.setColor(255, 255, 255)
 	end
     self.camera:detach()
+    self.gui:draw()
 end
 
 function cosmos:update( dt ) -- Каждый кадр
