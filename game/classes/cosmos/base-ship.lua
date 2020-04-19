@@ -1,5 +1,5 @@
 Class = require "lib.hump.class"
-PhysicsObject = require "game/classes/physical_object"
+PhysicsObject = require "game/classes/cosmos/physical_object"
 
 BaseShip = Class {
     __includes = PhysicsObject,

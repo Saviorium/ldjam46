@@ -1,6 +1,6 @@
 Class = require "lib.hump.class"
-PhysicsObject = require "game/classes/physical_object"
-Drop = require "game/classes/drop"
+PhysicsObject = require "game/classes/cosmos/physical_object"
+Drop = require "game/classes/cosmos/drop"
 
 Asteroid = Class {
     __includes = PhysicsObject,

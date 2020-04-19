@@ -1,7 +1,7 @@
 Class = require "lib.hump.class"
 Vector = require "lib.hump.vector"
-PhysicsObject = require "game/classes/physical_object"
-Bullets_handler    = require 'game/classes/guns_and_ammo/bullets_handler'
+PhysicsObject = require "game/classes/cosmos/physical_object"
+Bullets_handler    = require 'game/classes/cosmos/guns_and_ammo/bullets_handler'
 
 Player = Class {
     __includes = PhysicsObject,
@@ -9,10 +9,12 @@ Player = Class {
     	PhysicsObject.init(self, x, y, image)
         self.maxVolume = maxVolume
 
-        self.inventory = {energy = 0,
+        self.inventory = {energy = 100,
                           iron = 0,
                           ice = 0,
-                          oxigen = 0}
+                          oxygen = 1000}
+        self.maxEnergy = 100
+        self.oxygenConsume = 10
         
         self.HP = HP
         self.angle = andgle
@@ -21,9 +23,16 @@ Player = Class {
         self.strafe_speed = speed/2
         self.back_speed   = speed/10
         self.stop_speed   = 0.5
+
         self.rate_of_fire   = 1
         self.last_fire = 0
-        self.maxEnergy = 0
+
+        self.energyOnMove = 5
+        self.energyOnStrafe = 2
+        self.enegryOnFireLazer = 80
+        self.enegryOnFireGatling = 20
+        self.energyInSecond = 3
+
         self.HC = HC
         self.bullets_handler = Bullets_handler(self.HC)
         self:registerCollider(self.HC)
@@ -53,53 +62,63 @@ function Player:draw()
 end
 
 function Player:update( dt )
-    if love.keyboard.isDown( self.buttons['up'] ) then 
-        self:speedUp( self.speed, 
-                      math.cos(self.angle), 
-                      math.sin(self.angle),
-                      dt  
-                    )
+    if self.inventory['energy'] >= self.energyOnMove then
+        if love.keyboard.isDown( self.buttons['up'] ) then 
+            self:speedUp( self.speed, 
+                          math.cos(self.angle), 
+                          math.sin(self.angle),
+                          dt  
+                        )
+        end
+        if love.keyboard.isDown( self.buttons['down'] ) then 
+            self:speedUp( -self.back_speed, 
+                          math.cos(self.angle), 
+                          math.sin(self.angle),
+                          dt 
+                        )
+        end
+        if love.keyboard.isDown( self.buttons['left'] ) then 
+            self:speedUp( self.strafe_speed, 
+                          math.cos(self.angle-0.5*math.pi), 
+                          math.sin(self.angle-0.5*math.pi),
+                          dt  
+                        )
+        end
+        if love.keyboard.isDown( self.buttons['right'] ) then
+            self:speedUp( self.strafe_speed, 
+                          math.cos(self.angle+0.5*math.pi), 
+                          math.sin(self.angle+0.5*math.pi),
+                          dt  
+                        )
+        end
+        if love.keyboard.isDown( self.buttons['stop'] ) then
+            self:speedUp( -1, 
+                          self.cur_speed.x, 
+                          self.cur_speed.y,
+                          dt  
+                        )
+        end
     end
-    if love.keyboard.isDown( self.buttons['down'] ) then 
-        self:speedUp( -self.back_speed, 
-                      math.cos(self.angle), 
-                      math.sin(self.angle),
-                      dt 
-                    )
-    end
-    if love.keyboard.isDown( self.buttons['left'] ) then 
-        self:speedUp( self.strafe_speed, 
-                      math.cos(self.angle-0.5*math.pi), 
-                      math.sin(self.angle-0.5*math.pi),
-                      dt  
-                    )
-    end
-    if love.keyboard.isDown( self.buttons['right'] ) then
-        self:speedUp( self.strafe_speed, 
-                      math.cos(self.angle+0.5*math.pi), 
-                      math.sin(self.angle+0.5*math.pi),
-                      dt  
-                    )
-    end
-    if love.keyboard.isDown( self.buttons['stop'] ) then
-        self:speedUp( -1, 
-                      self.cur_speed.x, 
-                      self.cur_speed.y,
-                      dt  
-                    )
-    end
-
-    if love.keyboard.isDown( self.buttons['fire1'] ) then
+    if love.keyboard.isDown( self.buttons['fire1'] )
+   and self.inventory['energy'] > self.enegryOnFireLazer then
         self:fireLazer()
     end
-    if love.keyboard.isDown( self.buttons['fire2'] ) then
+    if love.keyboard.isDown( self.buttons['fire2'] ) 
+   and self.inventory['energy'] > self.enegryOnFireGatling then
         self:fireGatling()
     end
     self:setAngle(cursor, dt)
     self:onCollide()
     self:move( self.cur_speed )
     self.bullets_handler:update(dt)
+
     self.last_fire = self.last_fire+dt
+    if self.inventory['energy'] <= self.maxEnergy then
+      self.inventory['energy'] = self.inventory['energy'] + self.energyInSecond*dt
+    end
+    if self.inventory['oxygen'] >= 0  then
+      self.inventory['oxygen'] = self.inventory['oxygen'] - self.oxygenConsume *dt
+    end
 end
 
 function Player:debugDraw()
@@ -134,6 +153,7 @@ end
 function Player:speedUp( speed, angle_x, angle_y, dt)
     self.cur_speed.x = self.cur_speed.x + speed*angle_x*dt
     self.cur_speed.y = self.cur_speed.y + speed*angle_y*dt
+    self.inventory['energy'] = self.inventory['energy'] - self.energyOnMove*dt
 end
 
 function Player:fireLazer()
@@ -144,6 +164,7 @@ function Player:fireGatling()
     if self.last_fire > self.rate_of_fire then
         self.last_fire = 0
         self.bullets_handler:fire( self, 2, self.width, 0 ) 
+        self.inventory['energy'] = self.inventory['energy'] - self.enegryOnFireGatling
     end
 end
 

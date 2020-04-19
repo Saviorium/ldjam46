@@ -1,6 +1,5 @@
 Class = require "lib.hump.class"
-Asteroid = require "game/classes/asteroid"
-Tile = require "game/classes/map/tile"
+Tile = require "game/classes/cosmos/map/tile"
 
 Map = Class {
     init = function(self, image_near, image_mid, image_far, player, hc)

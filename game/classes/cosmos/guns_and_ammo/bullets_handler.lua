@@ -1,6 +1,6 @@
 Class = require "lib.hump.class"
 Vector = require "lib.hump.vector"
-Bullet = require 'game/classes/guns_and_ammo/bullet'
+Bullet = require 'game/classes/cosmos/guns_and_ammo/bullet'
 
 Bullets_handler = Class {
     init = function(self, hc)
