@@ -38,8 +38,6 @@ function cosmos:enter() -- Запускается при запуске прил
 				   self.player)
 	self.camera = Camera(self.player.curr_pos.x, self.player.curr_pos.y)
 	self.map = Map(love.graphics.newImage('data/images/map.png'),
-				   love.graphics.newImage('data/images/map.png'),
-				   love.graphics.newImage('data/images/map.png'),
 				   self.player,
 				   self.hc)
 	self.baseShip = BaseShip(0, 0, self.hc)
@@ -59,12 +57,16 @@ function cosmos:draw() -- отрисовка каждый кадр
 	for _,obj in pairs(Asteroids) do
 		if Vector(obj.curr_pos.x - self.player.curr_pos.x,
 				  obj.curr_pos.y - self.player.curr_pos.y
-				 ):len() < 300*scale then 
+				 ):len() <= 300*scale then 
 			obj:draw()
 		end
 	end
 	for _,obj in pairs(Loot) do
-		obj:draw()
+		if Vector(obj.curr_pos.x - self.player.curr_pos.x,
+				  obj.curr_pos.y - self.player.curr_pos.y
+				 ):len() <= 300*scale then 
+			obj:draw()
+		end
 	end
 	if debug_physics then
 		love.graphics.setColor(0, 0, 1)

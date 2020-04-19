@@ -6,11 +6,12 @@ Bullets_handler    = require 'game/classes/cosmos/guns_and_ammo/bullets_handler'
 Player = Class {
     __includes = PhysicsObject,
     init = function(self, x, y, andgle, image, speed, maxVolume, HP, HC)
-    	PhysicsObject.init(self, x, y, image)
+    	  PhysicsObject.init(self, x, y, image)
         self.maxVolume = maxVolume
 
         self.maxEnergy = 100
         self.oxygenConsume = 1
+        self.foodConsume = 0.1
 
         self.inventory = playerShip.inventory
 
@@ -117,6 +118,10 @@ function Player:update( dt )
     if self.inventory['oxygen'] >= 0  then
       self.inventory['oxygen'] = self.inventory['oxygen'] - self.oxygenConsume *dt
     end
+    if self.inventory['food'] >= 0  then
+      self.inventory['food'] = self.inventory['food'] - self.foodConsume *dt
+    end
+
 end
 
 function Player:debugDraw()

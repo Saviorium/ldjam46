@@ -6,7 +6,8 @@ PlayerShip = Class {
             iron = 0,
             ice = 0,
             oxygen = 100,
-            energy = 100
+            energy = 100,
+            food = 100
         }
         self.upgrades = {}
     end

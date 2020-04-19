@@ -1,8 +1,4 @@
 local Images = {}
-Images.empty = {}
-Images.iron = {}
-Images.ice = {}
-Images.all = {}
 
 for i=1, 5 do
 	Images['empty_'..i] = love.graphics.newImage('data/images/asteroid/empty_'..(i)..'.png')
@@ -13,6 +9,11 @@ for i=1, 5 do
 	Images['ice_'..i]:setFilter("nearest", "nearest")
 	Images['all_'..i] = love.graphics.newImage('data/images/asteroid/all_'..(i)..'.png')
 	Images['all_'..i]:setFilter("nearest", "nearest")
+end
+
+for i=1, 6 do
+	Images['star_'..i] = love.graphics.newImage('data/images/star/star_'..(i)..'.png')
+	Images['star_'..i]:setFilter("nearest", "nearest")
 end
 
 return Images
