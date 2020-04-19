@@ -11,12 +11,15 @@ MotherShipUI = Class {
 }
 
 function MotherShipUI:initUI()
-    local button = ButtonPlus(20, 20, function() self.motherShip:addMaxVegFarm() end)
+    local button = ButtonPlus(160, 25, function() self.motherShip:addMaxVegFarm() end)
     table.insert(self.buttons, button)
 
-    --for id, object in pairs(motherShip:getStorage()) do
-    --    table.insert(self.labels, object:getName())
-    --end
+    local i = 0
+    for id, object in pairs(motherShip:getModules()) do
+        i = i+1
+        table.insert(self.buttons, ButtonPlus(10, 20 + 20*(i), function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
+        table.insert(self.buttons, ButtonPlus(25, 20 + 20*(i), function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
+    end
 
 end
 
@@ -42,6 +45,11 @@ function MotherShipUI:draw()
         love.graphics.print(object:getName(), 10, 20*i)
         love.graphics.print(object:getValue(), 80, 20*i)
         love.graphics.print(object:getMax(), 150, 20*i)
+    end
+    i = 0
+    for id, object in pairs(motherShip:getModules()) do
+        i = i+1
+        love.graphics.print(object:getName()..": "..object:getWantedMaxUnit().."/"..object:getMaxUnit(), 45*scale, (25 + 20*(i))*scale)
     end
 end
 

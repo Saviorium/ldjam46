@@ -3,11 +3,13 @@ Module = require "game.classes.base.module"
 
 Farm = Class {
     __includes = Module,
-    init = function(self, initialUnits, maxUnits)
+    init = function(self, initialUnits, maxUnits, name)
         Module.init(self)
         self.units = initialUnits
         self.health = 0.5
         self.maxUnits = maxUnits
+        self.wantedMaxUnits = maxUnits
+        self.name = name
     end
 }
 
@@ -22,6 +24,24 @@ function Farm:initStorage(inputStorage, outputStorage, consumption, production)
     self.outputStorage = outputStorage
     self.foodConsumption = consumption
     self.foodProduction = production
+end
+
+function Farm:getName()
+    return self.name
+end
+function Farm:getMaxUnit()
+    return self.maxUnits
+end
+function Farm:getWantedMaxUnit()
+    return self.wantedMaxUnits
+end
+
+function Farm:changeWantedMax(changeTo)
+    print(string.format(self:getName().." + %d", changeTo))
+    if (self.wantedMaxUnits + changeTo <= self.maxUnits) and (self.wantedMaxUnits + changeTo >= 0) then
+        print(string.format(self:getName().." = %d", changeTo))
+        self.wantedMaxUnits = self.wantedMaxUnits + changeTo
+    end
 end
 
 function Farm:updateHealth(delta)

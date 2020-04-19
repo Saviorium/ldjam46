@@ -14,11 +14,11 @@ MotherShip = Class {
             oxygen     = StorageUnit(10000, 10000, "Oxygen"),
         }
 
-        local vegFarm = Farm(5, 10)
+        local vegFarm = Farm(5, 10, "VegFarm")
         vegFarm:initOxygen(self.storage.oxygen, 0.2, -10)
         vegFarm:initStorage(self.storage.water, self.storage.foodVeg)
 
-        local animalFarm = Farm(5, 10)
+        local animalFarm = Farm(5, 10, "AnimFarm")
         vegFarm:initOxygen(self.storage.oxygen, 0.2, 5)
         vegFarm:initStorage(self.storage.foodVeg, self.storage.foodAnimal)
 
@@ -39,6 +39,11 @@ function MotherShip:addResources(type, value)
     return self.storage[type]:addAndGetExcess(value)
 end
 
+function MotherShip:changeWantedMaxUnitInFarm(farm, changeTo)
+    farm:changeWantedMax(changeTo)
+    print(string.format("button %d"..farm:getName(), changeTo))
+end
+
 function MotherShip:update(dt)
     for _, module in pairs(self.modules) do
         module:update(dt)
@@ -47,6 +52,10 @@ end
 
 function MotherShip:getStorage()
     return self.storage
+end
+
+function MotherShip:getModules()
+    return self.modules
 end
 
 return MotherShip
