@@ -24,7 +24,7 @@ end
 
 function PhysicsObject:move( moveVector )
   self.curr_pos = self.curr_pos + moveVector
-  --self.collider:move(moveVector)
+  self.collider:move(moveVector)
 end
 
 function PhysicsObject:draw()

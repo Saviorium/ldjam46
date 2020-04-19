@@ -31,7 +31,7 @@ Map = Class {
 }
 
 function Map:draw()
-    for _, tile in pairs(self.tiles) do
+    for index, tile in pairs(self.tiles) do
         tile:draw()
     end
 end

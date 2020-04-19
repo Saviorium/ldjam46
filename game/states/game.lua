@@ -3,8 +3,11 @@ Player = require "game/classes/player"
 Asteroid = require "game/classes/asteroid"
 Map = require "game/classes/map/map"
 Camera = require "lib.hump.camera"
+HC = require 'lib/hardoncollider'
+Astreroids = {}
 
 function game:enter() -- Запускается при запуске приложения
+    HC = HC.new()
 	Player = Player(100, --x
 					100, --y
 					0, --angle
@@ -12,20 +15,13 @@ function game:enter() -- Запускается при запуске прило
 					10, --speed
 					100, --maxVolume
 					100) -- HP
+    Player:registerCollider(HC)
 	camera = Camera(Player.curr_pos.x, Player.curr_pos.y)
 	Map = Map(love.graphics.newImage('data/images/map.png'),
 			  love.graphics.newImage('data/images/map.png'),
 			  love.graphics.newImage('data/images/map.png'))
-	-- Astreroids = {}
-	-- for i=1, 10 do
-	-- 	table.insert(Astreroids,
-	-- 				 Asteroid(math.random(0,475 * scale), --x
-	-- 					 	  math.random(0,300 * scale), --y
-	-- 					 	  math.random(0,360), 		  --angle
-	-- 					 	  love.graphics.newImage('data/images/asteroid.png')
-	-- 					 	 )
-	-- 	 		    )
-	-- end
+
+	
 
 end
 
@@ -39,9 +35,9 @@ function game:draw() -- отрисовка каждый кадр
     camera:attach()
     Map:draw()
 	Player:draw()	
-	-- for _,obj in pairs(Astreroids) do
-	-- 	obj:draw()
-	-- end
+	for _,obj in pairs(Astreroids) do
+		obj:draw()
+	end
     camera:detach()
 end
 

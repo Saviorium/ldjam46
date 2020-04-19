@@ -14,8 +14,6 @@ Player = Class {
 }
 
 function Player:draw()
-
-
     love.graphics.draw(self.image,
                        self.curr_pos.x,
                        self.curr_pos.y, 
