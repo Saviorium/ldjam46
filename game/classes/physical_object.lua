@@ -14,11 +14,12 @@ PhysicsObject = Class {
 }
 
 function PhysicsObject:registerCollider(hc_instance)
-  self.collider = hc_instance:rectangle(self.curr_pos.x + self.width/2, self.curr_pos.y + self.height/2, self.width, self.height)
+  self.collider = hc_instance:rectangle(self.curr_pos.x - (self.width*scale)/2, self.curr_pos.y - (self.height*scale)/2, self.width*scale, self.height*scale)
 end
 
 function PhysicsObject:update( dt )
   self:onCollide()
+    self.collider:draw('fill')
   self:move( self.cur_speed )
 end
 
@@ -40,8 +41,8 @@ end
 function PhysicsObject:onCollide()
     local collisions = HC:collisions(self.collider)
     for shape, delta in pairs(collisions) do
-        self.deltaVector = Vector( delta.x, delta.y)
-        self:move(self.deltaVector)   
+      print('Touching '..shape:center()) 
+      shape:draw('fill')
     end
 end
 

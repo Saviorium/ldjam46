@@ -5,6 +5,7 @@ Map = require "game/classes/map/map"
 Camera = require "lib.hump.camera"
 HC = require 'lib/hardoncollider'
 Astreroids = {}
+Loot = {}
 
 function game:enter() -- Запускается при запуске приложения
     HC = HC.new()
@@ -15,7 +16,6 @@ function game:enter() -- Запускается при запуске прило
 					10, --speed
 					100, --maxVolume
 					100) -- HP
-    Player:registerCollider(HC)
 	camera = Camera(Player.curr_pos.x, Player.curr_pos.y)
 	Map = Map(love.graphics.newImage('data/images/map.png'),
 			  love.graphics.newImage('data/images/map.png'),

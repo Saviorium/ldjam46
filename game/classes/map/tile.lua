@@ -30,7 +30,6 @@ Tile = Class {
                                     100, -- drop
                                     'iron'  -- type
                                    )
-                    temp:registerCollider(HC)
                     if next(HC:collisions(temp.collider)) == nil then
                         table.insert(Astreroids,
                                      temp
