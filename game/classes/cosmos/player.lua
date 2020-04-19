@@ -168,8 +168,10 @@ end
 
 function Player:checkFreeSpace()
     local freeSpace = self.maxVolume
-    for _, count in pairs(self.inventory) do
-      freeSpace = freeSpace - count
+    for type, count in pairs(self.inventory) do
+      if type ~= 'energy' then
+        freeSpace = freeSpace - count
+      end
     end
     return freeSpace
 end

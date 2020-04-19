@@ -1,6 +1,7 @@
 Class = require "lib.hump.class"
 PhysicsObject = require "game/classes/cosmos/physical_object"
 Drop = require "game/classes/cosmos/drop"
+Images = require "data/images"
 
 Asteroid = Class {
     __includes = PhysicsObject,
@@ -52,19 +53,19 @@ function Asteroid:randomize()
   local temp = math.random(0,3)
   if temp == 0 then
     self.HP   = math.random(10,100)
-    self.image = love.graphics.newImage('data/images/asteroid/empty_'..(math.random(1,5))..'.png')
+    self.image = Images['empty_'..math.random(1,5)]
   elseif temp == 1 then
     self.HP   = math.random(100,1000)
     self.destroy_func = self.dropIron
-    self.image = love.graphics.newImage('data/images/asteroid/iron_'..(math.random(1,5))..'.png')
+    self.image = Images['iron_'..math.random(1,5)]
   elseif temp == 2 then
     self.HP   = math.random(50,400)
     self.destroy_func = self.dropIce
-    self.image = love.graphics.newImage('data/images/asteroid/ice_'..(math.random(1,5))..'.png')
+    self.image = Images['ice_'..math.random(1,5)]
   elseif temp == 3 then
     self.HP   = math.random(1000,10000)
     self.destroy_func = self.dropAll
-    self.image = love.graphics.newImage('data/images/asteroid/all_'..(math.random(1,5))..'.png')
+    self.image = Images['all_'..math.random(1,5)]
   end
 end
 
