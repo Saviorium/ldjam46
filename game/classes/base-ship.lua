@@ -13,7 +13,7 @@ BaseShip = Class {
 function BaseShip:registerCollider(hc)
     PhysicsObject.registerCollider(self, hc)
     self.collider.type = 'solid'
-    self.enterCollider = hc:circle(self.curr_pos.x - (self.width*scale)/2, self.curr_pos.y - (self.height*scale)/2, self.width*scale*3)
+    self.enterCollider = hc:circle(self.curr_pos.x, self.curr_pos.y, self.width*scale*2)
     self.enterCollider.type = 'enterBase'
 end
 
