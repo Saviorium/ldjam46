@@ -35,3 +35,5 @@ function MotherShip:update(dt)
 		module:update(dt)
 	end
 end
+
+return MotherShip

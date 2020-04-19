@@ -7,3 +7,5 @@ Module = Class {
 
 function Module:update(dt)
 end
+
+return Module

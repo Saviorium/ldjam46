@@ -12,8 +12,6 @@ function game:enter() -- Запускается при запуске прило
 					10, --speed
 					100, --maxVolume
 					100) -- HP
-	background_image = love.graphics.newImage('data/images/backgroud.jpg')
-	background_image:setFilter("nearest", "nearest")
 	camera = Camera(Player.curr_pos.x, Player.curr_pos.y)
 	Map = Map(love.graphics.newImage('data/images/map.png'),
 			  love.graphics.newImage('data/images/map.png'),

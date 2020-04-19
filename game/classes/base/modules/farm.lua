@@ -54,3 +54,5 @@ function Farm:update(dt)
     -- если кислород - ок и входящей еды много - дельта больше нуля
     self:updateHealth(hpDelta)
 end
+
+return Farm
