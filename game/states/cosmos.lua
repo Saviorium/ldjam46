@@ -34,13 +34,15 @@ function cosmos:enter() -- Запускается при запуске прил
 					100,  -- HP
 					self.hc)
 
-	self.gui = GUI(love.graphics.newImage('data/images/guid.png'), 
-				   self.player)
 	self.camera = Camera(self.player.curr_pos.x, self.player.curr_pos.y)
 	self.map = Map(love.graphics.newImage('data/images/map.png'),
 				   self.player,
+				   self.baseShip,
 				   self.hc)
 	self.baseShip = BaseShip(0, 0, self.hc)
+	self.gui = GUI(love.graphics.newImage('data/images/guid.png'), 
+				   self.player,
+				   self.baseShip)
 end
 
 function cosmos:mousepressed(x, y)

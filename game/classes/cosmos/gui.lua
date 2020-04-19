@@ -2,9 +2,10 @@ Class = require "lib.hump.class"
 fonts = require "data.fonts"
 
 GUI = Class {
-    init = function(self, image_gui, player)
+    init = function(self, image_gui, player, baseShip)
       self.image = image_gui
       self.player = player
+      self.baseShip = baseShip
     end
 }
 
@@ -63,12 +64,29 @@ function GUI:drawMap()
         end
     end
 
+    temp = Vector(self.baseShip.curr_pos.x - self.player.curr_pos.x,
+                  self.baseShip.curr_pos.y - self.player.curr_pos.y
+                 )
+    if temp:len() <= 900*scale then
+        love.graphics.setColor(255, 0, 255)
+        love.graphics.circle('fill',
+                             (364+temp.x/80)*scale,
+                             (264+temp.y/80)*scale,
+                             2*scale
+                            )
+    else   
+        temp = temp:normalized()
+        love.graphics.line( (364.5 + temp.x*10)*scale , (264.5 + temp.y*10)*scale , 
+                            (364.5 + temp.x*20)*scale , (264.5 + temp.y*20)*scale
+                          )
+    end 
+
     love.graphics.setColor(0, 0, 255)
     for ind, obj in pairs(asteroids_in_view) do
         love.graphics.circle('fill',
-                             (360+obj.x)*scale,
+                             (365+obj.x)*scale,
                              (265+obj.y)*scale,
-                             1
+                             1*scale
                             )
     end
     love.graphics.setColor(0, 255, 0)
@@ -76,15 +94,15 @@ function GUI:drawMap()
         love.graphics.circle('fill',
                              (365+obj.x)*scale,
                              (265+obj.y)*scale,
-                             1
+                             1*scale
                             )
     end
     love.graphics.setColor(255, 255, 255)
     love.graphics.circle('fill',
-                     365*scale,
-                     265*scale,
-                     1
-                    )
+                         364*scale,
+                         264*scale,
+                         1*scale
+                        )
 end
 
 return GUI

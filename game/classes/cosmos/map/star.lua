@@ -31,8 +31,8 @@ end
 function Star:initPlace()
     local x,y = math.random(-400*scale,400*scale), 
                 math.random(-300*scale,300*scale) 
-    self.curr_pos.x = self.player.curr_pos.x + ((x>0) and -1 or 1)*(self.player.width/2+100) + x            
-    self.curr_pos.y = self.player.curr_pos.y + ((y>0) and -1 or 1)*(self.player.height/2+100) + y
+    self.curr_pos.x = self.player.curr_pos.x + ((x<0) and -1 or 1)*(self.player.width/2+100) + x            
+    self.curr_pos.y = self.player.curr_pos.y + ((y<0) and -1 or 1)*(self.player.height/2+100) + y
 end
 
 return Star

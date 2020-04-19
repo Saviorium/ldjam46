@@ -3,9 +3,10 @@ Tile = require "game/classes/cosmos/map/tile"
 Star = require "game/classes/cosmos/map/star"
 
 Map = Class {
-    init = function(self, image, player, hc)
+    init = function(self, image, player, baseShip, hc)
     self.image      = image
     self.player     = player
+    self.baseShip   = baseShip
     self.width      = self.image:getWidth()
     self.height     = self.image:getHeight()
     self.hc         = hc
@@ -36,7 +37,7 @@ function Map:update( dt )
     for index, star in pairs(self.distant_stars) do
         if Vector(star.curr_pos.x - self.player.curr_pos.x,
                   star.curr_pos.y - self.player.curr_pos.y
-                 ):len() > 600*scale then
+                 ):len() > 1000*scale then
             self.distant_stars[index] = Star(self.player, self.hc)
             print('Nulled '..index)
         end
@@ -62,7 +63,7 @@ function Map:addTileToMap(x, y, tile)
     end
 end
 function Map:starsInit()
-    for i=1, 10 do
+    for i=1, 100 do
         table.insert(self.distant_stars,
                      Star(self.player, self.hc)
                     )
