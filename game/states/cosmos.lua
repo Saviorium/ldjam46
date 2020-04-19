@@ -9,6 +9,20 @@ local cosmos = {}
 
 function cosmos:enter() -- Запускается при запуске приложения
     self.hc = HC.new()
+    for _,obj in pairs(Asteroids) do
+		if obj then 
+			obj.hc = self.hc 
+			obj:registerCollider(self.hc) 
+			obj.collider.type = 'asteroid'
+		end
+	end
+	for _,obj in pairs(Loot) do
+		if obj then 
+			obj.hc = self.hc
+			obj:registerCollider(self.hc) 
+			obj.collider.type = 'drop'
+		end
+	end
 	self.player = Player(100, --x
 					100, --y
 					0, --angle
