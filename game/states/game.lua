@@ -20,9 +20,6 @@ function game:enter() -- Запускается при запуске прило
 	Map = Map(love.graphics.newImage('data/images/map.png'),
 			  love.graphics.newImage('data/images/map.png'),
 			  love.graphics.newImage('data/images/map.png'))
-
-	
-
 end
 
 function game:mousepressed(x, y)

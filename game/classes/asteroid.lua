@@ -9,8 +9,7 @@ Asteroid = Class {
         self.width  = self.image:getWidth()
         self.height = self.image:getHeight()
         self.HP = HP
-        self.drop = drop
-        self.type = type
+        self:randomize()
     end
 }
 
@@ -25,25 +24,30 @@ function Asteroid:draw()
                        self.height/2 )
 end
 
+function Asteroid:dropIron()
+
+end
+function Asteroid:dropIce()
+
+end
+function Asteroid:dropAll()
+
+end
+
 function Asteroid:randomize()
   local temp = math.random(0,3)
   if temp == 0 then
-    self.type = 'empty'
-    self.HP = math.random(10,100)
-    self.drop = 0
+    self.HP   = math.random(10,100)
   elseif temp == 1 then
-    self.type = 'iron'
     self.HP   = math.random(100,1000)
-    self.drop = math.random(10,100)
+    self.destroy_func = self:dropIron()
   elseif temp == 2 then
-    self.type = 'ice'
     self.HP   = math.random(50,400)
-    self.drop = math.random(10,100)
+    self.destroy_func = self:dropIce()
   elseif temp == 3 then
-    self.type = 'all'
     self.HP   = math.random(1000,10000)
-    self.drop = math.random(10,100)
-
+    self.destroy_func = self:dropAll()
   end
+end
 
 return Asteroid
