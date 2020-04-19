@@ -13,7 +13,7 @@ function game:enter() -- Запускается при запуске прило
 					100, --y
 					0, --angle
 					love.graphics.newImage('data/images/shuttle.png'), 
-					10, --speed
+					4, --speed
 					100, --maxVolume
 					100) -- HP
 	camera = Camera(Player.curr_pos.x, Player.curr_pos.y)
