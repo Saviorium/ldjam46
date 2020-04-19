@@ -17,11 +17,11 @@ function cosmos:enter() -- Запускается при запуске прил
 					100,  -- HP
 					self.hc)
 	self.camera = Camera(self.player.curr_pos.x, self.player.curr_pos.y)
-	-- self.Map = Map(love.graphics.newImage('data/images/map.png'),
-	-- 			   love.graphics.newImage('data/images/map.png'),
-	-- 			   love.graphics.newImage('data/images/map.png'),
-	-- 			   self.player,
-	-- 			   self.hc)
+	self.map = Map(love.graphics.newImage('data/images/map.png'),
+				   love.graphics.newImage('data/images/map.png'),
+				   love.graphics.newImage('data/images/map.png'),
+				   self.player,
+				   self.hc)
 end
 
 function cosmos:mousepressed(x, y)
@@ -32,7 +32,7 @@ end
 
 function cosmos:draw() -- отрисовка каждый кадр
     self.camera:attach()
-    --self.Map:draw()
+    self.map:draw()
 	self.player:draw()	
 	for _,obj in pairs(Asteroids) do
 		obj:draw()
@@ -47,7 +47,7 @@ function cosmos:update( dt ) -- Каждый кадр
 	end
     local dx,dy = self.player.curr_pos.x - self.camera.x, self.player.curr_pos.y - self.camera.y
     self.camera:move(dx/2, dy/2)
-    --self.Map:update(dt)
+    self.map:update(dt)
 end
 
 return cosmos

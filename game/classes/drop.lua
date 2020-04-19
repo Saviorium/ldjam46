@@ -2,10 +2,11 @@ Class = require "lib.hump.class"
 
 Drop = Class {
     __includes = PhysicsObject,
-    init = function(self, x, y, count, image, type)
+    init = function(self, x, y, count, image, type, hc)
         PhysicsObject.init(self, x, y, love.graphics.newImage('data/images/loot/ice.png'))
         self.count = count
-        self:registerCollider(HC)
+        self.hc = hc
+        self:registerCollider(self.hc)
         self.collider.type = type
     end
 }
@@ -18,11 +19,11 @@ function Drop:destroy()
       Loot[index] = nil
     end
   end
-  HC:remove(self.collider)
+  self.hc:remove(self.collider)
 end
 
 function Drop:onCollide()
-    for shape, delta in pairs(HC:collisions(self.collider)) do
+    for shape, delta in pairs(self.hc:collisions(self.collider)) do
       if shape.type == 'player' then 
       	if Player.maxVolume > (Player.iron + Player.ice + self.count) then 
           if self.collider.type == 'ice' then

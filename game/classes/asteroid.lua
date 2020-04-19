@@ -4,9 +4,8 @@ Drop = require "game/classes/drop"
 
 Asteroid = Class {
     __includes = PhysicsObject,
-    init = function(self, x, y, angle, HP, drop, type, hc)
+    init = function(self, x, y, angle, hc)
         self.angle = angle
-        self.HP = HP
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
         self.hc = hc
@@ -24,7 +23,7 @@ function Asteroid:destroy()
     end
   end
   if self.destroy_func then self.destroy_func(self) end
-  HC:remove(self.collider)
+  self.hc:remove(self.collider)
 end
 
 function Asteroid:draw()
@@ -43,17 +42,17 @@ function Asteroid:draw()
 end
 
 function Asteroid.dropIron(self)
-  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(10,100),'iron'))
+  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(10,100),'iron', self.hc))
 end
 
 function Asteroid.dropIce(self)
-  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(50,400),'ice'))
+  table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(50,400),'ice', self.hc))
 
 end
 
 function Asteroid.dropAll(self)
-  table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, math.random(100,200) ,'iron'))
-  table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,500),'ice'))
+  table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, math.random(100,200),'iron', self.hc))
+  table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,500),'ice', self.hc))
 end
 
 function Asteroid:randomize()
@@ -77,14 +76,14 @@ function Asteroid:randomize()
 end
 
 function Asteroid:onCollide()
-    for shape, delta in pairs(HC:collisions(self.collider)) do
+    for shape, delta in pairs(self.hc:collisions(self.collider)) do
       if shape.type == 'bullet' then 
         self.HP = self.HP - 100
         if self.HP < 0 then
           self:destroy()
         end
         Bullets_handler.bullets_on_screen[shape.index] = nil
-        HC:remove(shape)
+        self.hc:remove(shape)
       end
     end
 end

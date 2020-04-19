@@ -26,19 +26,15 @@ Tile = Class {
                     temp = Asteroid(math.random(x,x+self.width ), --x
                                     math.random(y,y+self.height), --y
                                     math.random(0,360)/math.pi,   --angle
-                                    love.graphics.newImage('data/images/asteroid/empty_0.png'),
-                                    100, -- Hp
-                                    100, -- drop
-                                    'iron',  -- typeF
                                     self.hc
                                    )
-                    if next(hc:collisions(temp.collider)) == nil then
+                    if next(self.hc:collisions(temp.collider)) == nil then
                         table.insert(Asteroids,
                                      temp
                                     )
                         bool = 0
                     else
-                      hc:remove(temp.collider)
+                      self.hc:remove(temp.collider)
                     end
                 end
             end
