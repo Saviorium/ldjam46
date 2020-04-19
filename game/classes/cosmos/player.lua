@@ -10,7 +10,7 @@ Player = Class {
         self.maxVolume = maxVolume
 
         self.maxEnergy = 100
-        self.oxygenConsume = 10
+        self.oxygenConsume = 1
 
         self.inventory = playerShip.inventory
 

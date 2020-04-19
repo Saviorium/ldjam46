@@ -57,7 +57,11 @@ function cosmos:draw() -- отрисовка каждый кадр
 	self.player:draw()
 	self.baseShip:draw()	
 	for _,obj in pairs(Asteroids) do
-		obj:draw()
+		if Vector(obj.curr_pos.x - self.player.curr_pos.x,
+				  obj.curr_pos.y - self.player.curr_pos.y
+				 ):len() < 300*scale then 
+			obj:draw()
+		end
 	end
 	for _,obj in pairs(Loot) do
 		obj:draw()
