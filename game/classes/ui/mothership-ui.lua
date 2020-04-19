@@ -49,7 +49,7 @@ function MotherShipUI:draw()
     i = 0
     for id, object in pairs(motherShip:getModules()) do
         i = i+1
-        love.graphics.print(object:getName()..": "..object:getWantedMaxUnit().."/"..object:getMaxUnit(), 45*scale, (25 + 20*(i))*scale)
+        love.graphics.print(object:getName()..": "..object:getCurrentUnits().."/"..object:getWantedMaxUnit().."(max: "..object:getMaxUnit()..")", 45*scale, (25 + 20*(i))*scale)
     end
 end
 

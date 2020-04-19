@@ -8,19 +8,19 @@ MotherShip = Class {
         self.storage = {
             energy     = StorageUnit(3000, 2000, "Energy"),
             iron       = StorageUnit(3000, 100, "Iron"),
-            water      = StorageUnit(3000, 2000, "Water"),
-            foodVeg    = StorageUnit(100, 50, "Vegetables"),
-            foodAnimal = StorageUnit(100, 50, "Animals"),
-            oxygen     = StorageUnit(10000, 10000, "Oxygen"),
+            water      = StorageUnit(300000, 200000, "Water"),
+            foodVeg    = StorageUnit(100, 50, "Vegetable food"),
+            foodAnimal = StorageUnit(1000, 500, "Animal food"),
+            oxygen     = StorageUnit(1000000, 1000000, "Oxygen"),
         }
 
-        local vegFarm = Farm(5, 10, "VegFarm")
+        local vegFarm = Farm(5, 10, 0.005, "VegFarm")
         vegFarm:initOxygen(self.storage.oxygen, 0.2, -10)
-        vegFarm:initStorage(self.storage.water, self.storage.foodVeg)
+        vegFarm:initStorage(self.storage.water, self.storage.foodVeg, 0.1, 15)
 
-        local animalFarm = Farm(5, 10, "AnimFarm")
-        vegFarm:initOxygen(self.storage.oxygen, 0.2, 5)
-        vegFarm:initStorage(self.storage.foodVeg, self.storage.foodAnimal)
+        local animalFarm = Farm(5, 10, 0.001, "AnimFarm")
+        animalFarm:initOxygen(self.storage.oxygen, 0.5, 5)
+        animalFarm:initStorage(self.storage.foodVeg, self.storage.foodAnimal, 0.01, 1)
 
         self.modules = {
             vegFarm = vegFarm,
