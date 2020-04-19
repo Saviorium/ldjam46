@@ -1,6 +1,5 @@
 Class = require "lib.hump.class"
 StorageUnit = require "game.classes.base.storageunit"
-OxygenSupply = require "game.classes.base.modules.oxygensupply"
 Farm = require "game.classes.base.modules.farm"
 Module = require "game.classes.base.module"
 
@@ -14,21 +13,20 @@ MotherShip = Class {
             water      = StorageUnit(3000, 2000),
             foodVeg    = StorageUnit(100, 50),
             foodAnimal = StorageUnit(100, 50),
+            oxygen     = StorageUnit(10000, 10000),
         }
-        local oxygenSupply = OxygenSupply()
 
         local vegFarm = Farm(5, 10)
-        vegFarm.initOxygen(oxygenSupply, 0.2, -10)
-        vegFarm.initStorage(self.storage.water, self.storage.foodVeg)
+        vegFarm:initOxygen(self.storage.oxygen, 0.2, -10)
+        vegFarm:initStorage(self.storage.water, self.storage.foodVeg)
 
         local animalFarm = Farm(5, 10)
-        vegFarm.initOxygen(oxygenSupply, 0.2, 5)
-        vegFarm.initStorage(self.storage.foodVeg, self.storage.foodAnimal)
+        vegFarm:initOxygen(self.storage.oxygen, 0.2, 5)
+        vegFarm:initStorage(self.storage.foodVeg, self.storage.foodAnimal)
 
         self.modules = {
             vegFarm = vegFarm,
-            animalFarm = animalFarm,
-            oxygenSupply = oxygenSupply
+            animalFarm = animalFarm
         }
         print(serpent.block(self))
     end
@@ -42,7 +40,7 @@ end
 
 function MotherShip:update(dt)
     for _, module in pairs(self.modules) do
-		module:update(dt)
+        module:update(dt)
 	end
 end
 

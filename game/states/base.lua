@@ -9,7 +9,10 @@ function base:enter()
     if not motherShip then
         motherShip = MotherShip()
     end
-    self.objects = {motherShipUI = MotherShipUI(motherShip)}
+    self.objects = {
+        motherShipUI = MotherShipUI(motherShip),
+        motherShip = motherShip
+    }
     self.eventManager = EM()
     self.objects.motherShipUI:registerButtons(self.eventManager)
 end
@@ -30,7 +33,9 @@ end
 
 function base:draw()
     for id, object in pairs(self.objects) do
-        object:draw()
+        if object.draw then
+            object:draw()
+        end
     end
 end
 
