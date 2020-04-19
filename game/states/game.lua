@@ -8,14 +8,14 @@ local game = {}
 motherShip = nil
 clock = nil
 
-Astreroids = nil
+Asteroids = nil
 Loot = nil
 
 function game:enter()
     motherShip = MotherShip()
     clock = Clock({ year = 2013, month = 09, day = 13}, 60*60*24)
 
-    Astreroids = {}
+    Asteroids = {}
     Loot = {}
 
     StateManager.switch( states.base )

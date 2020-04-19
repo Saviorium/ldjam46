@@ -5,7 +5,7 @@ Bullets_handler    = require 'game/classes/guns_and_ammo/bullets_handler'
 
 Player = Class {
     __includes = PhysicsObject,
-    init = function(self, x, y, andgle, image, speed, maxVolume, HP)
+    init = function(self, x, y, andgle, image, speed, maxVolume, HP, HC)
     	PhysicsObject.init(self, x, y, image)
         self.maxVolume = maxVolume
 
@@ -21,7 +21,8 @@ Player = Class {
         self.stop_speed   = 0.5
         self.rate_of_fire   = 1
         self.last_fire = 0
-        self:registerCollider(HC)
+        self.HC = HC
+        self:registerCollider(self.HC)
         self.collider.type = 'player'
         self.buttons = {up    = 'w',
                         down  = 's',
@@ -30,6 +31,7 @@ Player = Class {
                         stop  = 'space',
                         fire1 = 'q',
                         fire2 = 'e'}
+
     end
 }
 
@@ -142,7 +144,7 @@ function Player:fireGatling()
 end
 
 function Player:onCollide()
-    for shape, delta in pairs(HC:collisions(self.collider)) do
+    for shape, delta in pairs(self.HC:collisions(self.collider)) do
       if shape.type == 'asteroid' then 
         if self.cur_speed:len() > 10 then
           self.HP = self.HP - self.cur_speed:len()/10

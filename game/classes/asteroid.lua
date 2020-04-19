@@ -4,12 +4,13 @@ Drop = require "game/classes/drop"
 
 Asteroid = Class {
     __includes = PhysicsObject,
-    init = function(self, x, y, angle, HP, drop, type)
+    init = function(self, x, y, angle, HP, drop, type, hc)
         self.angle = angle
         self.HP = HP
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
-        self:registerCollider(HC)
+        self.hc = hc
+        self:registerCollider(self.hc)
         self.collider.type = 'asteroid'
     end
 }
