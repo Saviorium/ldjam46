@@ -72,7 +72,7 @@ end
 
 function Map:checkBorders( index, tile)
     local x,y = tile.curr_pos.x, tile.curr_pos.y
-    local width,height = 200 * scale + 10, 150 * scale + 10
+    local width,height = love.graphics.getWidth()/2 + 10, love.graphics.getHeight()/2 + 10
     if self.player.curr_pos.x + width + 50 < x 
     or self.player.curr_pos.x - width - 50 > x + tile.width 
     or self.player.curr_pos.y + height+ 50 < y

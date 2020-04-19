@@ -52,6 +52,7 @@ function cosmos:keypressed( key )
 end
 
 function cosmos:draw() -- отрисовка каждый кадр
+    local height = love.graphics.getHeight()
     self.camera:attach()
     self.map:draw()
 	self.player:draw()
@@ -59,14 +60,14 @@ function cosmos:draw() -- отрисовка каждый кадр
 	for _,obj in pairs(Asteroids) do
 		if Vector(obj.curr_pos.x - self.player.curr_pos.x,
 				  obj.curr_pos.y - self.player.curr_pos.y
-				 ):len() <= 300*scale then 
+				 ):len() <= height then 
 			obj:draw()
 		end
 	end
 	for _,obj in pairs(Loot) do
 		if Vector(obj.curr_pos.x - self.player.curr_pos.x,
 				  obj.curr_pos.y - self.player.curr_pos.y
-				 ):len() <= 300*scale then 
+				 ):len() <= height then 
 			obj:draw()
 		end
 	end

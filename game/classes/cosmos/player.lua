@@ -127,7 +127,7 @@ end
 function Player:debugDraw()
     local x = self.curr_pos.x
     local y = self.curr_pos.y
-    local width,height = 200 * scale, 150 * scale
+    local width,height = love.graphics.getWidth()/2, love.graphics.getHeight()/2
     local current_cursor = Vector((love.mouse.getX()) and x-width+love.mouse.getX()  or 0,
                                   (love.mouse.getY()) and y-height+love.mouse.getY()  or 0)
     love.graphics.setColor(0,255,0)
@@ -142,7 +142,7 @@ end
 function Player:setAngle(cursor, dt)
     local x = self.curr_pos.x
     local y = self.curr_pos.y 
-    local width,height = 200 * scale, 150 * scale  
+    local width,height = love.graphics.getWidth()/2, love.graphics.getHeight()/2
     local direction = Vector (math.cos(self.angle), math.sin(self.angle))
     local current_cursor = Vector((love.mouse.getX()) and -width +love.mouse.getX()  or 0,
                                   (love.mouse.getY()) and -height+love.mouse.getY() or 0)
