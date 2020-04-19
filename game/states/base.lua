@@ -1,14 +1,17 @@
 EM = require "game.classes.event-manager"
 ButtonPlus = require "game.classes.ui.button-plus"
+MotherShipUI = require "game.classes.ui.mothership-ui"
+MotherShip = require "game.classes.base.mothership"
 
 local base = {}
 
 function base:enter()
-    self.objects = {}
+    if not motherShip then
+        motherShip = MotherShip()
+    end
+    self.objects = {motherShipUI = MotherShipUI(motherShip)}
     self.eventManager = EM()
-    local button = ButtonPlus(20, 20)
-    self.eventManager:registerObject( button )
-    table.insert(self.objects, button)
+    self.objects.motherShipUI:registerButtons(self.eventManager)
 end
 
 function base:mousepressed(x, y)

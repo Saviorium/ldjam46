@@ -6,6 +6,8 @@ states = {
     base = require "game.states.base"
 }
 
+motherShip = nil
+
 function love.load()
     love.window.setTitle("Ludum Dare 46 Game")
     love.graphics.setDefaultFilter("nearest", "nearest")

@@ -7,6 +7,7 @@ Farm = Class {
         Module.init(self)
         self.units = initialPlants
         self.health = 0.5
+        self.maxUnits = maxUnits
     end
 }
 

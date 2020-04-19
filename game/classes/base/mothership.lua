@@ -1,7 +1,11 @@
 Class = require "lib.hump.class"
-StorageUnit = require "game.classes.storageunit"
+StorageUnit = require "game.classes.base.storageunit"
+OxygenSupply = require "game.classes.base.modules.oxygensupply"
 Farm = require "game.classes.base.modules.farm"
 Module = require "game.classes.base.module"
+
+
+serpent = require "lib.debug.serpent"
 
 MotherShip = Class {
     init = function(self)
@@ -22,13 +26,19 @@ MotherShip = Class {
         vegFarm.initStorage(self.storage.foodVeg, self.storage.foodAnimal)
 
         self.modules = {
-            vegFarm,
-            animalFarm,
-            heatGenerator = Module(),
+            vegFarm = vegFarm,
+            animalFarm = animalFarm,
             oxygenSupply = oxygenSupply
         }
+        print(serpent.block(self))
     end
 }
+
+function MotherShip:addMaxVegFarm()
+    value = self.modules.vegFarm.maxUnits + 1
+    self.modules.vegFarm.maxUnits = value
+    print(string.format("veg farm is now %d", value))
+end
 
 function MotherShip:update(dt)
     for _, module in pairs(self.modules) do

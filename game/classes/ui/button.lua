@@ -2,11 +2,12 @@ Class = require "lib.hump.class"
 Peachy = require "lib.peachy.peachy"
 
 Button = Class {
-    init = function(self, x, y, sprite)
+    init = function(self, x, y, callback, sprite)
         self.x = x
         self.y = y
         self.sprite = sprite
         self.selected = false
+        self.callback = callback
     end
 }
 
@@ -39,7 +40,7 @@ end
 function Button:mousereleased()
     self.sprite:setTag("up")
     if self.selected then
-        print("Button is clicked!")
+        self.callback()
     end
 end
 
