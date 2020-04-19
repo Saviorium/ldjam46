@@ -1,51 +1,24 @@
+-- init/restart game
+
+MotherShip = require "game.classes.base.mothership"
+Clock = require "game.classes.clock"
+
 local game = {}
-Player = require "game/classes/player"
-Asteroid = require "game/classes/asteroid"
-Map = require "game/classes/map/map"
-Camera = require "lib.hump.camera"
-HC = require 'lib/hardoncollider'
-Astreroids = {}
-Loot = {}
 
-function game:enter() -- Запускается при запуске приложения
-    HC = HC.new()
-	Player = Player(100, --x
-					100, --y
-					0, --angle
-					love.graphics.newImage('data/images/shuttle.png'), 
-					4, --speed
-					100, --maxVolume
-					100) -- HP
-	camera = Camera(Player.curr_pos.x, Player.curr_pos.y)
-	Map = Map(love.graphics.newImage('data/images/map.png'),
-			  love.graphics.newImage('data/images/map.png'),
-			  love.graphics.newImage('data/images/map.png'))
-end
+motherShip = nil
+clock = nil
 
-function game:mousepressed(x, y)
-end
+Astreroids = nil
+Loot = nil
 
-function game:keypressed( key ) -- кнопка нажата
-end
+function game:enter()
+    motherShip = MotherShip()
+    clock = Clock({ year = 2013, month = 09, day = 13}, 60*60*24)
 
-function game:draw() -- отрисовка каждый кадр
-    camera:attach()
-    Map:draw()
-	Player:draw()	
-	for _,obj in pairs(Astreroids) do
-		obj:draw()
-	end
-    camera:detach()
-end
+    Astreroids = {}
+    Loot = {}
 
-function game:update( dt ) -- Каждый кадр
-	Player:update(dt)
-	-- for _,obj in pairs(Astreroids) do
-	-- 	obj:update(dt)
-	-- end
-    local dx,dy = Player.curr_pos.x - camera.x, Player.curr_pos.y - camera.y
-    camera:move(dx/2, dy/2)
-    Map:update(dt)
+    StateManager.switch( states.base )
 end
 
 return game

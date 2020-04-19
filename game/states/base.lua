@@ -27,7 +27,7 @@ end
 
 function base:keypressed( key )
     if key == "space" then
-        StateManager.switch( states.game )
+        StateManager.switch( states.cosmos )
     end
 end
 

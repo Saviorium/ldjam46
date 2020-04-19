@@ -3,15 +3,14 @@ require 'conf'
 
 states = {
     game = require "game.states.game",
-    base = require "game.states.base"
+    base = require "game.states.base",
+    cosmos = require "game.states.cosmos"
 }
-
-motherShip = nil
 
 function love.load()
     love.window.setTitle("Ludum Dare 46 Game")
     love.graphics.setDefaultFilter("nearest", "nearest")
-    StateManager.switch( states.base )
+    StateManager.switch( states.game )
 end
 
 function love.draw()
@@ -35,6 +34,9 @@ function love.mousereleased(x, y)
 end
 
 function love.keypressed(key)
+    if key == "r" then
+        StateManager.switch( states.game )
+    end
     if StateManager.current().keypressed then
         StateManager.current():keypressed(key)
     end
