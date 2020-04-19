@@ -19,6 +19,12 @@ function base:mousereleased(x, y)
     self.eventManager:mousereleased(x, y)
 end
 
+function base:keypressed( key )
+    if key == "space" then
+        StateManager.switch( states.game )
+    end
+end
+
 function base:draw()
     for id, object in pairs(self.objects) do
         object:draw()
