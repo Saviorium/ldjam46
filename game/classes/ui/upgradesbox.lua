@@ -1,4 +1,5 @@
 Class = require "lib.hump.class"
+tracks = require "data/tracks"
 
 UpgradesBox = Class {
     init = function(self, x, y, resource, ship)
@@ -50,10 +51,12 @@ function UpgradesBox:doUpgrade(upgradeName)
     upgradeCost = self.upgrades[upgradeName].costs[currentLevel]
     if not upgradeCost then
         print("max upgrade level for " .. upgradeName .. " level: " .. currentLevel .. " reached!")
+        tracks.play_sound( tracks.list_of_sounds.error_button )
         return
     end
     if self.resource:getValue() < upgradeCost then
         print("not enough resources to upgrade " .. upgradeName .. " to level " .. currentLevel + 1)
+        tracks.play_sound( tracks.list_of_sounds.error_button )
         return
     end
     self.resource:add( -upgradeCost )
