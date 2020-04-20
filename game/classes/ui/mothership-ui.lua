@@ -4,6 +4,7 @@ IOSetting = require "game.classes.ui.iosetting"
 StorageBox = require "game.classes.ui.storagebox"
 StorageWithShipBox = require "game.classes.ui.storagewithshipbox"
 UpgradesBox = require "game.classes.ui.upgradesbox"
+tracks          = require "data/tracks"
 
 MotherShipUI = Class {
     init = function(self, motherShip, playerShip)

@@ -1,11 +1,29 @@
 require 'love.audio'
 
 local tracks = {}
---bip_on.wav --https://freesound.org/people/JustinBW/sounds/70107/
---radio_static.wav --https://freesound.org/people/GowlerMusic/sounds/262267/
---police_talk_1.wav --https://freesound.org/people/Guardian2433/sounds/320351/
-
+--moo https://freesound.org/people/Yudena/sounds/377603/
 tracks.list_of_sounds = {
+	button = { filepath = "data/music/button.wav",
+			   loopPoint = 0,
+			   bpm = 160,
+			   volume = 0.1
+			 },
+
+	error_button = { filepath = "data/music/error_button.wav",
+					   loopPoint = 0,
+					   bpm = 160,
+					   volume = 0.1
+					 },
+	ship_start = { filepath = "data/music/ship_start.wav",
+				   loopPoint = 0,
+				   bpm = 160,
+				   volume = 0.1
+				 },
+	shoot_1 = { filepath = "data/music/shoot_1.mp3",
+			    loopPoint = 0,
+			    bpm = 160,
+			    volume = 0.1
+			  }
 }
 
 function tracks.set_next_track( index, loaded_tracks )

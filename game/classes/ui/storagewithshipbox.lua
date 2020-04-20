@@ -1,5 +1,6 @@
 Class = require "lib.hump.class"
 StorageBox = require "game.classes.ui.storagebox"
+tracks          = require "data/tracks"
 
 StorageWithShipBox = Class {
     __includes = StorageBox,
@@ -19,7 +20,10 @@ StorageWithShipBox = Class {
                             function() 
                                 if self.ship.inventory[self.ship_resource] > 0 and storageUnit.value < storageUnit.max  then
                                     storageUnit.value = storageUnit.value + 10 
-                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - 10  
+                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - 10 
+                                    tracks.play_sound( tracks.list_of_sounds.button )
+                                else
+                                    tracks.play_sound( tracks.list_of_sounds.error_button )
                                 end
                             end) 
                     )
@@ -30,7 +34,10 @@ StorageWithShipBox = Class {
                             function() 
                                 if self.ship.inventory[self.ship_resource] < self.ship:checkFreeSpace() and storageUnit.value >= 10 then
                                     storageUnit.value = storageUnit.value - 10 
-                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + 10  
+                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + 10 
+                                    tracks.play_sound( tracks.list_of_sounds.button )
+                                else
+                                    tracks.play_sound( tracks.list_of_sounds.error_button )
                                 end
                             end) 
                     )

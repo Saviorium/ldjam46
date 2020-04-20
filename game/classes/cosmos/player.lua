@@ -2,6 +2,7 @@ Class = require "lib.hump.class"
 Vector = require "lib.hump.vector"
 PhysicsObject = require "game/classes/cosmos/physical_object"
 Bullets_handler = require "game/classes/cosmos/guns_and_ammo/bullets_handler"
+tracks          = require "data/tracks"
 
 Player =
     Class {
@@ -184,6 +185,7 @@ function Player:fireGatling()
         self.last_fire = 0
         self.bullets_handler:fire(self, 2, self.width, 0)
         self.inventory["energy"] = self.inventory["energy"] - self.enegryOnFireGatling
+        tracks.play_sound( tracks.list_of_sounds.shoot_1 )
     end
 end
 

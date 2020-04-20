@@ -1,6 +1,7 @@
 Class = require "lib.hump.class"
 Module = require "game.classes.base.module"
 TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
+tracks          = require "data/tracks"
 
 Farm = Class {
     __includes = Module,
@@ -31,7 +32,12 @@ function Farm:addMaxFarm()
             self.maxUnits = self.maxUnits + 5
             self.cur_level = self.cur_level + 1
             motherShip.storage['iron'].value = motherShip.storage['iron'].value - self.level.costs[self.cur_level]
+            tracks.play_sound( tracks.list_of_sounds.button )
+        else
+            tracks.play_sound( tracks.list_of_sounds.error_button )
         end
+    else
+        tracks.play_sound( tracks.list_of_sounds.error_button )
     end
 end
 
@@ -111,7 +117,12 @@ function Farm:initStorage( consumeResource, produceResource, inputStorage, outpu
 end
 
 function Farm:changeSupply(resource, change)
-    self.resources[resource]['rate'] = self.resources[resource]['rate'] + change
+    if (self.resources[resource]['rate'] + change) > 0 and (self.resources[resource]['rate'] + change) <= 2 then
+        self.resources[resource]['rate'] = self.resources[resource]['rate'] + change
+        tracks.play_sound( tracks.list_of_sounds.button )
+    else
+        tracks.play_sound( tracks.list_of_sounds.error_button )
+    end
 end
 
 function Farm:setFoodSupply(rate)
@@ -139,6 +150,9 @@ function Farm:changeWantedMax(changeTo)
     if (self.wantedMaxUnits + changeTo <= self.maxUnits) and (self.wantedMaxUnits + changeTo >= 0) then
         print(string.format(self:getName().." = %d", changeTo))
         self.wantedMaxUnits = self.wantedMaxUnits + changeTo
+        tracks.play_sound( tracks.list_of_sounds.button )
+    else
+        tracks.play_sound( tracks.list_of_sounds.error_button )
     end
 end
 
@@ -152,7 +166,7 @@ function Farm:updateHealth(delta)
         self.health = 0.1
     end
     if self.health < 0 and self.units > 0 then
-        self.units = self.units - 1
+        self:harvestToStorage(1)
         self.health = 0.9
     end
 end
