@@ -2,6 +2,7 @@ Class = require "lib.hump.class"
 StorageUnit = require "game.classes.base.storageunit"
 Farm = require "game.classes.base.modules.farm"
 Module = require "game.classes.base.module"
+TreeUnit = require "game.classes.ui.farm-unit.tree-unit"
 
 MotherShip = Class {
     init = function(self)
@@ -21,7 +22,7 @@ MotherShip = Class {
                             self.storage.foodVeg, --outputStorage
                             0.1, --consumptionPerUnit
                             15)--productionPerUnit
-        --vegFarm:initUnits("tree")
+        vegFarm:initUnits("tree")
 
         local animalFarm = Farm(5, 10, 0.001, "AnimFarm")
         animalFarm:initOxygen(self.storage.oxygen, 0.5, 5)
@@ -32,7 +33,7 @@ MotherShip = Class {
                                0.01, --consumptionPerUnit
                                100     --productionPerUnit)
                               )
-        --animalFarm:initUnits("tree")
+        animalFarm:initUnits("tree")
 
         self.modules = {
             animalFarm = animalFarm,

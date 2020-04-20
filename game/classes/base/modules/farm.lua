@@ -1,6 +1,6 @@
 Class = require "lib.hump.class"
 Module = require "game.classes.base.module"
--- TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
+TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
 
 Farm = Class {
     __includes = Module,
@@ -20,15 +20,17 @@ Farm = Class {
         self.farm_image = image
         self.farm_units = {}
         self.cur_level  = 1
-        self.level  = { costs = {100, 200, 500, 1000, 10000} },
+        self.level  = { costs = {100, 200, 500, 1000, 10000} }
     end
 }
 
 function Farm:addMaxFarm()
-    if motherShip.storage['iron'] >= self.level[self.cur_level+1] then
-        self.maxUnits = self.maxUnits + 5
-        self.cur_level = self.cur_level + 1
-        motherShip.storage['iron'] = motherShip.storage['iron'] - self.level[self.cur_level]
+    if self.level.costs[self.cur_level+1] then
+        if motherShip.storage['iron'].value >= self.level.costs[self.cur_level+1] then
+            self.maxUnits = self.maxUnits + 5
+            self.cur_level = self.cur_level + 1
+            motherShip.storage['iron'].value = motherShip.storage['iron'].value - self.level[self.cur_level]
+        end
     end
 end
 
@@ -65,20 +67,20 @@ function Farm:drawFarm(x, y)
                              3*scale
                            )
     love.graphics.setColor(255, 255, 255)
-    -- for id, object in pairs(self.farm_units) do
-    --     object:draw()
-    -- end
+    for id, object in pairs(self.farm_units) do
+        object:draw()
+    end
 
 end
 
--- function Farm:initUnits(unitType)
---     if unitType == "tree" then
---         for i = 1, self.units do
---             table.insert(self.farm_units, TreeUnit(0, 10, 0, 10))
---         end
---     end
+function Farm:initUnits(unitType)
+    if unitType == "tree" then
+        for i = 1, self.units do
+            table.insert(self.farm_units, TreeUnit(0, 10, 0, 10))
+        end
+    end
 
--- end
+end
 
 function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, can_heal)
     self.resources[resource] = {}
