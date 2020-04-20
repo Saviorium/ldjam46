@@ -16,8 +16,8 @@ end]]
 
 function TreeUnit:draw()
     love.graphics.draw(self.sprite,
-            self.x+(5*scale),
-            self.y+(13*scale),
+            self.x,
+            self.y,
             0,
             scale,
             scale)

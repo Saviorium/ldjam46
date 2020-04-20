@@ -4,7 +4,7 @@ TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
 
 Farm = Class {
     __includes = Module,
-    init = function(self, initialUnits, maxUnits, growthRate, name, image)
+    init = function(self, initialUnits, maxUnits, growthRate, name, x, y)
         Module.init(self)
         self.units = initialUnits
         self.health = 0.5
@@ -17,8 +17,9 @@ Farm = Class {
         self.resources = {}
         self.cam_image = love.graphics.newImage('data/images/ui/farm-cam.png')
         self.cam_background = love.graphics.newImage('data/images/cam/wall_3.png')
-        self.farm_image = image
         self.farm_units = {}
+        self.x = x
+        self.y = y
         self.cur_level  = 1
         self.level  = { costs = {100, 200, 500, 1000, 10000} }
     end
@@ -34,35 +35,39 @@ function Farm:addMaxFarm()
     end
 end
 
-function Farm:drawFarm(x, y)
+function Farm:drawFarm()
     love.graphics.draw(self.cam_background,
-                        x+(5*scale),
-                        y+(13*scale),
-                        0,
-                        scale,
-                        scale)
+            self.x+(5*scale),
+            self.y+(13*scale),
+            0,
+            scale,
+            scale)
     love.graphics.draw(self.cam_image,
-                       x,
-                       y, 
-                       0, 
-                       scale, 
-                       scale)
+            self.x,
+            self.y,
+            0,
+            scale,
+            scale)
     love.graphics.print(self.units,
-                        x+29*scale,
-                        y+4*scale
-                       )
+            self.x+29*scale,
+            self.y+4*scale
+    )
     love.graphics.print(self.wantedMaxUnits,
-                        x+55*scale,
-                        y+3*scale
-                       )
+            self.x+55*scale,
+            self.y+3*scale
+    )
     love.graphics.print(self.maxUnits,
-                        x+103*scale,
-                        y+4*scale
-                       )
+            self.x+103*scale,
+            self.y+4*scale
+    )
+    love.graphics.print(self.name,
+            self.x+103*scale,
+            self.y+14*scale
+    )
     love.graphics.setColor(0, 255, 0)
     love.graphics.rectangle( 'fill',
-                             x+5*scale,
-                             y+91*scale,
+            self.x+5*scale,
+            self.y+91*scale,
                              (117*scale)*self.health,
                              3*scale
                            )
@@ -76,7 +81,11 @@ end
 function Farm:initUnits(unitType)
     if unitType == "tree" then
         for i = 1, self.units do
-            table.insert(self.farm_units, TreeUnit(0, 10, 0, 10))
+            table.insert(self.farm_units,
+                    TreeUnit(self.x, self.x,
+                            self.y,
+                            self.y)
+            )
         end
     end
 
@@ -154,6 +163,11 @@ end
 
 function Farm:growNewUnits(units)
     self.units = self.units + units
+    table.insert(self.farm_units,
+            TreeUnit(self.x, self.x+100,
+                    self.y,
+                    self.y+100)
+    )
 end
 
 function Farm:harvestToStorage(units)

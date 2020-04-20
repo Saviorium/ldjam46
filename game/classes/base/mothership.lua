@@ -14,25 +14,25 @@ MotherShip = Class {
             foodAnimal = StorageUnit(1000, 500, "Animal food"),
             oxygen     = StorageUnit(10000, 5000, "Oxygen"),
         }
-        local vegFarm = Farm(5, 10, 0.005, "VegFarm")
+        local vegFarm = Farm(5, 10, 0.005, "VegFarm", 15*scale, 110*scale )
         vegFarm:initOxygen(self.storage.oxygen, 0.2, -10)
         vegFarm:initStorage('water', -- consumeResource
-                            'foodVeg', -- produceResource
-                            self.storage.water, --inputStorage
-                            self.storage.foodVeg, --outputStorage
-                            0.1, --consumptionPerUnit
-                            15)--productionPerUnit
+                'foodVeg', -- produceResource
+                self.storage.water, --inputStorage
+                self.storage.foodVeg, --outputStorage
+                0.1, --consumptionPerUnit
+                15)--productionPerUnit
         vegFarm:initUnits("tree")
 
-        local animalFarm = Farm(5, 10, 0.001, "AnimFarm")
+        local animalFarm = Farm(5, 10, 0.001, "AnimFarm", 15*scale, 15*scale)
         animalFarm:initOxygen(self.storage.oxygen, 0.5, 5)
         animalFarm:initStorage('foodVeg', -- consumeResource
-                               'foodAnimal', -- produceResource
-                               self.storage.foodVeg, --inputStorage
-                               self.storage.foodAnimal, --outputStorage
-                               0.01, --consumptionPerUnit
-                               100     --productionPerUnit)
-                              )
+                'foodAnimal', -- produceResource
+                self.storage.foodVeg, --inputStorage
+                self.storage.foodAnimal, --outputStorage
+                0.01, --consumptionPerUnit
+                100     --productionPerUnit)
+        )
         animalFarm:initUnits("tree")
 
         self.modules = {
@@ -60,7 +60,7 @@ end
 function MotherShip:update(dt)
     for _, module in pairs(self.modules) do
         module:update(dt)
-	end
+    end
 end
 
 function MotherShip:getStorage()
