@@ -2,6 +2,7 @@ Class = require "lib.hump.class"
 IOBox = require "game.classes.ui.iobox"
 IOSetting = require "game.classes.ui.iosetting"
 StorageBox = require "game.classes.ui.storagebox"
+StorageWithShipBox = require "game.classes.ui.storagewithshipbox"
 
 MotherShipUI = Class {
     init = function(self, motherShip)
@@ -41,7 +42,7 @@ function MotherShipUI:initUI()
         VegFoodBox_out = IOBox( x, 77 *scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm']),
 
         -- Storage
-        oxygenStorage = StorageBox(storageX, 30*scale, 'oxygen', self.motherShip.storage.oxygen)
+        oxygenStorage = StorageWithShipBox(storageX, 30*scale, 'oxygen', self.motherShip.storage.oxygen)
     }
 end
 

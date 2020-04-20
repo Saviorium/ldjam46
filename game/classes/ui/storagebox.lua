@@ -1,11 +1,10 @@
 Class = require "lib.hump.class"
 
 StorageBox = Class {
-    init = function(self, x, y, resource, storageUnit, shipStorage)
+    init = function(self, x, y, resource, storageUnit)
         self.curr_pos = Vector( x, y )
         self.resource = resource
         self.storageUnit = storageUnit
-        self.shipStorage = shipStorage
         self:initUI()
     end
 }
@@ -27,11 +26,18 @@ function StorageBox:drawBox()
                        scale)
 
     love.graphics.setFont(fonts.numbers)
-    love.graphics.setColor(1, 0, 0)
     love.graphics.print(
         string.format('%d', math.min(self.storageUnit:getValue(),9999)),
         self.curr_pos.x+48*scale,
         self.curr_pos.y+12*scale,
+        0,
+        scale,
+        scale
+    )
+    love.graphics.draw(
+        self.image_resource,
+        self.curr_pos.x+97*scale,
+        self.curr_pos.y+3*scale, 
         0,
         scale,
         scale

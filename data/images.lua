@@ -27,7 +27,7 @@ Images['water'] = love.graphics.newImage('data/images/ui/icon-water.png')
 Images['IOBox'] = love.graphics.newImage('data/images/ui/io_box.png')
 Images['arrow'] = love.graphics.newImage('data/images/ui/arrow.png')
 Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
-
+Images['bigscreen'] = love.graphics.newImage('data/images/ui/big-tablo.png')
 Images['storageBox'] = love.graphics.newImage('data/images/ui/storage-example.png')
 
 for ind, obj in pairs(Images) do
