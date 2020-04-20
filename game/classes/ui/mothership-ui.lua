@@ -1,6 +1,7 @@
 Class = require "lib.hump.class"
 IOBox = require "game.classes.ui.iobox"
 IOSetting = require "game.classes.ui.iosetting"
+StorageBox = require "game.classes.ui.storagebox"
 
 MotherShipUI = Class {
     init = function(self, motherShip)
@@ -27,20 +28,25 @@ function MotherShipUI:initUI()
         table.insert(self.buttons, Button(25*scale, (20 + 20*(i))*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
     end
     local x = 141*scale
-    self.IOBoxes = {
-    OxygenBox_in    = IOBox( x, 15*scale, 'In', 'oxygen', self.motherShip.modules['animalFarm']),
-    VegFoodBox_in   = IOSetting( x, 46*scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
-    MeatFoodBox_out = IOBox( x, 77*scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
+    local storageX = 217*scale
+    self.uiBoxes = {
+        -- IOBoxes
+        OxygenBox_in    = IOBox( x, 15*scale, 'In', 'oxygen', self.motherShip.modules['animalFarm']),
+        VegFoodBox_in   = IOSetting( x, 46*scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
+        MeatFoodBox_out = IOBox( x, 77*scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
 
-    WaterBox_in    = IOSetting( x, 110*scale, 'In', 'water', self.motherShip.modules['vegFarm']),
-    OxygenBox_out  = IOBox( x, 141*scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
-    VegFoodBox_out = IOBox( x, 172*scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm'])
+        WaterBox_in    = IOSetting( x, 110*scale, 'In', 'water', self.motherShip.modules['vegFarm']),
+        OxygenBox_out  = IOBox( x, 141*scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
+        VegFoodBox_out = IOBox( x, 172*scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm']),
+
+        -- Storage
+        oxygenStorage = StorageBox(storageX, 30*scale, 'oxygen', self.motherShip.storage.oxygen)
     }
 
 end
 
 function MotherShipUI:registerButtons(eventManager)
-    for id, iobox in pairs(self.IOBoxes) do
+    for id, iobox in pairs(self.uiBoxes) do
         if iobox.registerButtons then
             iobox:registerButtons(eventManager)
         end
@@ -88,7 +94,7 @@ function MotherShipUI:draw()
         love.graphics.print(object:getName()..": "..object:getCurrentUnits().."/"..object:getWantedMaxUnit().."(max: "..object:getMaxUnit()..")", 45*scale, (25 + 20*(i))*scale)
         object:drawFarm( 15*scale, (15+i*95)*scale )
     end
-    for id, object in pairs(self.IOBoxes) do
+    for id, object in pairs(self.uiBoxes) do
         object:draw()
     end
 end
