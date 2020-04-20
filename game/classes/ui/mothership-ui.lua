@@ -88,15 +88,15 @@ function MotherShipUI:draw()
     for id, object in pairs(self.modules) do
         object:draw()
     end
-    for id, object in pairs(self.buttons) do
-        object:draw()
-    end
     i = -1
     for id, object in pairs(motherShip:getModules()) do
         i = i+1
         object:drawFarm( 15*scale, (15+i*95)*scale )
     end
     for id, object in pairs(self.uiBoxes) do
+        object:draw()
+    end
+    for id, object in pairs(self.buttons) do
         object:draw()
     end
 end

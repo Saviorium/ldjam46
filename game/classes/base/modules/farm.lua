@@ -15,11 +15,18 @@ Farm = Class {
         self.growthSpeed = growthRate
         self.resources = {}
         self.cam_image = love.graphics.newImage('data/images/ui/farm-cam.png')
+        self.cam_background = love.graphics.newImage('data/images/cam/wall_3.png')
         self.farm_image = image
     end
 }
 
 function Farm:drawFarm(x, y)
+    love.graphics.draw(self.cam_background,
+            x+(5*scale),
+            y+(13*scale),
+            0,
+            scale,
+            scale)
     love.graphics.draw(self.cam_image,
                        x,
                        y, 
