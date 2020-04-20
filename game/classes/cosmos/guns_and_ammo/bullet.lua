@@ -30,7 +30,7 @@ end
 
 function Bullet:update( dt )
   self:move( self.cur_speed )
-  if self.time_to_live > 0 then
+  if self.time_to_live >= 0 then
     self.time_to_live = self.time_to_live - dt
   end
 end

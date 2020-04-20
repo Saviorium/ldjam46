@@ -39,6 +39,7 @@ function Tile:checkAndCreateAsteroids()
                 temp = Asteroid(math.random(self.curr_pos.x,self.curr_pos.x+self.width ), --x
                                 math.random(self.curr_pos.y,self.curr_pos.y+self.height), --y
                                 math.pi*(math.random(0,360)/180),   --angle
+                                table.maxn(Asteroids)+1,
                                 self.hc
                                )
                 if next(self.hc:collisions(temp.collider)) == nil then

@@ -17,6 +17,8 @@ for i=1, 6 do
 end
 Images.poligons = {
     asteroid_1 = {
+    	x = 22.94,
+    	y = 40.79,
         polygon = {
             { x = 8, y = 68 },
             { x = 0, y = 51 },
@@ -31,6 +33,8 @@ Images.poligons = {
         }
     },
     asteroid_2 = {
+    	x = 37.52,
+    	y = 41.42,
         polygon = {
             { x = 1, y = 28 },
             { x = 24, y = 3 },
@@ -45,6 +49,8 @@ Images.poligons = {
         }
     },
     asteroid_3 = {
+    	x = 58,
+    	y = 55, -- 55
         polygon = {
             { x = 0, y = 7 },
             { x = 9, y = 0 },
@@ -68,6 +74,8 @@ Images.poligons = {
         }
     },
     asteroid_4 = {
+    	x = 24.48,
+    	y = 23.63,
         polygon = {
             { x = 2, y = 18 },
             { x = 20, y = 0 },
@@ -82,6 +90,8 @@ Images.poligons = {
         }
     },
     asteroid_5 = {
+    	x = 20.95,
+    	y = 15.25,
         polygon = {
             { x = 1, y = 21 },
             { x = 11, y = 1 },

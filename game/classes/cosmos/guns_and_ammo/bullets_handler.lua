@@ -37,22 +37,16 @@ function Bullets_handler:update( dt )
         bullet:update( dt )
         for shape, delta in pairs(self.hc:collisions(bullet.collider)) do
           if shape.type == 'asteroid' then 
-              for index, asteroid in pairs(Asteroids) do
-                local cx, cy = shape:center()
-                if cx == asteroid.curr_pos.x and
-                   cy == asteroid.curr_pos.y then
-                  asteroid.HP = asteroid.HP - bullet.damage
-                  if asteroid.HP < 0 then
-                      Asteroids[index] = nil
-                      asteroid:destroy()
-                  end
-                end
+              Asteroids[shape.index].HP = Asteroids[shape.index].HP - bullet.damage
+              if Asteroids[shape.index].HP < 0 then
+                  Asteroids[shape.index]:destroy()
+                  Asteroids[shape.index] = nil
               end
             self.bullets_on_screen[b_i] = nil
             self.hc:remove(bullet.collider)
           end
         end
-        if self.time_to_live == 0 then
+        if bullet.time_to_live < 0 then
             self.bullets_on_screen[b_i] = nil
             self.hc:remove(bullet.collider)
         end

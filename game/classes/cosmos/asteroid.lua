@@ -5,16 +5,15 @@ Images = require "data/images"
 
 Asteroid = Class {
     __includes = PhysicsObject,
-    init = function(self, x, y, angle, hc)
+    init = function(self, x, y, angle, index, hc)
         self.angle = angle
         self.hc = hc
-        self:randomize()
+        self:randomize(x, y)
         PhysicsObject.init(self, x, y, self.image)
         self.collider:rotate(angle)
         self.collider:scale(scale,scale)
-        self.collider:move(x - self.width/2, y - self.width/2)
-        --self:registerCollider(self.hc)
         self.collider.type = 'asteroid'
+        self.collider.index = index
     end
 }
 
@@ -25,6 +24,7 @@ function Asteroid:destroy()
 end
 
 function Asteroid:draw()
+  local dx,dy = self.collider:center()
     love.graphics.draw(self.image,
                        self.curr_pos.x,
                        self.curr_pos.y, 
@@ -37,6 +37,7 @@ function Asteroid:draw()
                         self.curr_pos.x,
                         self.curr_pos.y
                        )
+
 end
 
 function Asteroid.dropIron(self)
@@ -58,7 +59,7 @@ function Asteroid:update(dt)
     self.collider:rotate(self.rotationSpeed)
 end
 
-function Asteroid:randomize()
+function Asteroid:randomize( x, y )
     local temp = math.random(0,3)
     local type = math.random(1,5)
     self.rotationSpeed = math.random(-15,15) / 5000
@@ -82,6 +83,7 @@ function Asteroid:randomize()
       self.image = Images['all_'..type]
       self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
     end
+    self.collider:move(x - Images.poligons['asteroid_'..type].x, y - Images.poligons['asteroid_'..type].y)
 end
 
 
