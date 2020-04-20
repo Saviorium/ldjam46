@@ -30,7 +30,7 @@ function Farm:addMaxFarm()
         if motherShip.storage['iron'].value >= self.level.costs[self.cur_level+1] then
             self.maxUnits = self.maxUnits + 5
             self.cur_level = self.cur_level + 1
-            motherShip.storage['iron'].value = motherShip.storage['iron'].value - self.level[self.cur_level]
+            motherShip.storage['iron'].value = motherShip.storage['iron'].value - self.level.costs[self.cur_level]
         end
     end
 end
