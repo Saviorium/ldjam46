@@ -1,6 +1,6 @@
 Class = require "lib.hump.class"
 Module = require "game.classes.base.module"
-TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
+-- TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
 
 Farm = Class {
     __includes = Module,
@@ -19,8 +19,18 @@ Farm = Class {
         self.cam_background = love.graphics.newImage('data/images/cam/wall_3.png')
         self.farm_image = image
         self.farm_units = {}
+        self.cur_level  = 1
+        self.level  = { costs = {100, 200, 500, 1000, 10000} },
     end
 }
+
+function Farm:addMaxFarm()
+    if motherShip.storage['iron'] >= self.level[self.cur_level+1] then
+        self.maxUnits = self.maxUnits + 5
+        self.cur_level = self.cur_level + 1
+        motherShip.storage['iron'] = motherShip.storage['iron'] - self.level[self.cur_level]
+    end
+end
 
 function Farm:drawFarm(x, y)
     love.graphics.draw(self.cam_background,
@@ -47,24 +57,28 @@ function Farm:drawFarm(x, y)
                         x+103*scale,
                         y+4*scale
                        )
-    love.graphics.print(self.name,
-                        x+103*scale,
-                        y+14*scale
-                       )
-    for id, object in pairs(self.farm_units) do
-        object:draw()
-    end
+    love.graphics.setColor(0, 255, 0)
+    love.graphics.rectangle( 'fill',
+                             x+5*scale,
+                             y+91*scale,
+                             (117*scale)*self.health,
+                             3*scale
+                           )
+    love.graphics.setColor(255, 255, 255)
+    -- for id, object in pairs(self.farm_units) do
+    --     object:draw()
+    -- end
 
 end
 
-function Farm:initUnits(unitType)
-    if unitType == "tree" then
-        for i = 1, self.units do
-            table.insert(self.farm_units, TreeUnit(0, 10, 0, 10))
-        end
-    end
+-- function Farm:initUnits(unitType)
+--     if unitType == "tree" then
+--         for i = 1, self.units do
+--             table.insert(self.farm_units, TreeUnit(0, 10, 0, 10))
+--         end
+--     end
 
-end
+-- end
 
 function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, can_heal)
     self.resources[resource] = {}
@@ -83,7 +97,7 @@ end
 
 function Farm:initStorage( consumeResource, produceResource, inputStorage, outputStorage, consumptionPerUnit, productionPerUnit)
 
-    self:initResource(consumeResource, 1, inputStorage , 0.8, consumptionPerUnit, 0 ,self.growthSpeed, 1)
+    self:initResource(consumeResource, 1, inputStorage , 1, consumptionPerUnit, 0 ,self.growthSpeed, 1)
     self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit  ,0, 0)
     self.consumeResource = consumeResource
     self.produceResource = produceResource

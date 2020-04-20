@@ -95,6 +95,7 @@ function cosmos:update( dt ) -- Каждый кадр
     local dx,dy = self.player.curr_pos.x - self.camera.x, self.player.curr_pos.y - self.camera.y
     self.camera:move(dx/2, dy/2)
     self.map:update(dt)
+    motherShip:update(dt)
 end
 
 return cosmos
