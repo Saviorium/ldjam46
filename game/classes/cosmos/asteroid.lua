@@ -8,9 +8,11 @@ Asteroid = Class {
     init = function(self, x, y, angle, hc)
         self.angle = angle
         self.hc = hc
-        print(x,y)
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
+        self.collider:move(5,10)
+        self.collider:rotate(angle)
+        self.collider:move(x - self.width, y - self.height)
         --self:registerCollider(self.hc)
         self.collider.type = 'asteroid'
     end
@@ -26,7 +28,7 @@ function Asteroid:draw()
     love.graphics.draw(self.image,
                        self.curr_pos.x,
                        self.curr_pos.y, 
-                       self.angle/math.pi + math.pi/2, 
+                       self.angle, 
                        scale, 
                        scale,
                        self.width/2,
@@ -79,10 +81,9 @@ end
 function Asteroid:createPoligon(object)
     local polygon = {}
     for _, vertex in ipairs(object.polygon) do
-        table.insert(polygon, vertex.x)
-        table.insert(polygon, vertex.y)
+        table.insert(polygon, vertex.x*scale)
+        table.insert(polygon, vertex.y*scale)
     end
-    print('poligoned')
     return self.hc:polygon(unpack(polygon))
 end
 return Asteroid
