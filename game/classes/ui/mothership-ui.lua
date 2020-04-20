@@ -11,7 +11,7 @@ MotherShipUI = Class {
 
         local image_screen = love.graphics.newImage("data/images/ui/bgndscreen/screen.png")
         image_screen:setFilter("nearest", "nearest")
-        sprite = Peachy.new("data/images/ui/bgndscreen/screen.json", image_screen, "loop1")
+        sprite = Peachy.new("data/images/ui/bgndscreen/screen.json", image_screen, "loop")
         self.sprite = sprite
     end
 }
@@ -51,7 +51,24 @@ function MotherShipUI:update(dt)
     self.sprite:update(dt)
 end
 
+function MotherShipUI:onTag(sprite)
+    if (sprite.frameIndex == #sprite.tag.frames) and (sprite.tagName == "loop1" or sprite.tagName == "loop2") then
+        sprite:setTag("loop")
+    end
+end
+
 function MotherShipUI:draw()
+    if self.sprite.tagName == "loop" then
+        i = math.random(0,1000)
+        if i == 1 then
+            sprite:setTag("loop1")
+        end
+        if i == 2 then
+            sprite:setTag("loop2")
+        end
+    end
+    self.sprite:onLoop(MotherShipUI:onTag(self.sprite))
+    self.sprite:draw(0, 0, 0, scale, scale)
     for id, object in pairs(self.modules) do
         object:draw()
     end
@@ -73,7 +90,6 @@ function MotherShipUI:draw()
     for id, object in pairs(self.IOBoxes) do
         object:draw()
     end
-    self.sprite:draw(0, 0, 0, scale, scale)
 end
 
 return MotherShipUI
