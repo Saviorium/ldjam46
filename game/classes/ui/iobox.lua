@@ -1,10 +1,11 @@
 Class = require "lib.hump.class"
 
 IOBox = Class {
-    init = function(self, x, y, direction, resource)
+    init = function(self, x, y, direction, resource, module)
         self.curr_pos = Vector( x, y )
         self.direction = direction
         self.resource = resource
+        self.module = module
         self:initUI()
     end
 }
@@ -48,7 +49,11 @@ function IOBox:drawBox()
 
     love.graphics.setFont(fonts.numbers)
     love.graphics.setColor(0, 0, 0)
-    love.graphics.print('100%',
+    local level = 0
+    if self.module.resources[self.resource] then
+        level = self.module.resources[self.resource]['rate']
+    end
+    love.graphics.print((level*100)..'%',
                         self.curr_pos.x+30*scale,
                         self.curr_pos.y+18*scale,
                         0,
@@ -56,6 +61,23 @@ function IOBox:drawBox()
                         scale
                        )
     love.graphics.setColor(255, 255, 255)
+
+    local count, loc_count = -1, -1
+    for index, resource in pairs(self.module.resources) do
+        count = count + 1
+        loc_count = -1
+        love.graphics.print(index,
+                            (250+count*50)*scale,
+                            (280)*scale
+                           )
+        for ind, par in pairs(resource) do
+            loc_count = loc_count + 1
+            love.graphics.print(par,
+                                (250+count*50)*scale,
+                                (10+loc_count*20)*scale
+                               )
+        end
+    end
 end
 
 function IOBox:draw()

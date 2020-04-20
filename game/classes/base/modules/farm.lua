@@ -13,20 +13,31 @@ Farm = Class {
         self.foodSupplyRate = 1.1
         self.baseOxygenDamage = 0.01
         self.growthSpeed = growthRate
+        self.resources = {}
     end
 }
 
-function Farm:initOxygen(supplyUnit, sensitivity, consumption)
-    self.oxygenSupply = supplyUnit
-    self.oxygenSensitivity = sensitivity
-    self.oxygenConsumption = consumption
+function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, affect)
+    self.resources[resource] = {}
+    self.resources[resource]['rate']            = rate
+    self.resources[resource]['storageUnit']     = supplyUnit
+    self.resources[resource]['sensivity']       = sensitivity
+    self.resources[resource]['consume_by_unit'] = consumption
+    self.resources[resource]['produce_by_unit'] = production
+    self.resources[resource]['base_affect']     = base_affect
+    self.resources[resource]['affect']          = affect
 end
 
-function Farm:initStorage(inputStorage, outputStorage, consumptionPerUnit, production)
-    self.inputStorage = inputStorage
-    self.outputStorage = outputStorage
-    self.foodConsumption = consumptionPerUnit
-    self.foodProduction = production
+function Farm:initOxygen(supplyUnit, sensitivity, consumption)
+    self:initResource('oxygen', 1, supplyUnit, sensitivity, consumption, 0,20, 'percent')
+end
+
+function Farm:initStorage( consumeResource, produceResource, inputStorage, outputStorage, consumptionPerUnit, productionPerUnit)
+
+    self:initResource(consumeResource, 1, inputStorage , 0.8, consumptionPerUnit, 0 ,0,'by_unit')
+    self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit  ,0,'by_unit')
+    self.consumeResource = consumeResource
+    self.produceResource = produceResource
 end
 
 function Farm:setFoodSupply(rate)
@@ -80,35 +91,38 @@ end
 function Farm:harvestToStorage(units)
     local unitsToHarvest = math.min(units, self.units)
     self.units = self.units - unitsToHarvest
-    self.outputStorage:add(unitsToHarvest * self.foodProduction)
+    self.resources[self.produceResource]['storageUnit']:addAndGetExcess(unitsToHarvest * self.resources[self.produceResource]['produce_by_unit'])
     print("killed "..unitsToHarvest.." in "..self.name)
 end
 
 function Farm:update(dt)
     Module:update(dt)
-    local oxygenDamage = 0
-    if self.oxygenConsumption then
-        local oxygenLevel = self.oxygenSupply:getLevel()
-        self.oxygenSupply:add( -(self.oxygenConsumption * self.units) )
-        -- oxyLevel = 0% => 100% baseOxygenDamage
-        -- oxyLevel = oxygenSensitivity% => 0% baseOxygenDamage
-        if oxygenLevel < self.oxygenSensitivity then
-            oxygenDamage = self.baseOxygenDamage * (self.oxygenSensitivity - oxygenLevel) 
+    local deltaHP_percent = 0
+    local deltaHP_by_unit = 0
+    for index, resource in pairs(self.resources) do
+        if resource['consume_by_unit'] ~= 0 then
+            local cur_rate = 0
+            local deficit = resource['storageUnit']:addAndGetExcess(-resource['rate'] * resource['consume_by_unit'] * self.units)
+            if deficit == 0 then
+                cur_rate = resource['rate'] 
+            end
+            if cur_rate ~= resource['sensivity'] then
+                if resource['affect'] == 'percent' then
+                    deltaHP_percent = deltaHP_percent - resource['base_affect']*(resource['sensivity'] - resource['rate']) 
+                    print(deltaHP_by_unit)
+                elseif resource['affect'] == 'by_unit' then
+                    deltaHP_by_unit = deltaHP_by_unit + (cur_rate - 1) * self.growthSpeed * self.units
+                    print(deltaHP_by_unit)
+                end
+                if deltaHP_percent > 0 and deltaHP_by_unit > 0 then
+                    deltaHP_by_unit = 0
+                end 
+            end
         end
+
     end
-    local foodSatisfaction = 0
-    if self.foodConsumption then
-        local foodToConsume = self.foodSupplyRate * self.foodConsumption * self.units
-        local foodDeficit = self.inputStorage:addAndGetExcess(-foodToConsume)
-        if foodDeficit == 0 then
-            foodSatisfaction = self.foodSupplyRate
-        end
-    end
-    local hpDelta = (foodSatisfaction - 1) * self.growthSpeed * self.units
-    if self.foodSupplyRate > 1 and oxygenDamage > 0 then
-        hpDelta = 0
-    end
-    hpDelta = hpDelta + oxygenDamage
+
+    hpDelta = deltaHP_percent + deltaHP_by_unit
 
     self:updateHealth(hpDelta)
     local excessUnits = self.units - self:getWantedMaxUnit()
