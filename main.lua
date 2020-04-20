@@ -3,15 +3,19 @@ require 'conf'
 
 serpent = require "lib.debug.serpent"
 states = {
+    start_game = require "game.states.start_game",
     game = require "game.states.game",
+    end_game = require "game.states.end_game",
     base = require "game.states.base",
     cosmos = require "game.states.cosmos"
 }
 
+strings = {''}
+
 function love.load()
     love.window.setTitle("Ludum Dare 46 Game")
     love.graphics.setDefaultFilter("nearest", "nearest")
-    StateManager.switch( states.game )
+    StateManager.switch( states.start_game )
 end
 
 function love.draw()

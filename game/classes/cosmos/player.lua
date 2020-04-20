@@ -17,9 +17,9 @@ Player =
         self.height = Images[image]:getHeight()
         self.width  = Images[image]:getWidth()
 
-        self.maxVolume = maxVolume + playerShip.upgrade.space*100
+        self.maxVolume = playerShip.upgrade.space*100
 
-        self.maxEnergy = 100 + playerShip.upgrade.battery*10
+        self.maxEnergy = playerShip.upgrade.battery*100
         self.oxygenConsume = 1
         self.foodConsume = 0.1
 
@@ -41,7 +41,7 @@ Player =
         self.energyOnStrafe = 2
         self.enegryOnFireLazer = 80
         self.enegryOnFireGatling = 20
-        self.energyInSecond = 3 + playerShip.upgrade.recharge
+        self.energyInSecond = 2 + playerShip.upgrade.recharge
 
         self.HC = HC
         self.bullets_handler = Bullets_handler(self.HC)
@@ -204,7 +204,7 @@ function Player:onCollide()
     for shape, delta in pairs(self.HC:collisions(self.collider)) do
         if shape.type == "asteroid" or shape.type == "solid" then
             if self.cur_speed:len() > 10 then
-                self.HP = self.HP - self.cur_speed:len() / 10
+                self.HP = self.HP - self.cur_speed:len()
                 print(self.HP)
             end
             self.curr_pos.x = self.curr_pos.x + delta.x
