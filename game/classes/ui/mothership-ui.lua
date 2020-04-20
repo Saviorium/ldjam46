@@ -3,6 +3,7 @@ IOBox = require "game.classes.ui.iobox"
 IOSetting = require "game.classes.ui.iosetting"
 StorageBox = require "game.classes.ui.storagebox"
 StorageWithShipBox = require "game.classes.ui.storagewithshipbox"
+UpgradesBox = require "game.classes.ui.upgradesbox"
 
 MotherShipUI = Class {
     init = function(self, motherShip, playerShip)
@@ -49,6 +50,9 @@ function MotherShipUI:initUI()
         foodVegStorage    = StorageWithShipBox(storageX, 33*3*scale, 'foodVeg',    self.motherShip.storage.foodVeg, self.playerShip),
         foodAnimalStorage = StorageWithShipBox(storageX, 33*4*scale, 'foodAnimal', self.motherShip.storage.foodAnimal, self.playerShip),
         oxygenStorage     = StorageWithShipBox(storageX, 33*5*scale, 'oxygen',     self.motherShip.storage.oxygen ,self.playerShip),
+
+        -- Upgrades
+        upgradesBox = UpgradesBox(storageX, 33*6*scale, self.playerShip)
     }
 end
 

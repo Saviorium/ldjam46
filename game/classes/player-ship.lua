@@ -9,12 +9,12 @@ PlayerShip = Class {
             energy = 100,
             food = 100
         }
-        self.upgrade = {battery = 0,
-                        fire = 0,
-                        maneur = 0,
-                        recharge =0,
-                        space = 0,
-                        speed = 0
+        self.upgrade = {battery  = 1,
+                        fire     = 1,
+                        maneur   = 1,
+                        recharge = 1,
+                        space    = 1,
+                        speed    = 1
                        } 
     end
 }
