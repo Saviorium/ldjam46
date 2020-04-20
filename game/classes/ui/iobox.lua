@@ -13,7 +13,7 @@ IOBox = Class {
 function IOBox:initUI()
     self.image_back = Images['IOBox']
     self.image_arrow = Images['arrow']
-    self.angel_of_arrow = (self.direction == 'In' and math.pi or 0)
+    self.angel_of_arrow = (self.direction == 'Out' and math.pi or 0)
     self.image_resource = Images[self.resource]
     self.screen = Images['screen']
 end
