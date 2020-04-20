@@ -48,7 +48,7 @@ function Button:mousereleased()
 end
 
 function Button:draw()
-    self.sprite:draw(self.x*scale, self.y*scale, 0, scale, scale)
+    self.sprite:draw(self.x, self.y, 0, scale, scale)
 end
 
 function Button:update(dt)

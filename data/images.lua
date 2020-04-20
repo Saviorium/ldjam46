@@ -15,6 +15,22 @@ for i=1, 6 do
     Images['star_'..i] = love.graphics.newImage('data/images/star/star_'..(i)..'.png')
     Images['star_'..i]:setFilter("nearest", "nearest")
 end
+
+Images['iron'] = love.graphics.newImage('data/images/ui/icon-iron.png')
+Images['foodAnimal'] = love.graphics.newImage('data/images/ui/icon-meatfood.png')
+Images['oxygen'] = love.graphics.newImage('data/images/ui/icon-oxygen.png')
+Images['foodVeg'] = love.graphics.newImage('data/images/ui/icon-vegfood.png')
+Images['water'] = love.graphics.newImage('data/images/ui/icon-water.png')
+
+Images['IOBox'] = love.graphics.newImage('data/images/ui/io_box.png')
+Images['arrow'] = love.graphics.newImage('data/images/ui/arrow.png')
+Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
+
+
+for ind, obj in pairs(Images) do
+    obj:setFilter("nearest", "nearest")
+end
+
 Images.poligons = {
     asteroid_1 = {
     	x = 22.94,
