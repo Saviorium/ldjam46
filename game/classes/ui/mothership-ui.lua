@@ -80,10 +80,10 @@ function MotherShipUI:draw()
     if self.sprite.tagName == "loop" then
         i = math.random(0,1000)
         if i == 1 then
-            sprite:setTag("loop1")
+            self.sprite:setTag("loop1")
         end
         if i == 2 then
-            sprite:setTag("loop2")
+            self.sprite:setTag("loop2")
         end
     end
     self.sprite:onLoop(MotherShipUI:onTag(self.sprite))
