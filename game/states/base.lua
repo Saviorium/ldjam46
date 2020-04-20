@@ -9,7 +9,7 @@ function base:enter()
         motherShip = MotherShip()
     end
     self.objects = {
-        motherShipUI = MotherShipUI(motherShip),
+        motherShipUI = MotherShipUI(motherShip, playerShip),
         motherShip = motherShip
     }
     self.eventManager = EM()

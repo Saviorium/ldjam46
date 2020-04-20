@@ -6,6 +6,7 @@ StorageBox = Class {
         self.resource = resource
         self.storageUnit = storageUnit
         self:initUI()
+        self.storageScreen = Images['bigscreen']
     end
 }
 
@@ -24,7 +25,14 @@ function StorageBox:drawBox()
                        0, 
                        scale, 
                        scale)
-
+    love.graphics.draw(
+        self.storageScreen,
+        self.curr_pos.x+45*scale,
+        self.curr_pos.y+9*scale, 
+        0, 
+        scale, 
+        scale
+    )
     love.graphics.setFont(fonts.numbers)
     love.graphics.print(
         string.format('%d', math.min(self.storageUnit:getValue(),9999)),

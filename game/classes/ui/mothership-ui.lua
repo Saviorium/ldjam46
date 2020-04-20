@@ -5,8 +5,9 @@ StorageBox = require "game.classes.ui.storagebox"
 StorageWithShipBox = require "game.classes.ui.storagewithshipbox"
 
 MotherShipUI = Class {
-    init = function(self, motherShip)
+    init = function(self, motherShip, playerShip)
         self.motherShip = motherShip
+        self.playerShip = playerShip
         self.modules = {}
         self.buttons = {}
         self:initUI()
