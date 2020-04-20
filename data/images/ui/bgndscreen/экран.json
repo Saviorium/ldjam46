@@ -1,0 +1,301 @@
+{ "frames": [
+   {
+    "filename": "экран 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 1.aseprite",
+    "frame": { "x": 400, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 100
+   },
+   {
+    "filename": "экран 2.aseprite",
+    "frame": { "x": 800, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 60
+   },
+   {
+    "filename": "экран 3.aseprite",
+    "frame": { "x": 1200, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 4.aseprite",
+    "frame": { "x": 1600, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 60
+   },
+   {
+    "filename": "экран 5.aseprite",
+    "frame": { "x": 2000, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 20
+   },
+   {
+    "filename": "экран 6.aseprite",
+    "frame": { "x": 2400, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 7.aseprite",
+    "frame": { "x": 2800, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 8.aseprite",
+    "frame": { "x": 3200, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 100
+   },
+   {
+    "filename": "экран 9.aseprite",
+    "frame": { "x": 3600, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 60
+   },
+   {
+    "filename": "экран 10.aseprite",
+    "frame": { "x": 4000, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 11.aseprite",
+    "frame": { "x": 4400, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 60
+   },
+   {
+    "filename": "экран 12.aseprite",
+    "frame": { "x": 4800, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 20
+   },
+   {
+    "filename": "экран 13.aseprite",
+    "frame": { "x": 5200, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 14.aseprite",
+    "frame": { "x": 5600, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 15.aseprite",
+    "frame": { "x": 6000, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 100
+   },
+   {
+    "filename": "экран 16.aseprite",
+    "frame": { "x": 6400, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 17.aseprite",
+    "frame": { "x": 6800, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 18.aseprite",
+    "frame": { "x": 7200, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 19.aseprite",
+    "frame": { "x": 7600, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 20.aseprite",
+    "frame": { "x": 8000, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 21.aseprite",
+    "frame": { "x": 8400, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 22.aseprite",
+    "frame": { "x": 8800, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 23.aseprite",
+    "frame": { "x": 9200, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 24.aseprite",
+    "frame": { "x": 9600, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 25.aseprite",
+    "frame": { "x": 10000, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 26.aseprite",
+    "frame": { "x": 10400, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 27.aseprite",
+    "frame": { "x": 10800, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 28.aseprite",
+    "frame": { "x": 11200, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 29.aseprite",
+    "frame": { "x": 11600, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   },
+   {
+    "filename": "экран 30.aseprite",
+    "frame": { "x": 12000, "y": 0, "w": 400, "h": 300 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 400, "h": 300 },
+    "sourceSize": { "w": 400, "h": 300 },
+    "duration": 50
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.17",
+  "image": "экран.png",
+  "format": "RGBA8888",
+  "size": { "w": 12400, "h": 300 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "loop1", "from": 0, "to": 5, "direction": "forward" },
+   { "name": "loop2", "from": 6, "to": 15, "direction": "forward" },
+   { "name": "Loop", "from": 16, "to": 30, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
