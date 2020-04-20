@@ -20,7 +20,7 @@ PlayerShip = Class {
 }
 
 function PlayerShip:checkFreeSpace()
-    local freeSpace = 100 + self.parameters.maxStorage
+    local freeSpace = 100 + self.parameters.addMaxStorage
     for type, count in pairs(self.inventory) do
         if type ~= "energy" then
             freeSpace = freeSpace - count
