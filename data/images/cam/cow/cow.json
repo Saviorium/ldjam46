@@ -1,0 +1,112 @@
+{ "frames": [
+   {
+    "filename": "cow 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 1.aseprite",
+    "frame": { "x": 79, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 2.aseprite",
+    "frame": { "x": 158, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 3.aseprite",
+    "frame": { "x": 237, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 4.aseprite",
+    "frame": { "x": 316, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 5.aseprite",
+    "frame": { "x": 395, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 6.aseprite",
+    "frame": { "x": 474, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 7.aseprite",
+    "frame": { "x": 553, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 8.aseprite",
+    "frame": { "x": 632, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   },
+   {
+    "filename": "cow 9.aseprite",
+    "frame": { "x": 711, "y": 0, "w": 79, "h": 55 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 79, "h": 55 },
+    "sourceSize": { "w": 79, "h": 55 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.17",
+  "image": "cow.png",
+  "format": "RGBA8888",
+  "size": { "w": 790, "h": 55 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "chew", "from": 0, "to": 3, "direction": "forward" },
+   { "name": "wolck", "from": 4, "to": 9, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
