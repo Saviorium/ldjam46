@@ -10,7 +10,6 @@ Asteroid = Class {
         self.hc = hc
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
-        self.collider:move(5,10)
         self.collider:rotate(angle)
         self.collider:move(x - self.width, y - self.height)
         --self:registerCollider(self.hc)
