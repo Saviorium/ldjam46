@@ -10,36 +10,36 @@ GUI = Class {
 }
 
 function GUI:draw()
-    love.graphics.setFont(fonts.numbers)
+    love.graphics.setFont(fonts.char)
     love.graphics.draw(self.image,
                        0,
                        0, 
                        0, 
                        scale, 
                        scale)
-    love.graphics.print(string.format('%.1f',self.player.inventory['oxygen']),
-                        47*scale,
-                        3*scale
+    love.graphics.print(string.format('%3.f', self.player.inventory['oxygen']),
+                        48*scale,
+                        2*scale
                        )
-    love.graphics.print(string.format('%.1f',self.player.inventory['ice']),
-                        91*scale,
-                        3*scale
+    love.graphics.print(string.format('%3.f', self.player.inventory['ice']),
+                        96*scale,
+                        2*scale
                        )
-    love.graphics.print(string.format('%.1f',self.player.inventory['iron']),
-                        141*scale,
-                        3*scale
+    love.graphics.print(string.format('%3.f', self.player.inventory['iron']),
+                        146*scale,
+                        2*scale
                        )
-    love.graphics.print(string.format('%.1f',self.player.inventory['foodAnimal']),
-                        237*scale,
-                        3*scale
+    love.graphics.print(string.format('%3.f', self.player.inventory['foodAnimal']),
+                        235*scale,
+                        2*scale
                        )
-    love.graphics.print(string.format('%.1f',self.player.inventory['foodVeg']),
-                        282*scale,
-                        3*scale
+    love.graphics.print(string.format('%3.f', self.player.inventory['foodVeg']),
+                        284*scale,
+                        2*scale
                        )
-    love.graphics.print(string.format('%.1f',self.player.inventory['energy']),
-                        328*scale,
-                        3*scale
+    love.graphics.print(string.format('%3.f', self.player.inventory['energy']),
+                        333*scale,
+                        2*scale
                        )
     self:drawMap()
     love.graphics.setFont(fonts.char)
