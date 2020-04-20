@@ -7,12 +7,12 @@ function start_game:enter()
 end
 
 function start_game:draw()
-	for i=1, string.len(texts.start_text)/100 do
-		love.graphics.print(string.sub(texts.start_text,(i-1)*100,i*100),
-	                        50*scale,
-	                        i*20*scale
-	                       )
-	end
+
+  	love.graphics.setFont(fonts.char)
+	love.graphics.print(texts.start_text,
+                        20*scale,
+                        20*scale
+                       )
 end
 
 function start_game:keypressed( key )

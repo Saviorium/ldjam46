@@ -23,6 +23,8 @@ Player =
         self.maxEnergy = playerShip.upgrade.battery*100
         self.oxygenConsume = 1
         self.foodConsume = 0.1
+        self.death_o2_timer = 5
+        self.death_food_timer = 30
 
         self.inventory = playerShip.inventory
 
@@ -122,14 +124,30 @@ function Player:update(dt)
     end
     if self.inventory["oxygen"] >= 0 then
         self.inventory["oxygen"] = self.inventory["oxygen"] - self.oxygenConsume * dt
+        self.death_o2_timer = 5
+    else
+        self.death_o2_timer = self.death_o2_timer - dt
     end
     if self.inventory["foodVeg"] >= 0 and self.inventory["foodAnimal"] >= 0 then
         self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2 * dt
         self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume/2 * dt
+        self.death_food_timer = 30
     elseif self.inventory["foodVeg"] >= 0 then
         self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume * dt
+        self.death_food_timer = 30
     elseif self.inventory["foodAnimal"] >= 0 then
         self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume * dt
+        self.death_food_timer = 30
+    else
+        self.death_food_timer = self.death_food_timer - dt
+    end
+
+    if self.death_food_timer < 0 then
+        StateManager.switch(states.end_game,1)
+    elseif self.death_o2_timer < 0 then
+        StateManager.switch(states.end_game,2)
+    elseif self.HP < 0 then
+        StateManager.switch(states.end_game,3)
     end
 end
 
