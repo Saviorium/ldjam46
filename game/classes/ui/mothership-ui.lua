@@ -24,13 +24,11 @@ function MotherShipUI:initUI()
     local button = Button(160, 25, "button-plus", function() self.motherShip:addMaxVegFarm() end)
     table.insert(self.buttons, button)
 
-    local i = -1
-    for id, object in pairs(motherShip:getModules()) do
-        i = i+1
-        local x,y = 15*scale, (15+i*95)*scale
-        table.insert(self.buttons, Button(x+4*scale, y+2*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
-        table.insert(self.buttons, Button(x+15*scale, y+2*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
-    end
+    local x,y = 15*scale, 15*scale
+    table.insert(self.buttons, Button(x+4*scale, y+2*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.animalFarm, 1) end) )
+    table.insert(self.buttons, Button(x+15*scale, y+2*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.animalFarm, -1) end) )
+    table.insert(self.buttons, Button(x+4*scale, y+(95+2)*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, 1) end) )
+    table.insert(self.buttons, Button(x+15*scale, y+(95+2)*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, -1) end) )
     local x = 141*scale
     local storageX = 217*scale
     self.uiBoxes = {
@@ -93,10 +91,10 @@ function MotherShipUI:draw()
         object:draw()
     end
     i = -1
-    for id, object in pairs(motherShip:getModules()) do
-        i = i+1
-        object:drawFarm( 15*scale, (15+i*95)*scale )
-    end
+
+    local x,y = 15*scale, 15*scale
+    motherShip.modules.animalFarm:drawFarm( x, y )
+    motherShip.modules.vegFarm:drawFarm( x, y+95*scale )
     for id, object in pairs(self.uiBoxes) do
         object:draw()
     end

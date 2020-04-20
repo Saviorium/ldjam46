@@ -33,8 +33,8 @@ MotherShip = Class {
                               ) 
 
         self.modules = {
+            animalFarm = animalFarm,
             vegFarm = vegFarm,
-            animalFarm = animalFarm
         }
     end
 }

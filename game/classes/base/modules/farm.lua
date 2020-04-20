@@ -22,11 +22,11 @@ Farm = Class {
 
 function Farm:drawFarm(x, y)
     love.graphics.draw(self.cam_background,
-            x+(5*scale),
-            y+(13*scale),
-            0,
-            scale,
-            scale)
+                        x+(5*scale),
+                        y+(13*scale),
+                        0,
+                        scale,
+                        scale)
     love.graphics.draw(self.cam_image,
                        x,
                        y, 
@@ -45,10 +45,14 @@ function Farm:drawFarm(x, y)
                         x+103*scale,
                         y+4*scale
                        )
+    love.graphics.print(self.name,
+                        x+103*scale,
+                        y+14*scale
+                       )
 
 end
 
-function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, affect)
+function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, can_heal)
     self.resources[resource] = {}
     self.resources[resource]['rate']            = rate
     self.resources[resource]['storageUnit']     = supplyUnit
@@ -56,17 +60,17 @@ function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption,
     self.resources[resource]['consume_by_unit'] = consumption
     self.resources[resource]['produce_by_unit'] = production
     self.resources[resource]['base_affect']     = base_affect
-    self.resources[resource]['affect']          = affect
+    self.resources[resource]['can_heal']        = can_heal
 end
 
 function Farm:initOxygen(supplyUnit, sensitivity, consumption)
-    self:initResource('oxygen', 1, supplyUnit, sensitivity, consumption, 0,20, 'percent')
+    self:initResource('oxygen', 1, supplyUnit, sensitivity, consumption, 0,20,0)
 end
 
 function Farm:initStorage( consumeResource, produceResource, inputStorage, outputStorage, consumptionPerUnit, productionPerUnit)
 
-    self:initResource(consumeResource, 1, inputStorage , 0.8, consumptionPerUnit, 0 ,0,'by_unit')
-    self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit  ,0,'by_unit')
+    self:initResource(consumeResource, 1, inputStorage , 0.8, consumptionPerUnit, 0 ,self.growthSpeed, 1)
+    self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit  ,0, 0)
     self.consumeResource = consumeResource
     self.produceResource = produceResource
 end
@@ -129,31 +133,24 @@ end
 
 function Farm:update(dt)
     Module:update(dt)
-    local deltaHP_percent = 0
-    local deltaHP_by_unit = 0
+    local deltaHP = 0
     for index, resource in pairs(self.resources) do
         if resource['consume_by_unit'] ~= 0 then
             local cur_rate = 0
-            local deficit = resource['storageUnit']:addAndGetExcess(-resource['rate'] * resource['consume_by_unit'] * self.units)
-            if deficit == 0 then
-                cur_rate = resource['rate'] 
+            local deficit = resource['storageUnit']:addAndGetExcess(- resource['rate'] * resource['consume_by_unit'] * self.units)
+            if deficit >= 0 then
+                cur_rate = resource['rate']
             end
-            if cur_rate ~= resource['sensivity'] then
-                if resource['affect'] == 'percent' and cur_rate < resource['sensivity'] then
-                    deltaHP_percent = deltaHP_percent - resource['base_affect']*(resource['sensivity'] - cur_rate) 
-                elseif resource['affect'] == 'by_unit' then
-                    deltaHP_by_unit = deltaHP_by_unit + (cur_rate - 1) * self.growthSpeed * self.units
-                end
-                if deltaHP_percent > 0 and deltaHP_by_unit > 0 then
-                    deltaHP_by_unit = 0
-                end 
+            local cur_status = cur_rate - resource['sensivity']
+            if not(resource['can_heal'] == 0 and cur_status > 0) then
+                deltaHP = deltaHP + cur_status *  resource['base_affect'] * self.units
             end
         end
     end
+
     self.resources['oxygen']['rate'] = self.resources['oxygen']['storageUnit']:getLevel()
 
-    hpDelta = deltaHP_percent + deltaHP_by_unit
-    self:updateHealth(hpDelta)
+    self:updateHealth(deltaHP)
     local excessUnits = self.units - self:getWantedMaxUnit()
     if excessUnits > 0 then
         self:harvestToStorage(excessUnits)
