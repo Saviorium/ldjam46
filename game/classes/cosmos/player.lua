@@ -17,9 +17,9 @@ Player =
         self.height = Images[image]:getHeight()
         self.width  = Images[image]:getWidth()
 
-        self.maxVolume = maxVolume + playerShip.parameters.addMaxStorage
+        self.maxVolume = maxVolume + playerShip.upgrade.space*100
 
-        self.maxEnergy = 100 + playerShip.parameters.addMaxEnergy
+        self.maxEnergy = 100 + playerShip.upgrade.battery*10
         self.oxygenConsume = 1
         self.foodConsume = 0.1
 
@@ -27,21 +27,21 @@ Player =
 
         self.HP = HP
         self.angle = andgle 
-        self.turn_speed = (10 + playerShip.parameters.addManeur) / math.pi
-        self.speed = speed + playerShip.parameters.addSpeed
-        self.strafe_speed = speed / 2 + playerShip.parameters.addManeur
-        self.back_speed = speed / 5 + playerShip.parameters.addManeur
-        self.stop_speed = 0.5 + playerShip.parameters.addManeur/10
+        self.turn_speed = (10 + playerShip.upgrade.maneur) / math.pi
+        self.speed = speed + playerShip.upgrade.speed
+        self.strafe_speed = speed / 2 + playerShip.upgrade.maneur
+        self.back_speed = speed / 5 + playerShip.upgrade.maneur
+        self.stop_speed = 0.5 + playerShip.upgrade.maneur/10
         self.bounciness = 0.3
 
-        self.rate_of_fire = 1 - playerShip.parameters.addROF
+        self.rate_of_fire = 1 - playerShip.upgrade.fire*0.1
         self.last_fire = 0
 
         self.energyOnMove = 5
         self.energyOnStrafe = 2
         self.enegryOnFireLazer = 80
         self.enegryOnFireGatling = 20
-        self.energyInSecond = 3 + playerShip.parameters.addRecharge
+        self.energyInSecond = 3 + playerShip.upgrade.recharge
 
         self.HC = HC
         self.bullets_handler = Bullets_handler(self.HC)
