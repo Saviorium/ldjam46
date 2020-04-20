@@ -22,25 +22,24 @@ MotherShipUI = Class {
 
 function MotherShipUI:initUI()
 
-
     local x,y = 15*scale, 15*scale
-    table.insert(self.buttons, Button(x+4*scale, y+2*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.animalFarm, 1) end) )
-    table.insert(self.buttons, Button(x+15*scale, y+2*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.animalFarm, -1) end) )
-    table.insert(self.buttons, Button(x+112*scale, y+3*scale, "button-plus", function() motherShip.modules.animalFarm:addMaxFarm() end))
-    table.insert(self.buttons, Button(x+4*scale, y+(95+2)*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, 1) end) )
-    table.insert(self.buttons, Button(x+15*scale, y+(95+2)*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, -1) end) )
-    table.insert(self.buttons, Button(x+112*scale, y+(95+3)*scale, "button-plus", function() motherShip.modules.vegFarm:addMaxFarm() end))
+    table.insert(self.buttons, Button(x+47*scale, y+2*scale, "button-plus-big", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.animalFarm, 1) end) )
+    table.insert(self.buttons, Button(x+58*scale, y+2*scale, "button-minus-big", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.animalFarm, -1) end) )
+    table.insert(self.buttons, Button(x+111*scale, y+2*scale, "button-plus-big", function() motherShip.modules.animalFarm:addMaxFarm() end))
+    table.insert(self.buttons, Button(x+47*scale, y+(101+2)*scale, "button-plus-big", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, 1) end) )
+    table.insert(self.buttons, Button(x+58*scale, y+(101+2)*scale, "button-minus-big", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, -1) end) )
+    table.insert(self.buttons, Button(x+111*scale, y+(101+2)*scale, "button-plus-big", function() motherShip.modules.vegFarm:addMaxFarm() end)) 
     local x = 141*scale
     local storageX = 217*scale
     self.uiBoxes = {
         -- IOBoxes
-        WaterBox_in    = IOSetting( x, 110 *scale, 'In', 'water', self.motherShip.modules['vegFarm']),
-        OxygenBox_out  = IOBox( x, 141 *scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
-        VegFoodBox_out = IOBox( x, 172 *scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm']),
-
         OxygenBox_in    = IOBox( x, 15 *scale, 'In', 'oxygen', self.motherShip.modules['animalFarm']),
-        VegFoodBox_in   = IOSetting( x, 46 *scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
-        MeatFoodBox_out = IOBox( x, 77 *scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
+        VegFoodBox_in   = IOSetting( x, 48 *scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
+        MeatFoodBox_out = IOBox( x, 81 *scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
+
+        WaterBox_in    = IOSetting( x, 116 *scale, 'In', 'water', self.motherShip.modules['vegFarm']),
+        OxygenBox_out  = IOBox( x, 149 *scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
+        VegFoodBox_out = IOBox( x, 182 *scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm']),
 
         -- Storage
         -- energyStorage     = StorageWithShipBox(storageX, 33*0*scale, 'energy',     self.motherShip.storage.energy),
@@ -91,10 +90,10 @@ function MotherShipUI:draw()
     for id, object in pairs(self.modules) do
         object:draw()
     end
-    i = -1
-
+ 
     motherShip.modules.animalFarm:drawFarm()
     motherShip.modules.vegFarm:drawFarm()
+
     for id, object in pairs(self.uiBoxes) do
         object:draw()
     end

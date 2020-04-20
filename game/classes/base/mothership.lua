@@ -14,7 +14,7 @@ MotherShip = Class {
             foodAnimal = StorageUnit(1000, 500, "Animal food"),
             oxygen     = StorageUnit(10000, 5000, "Oxygen"),
         }
-        local vegFarm = Farm(5, 10, 0.005, "VegFarm", 15*scale, 110*scale )
+        local vegFarm = Farm(5, 10, 0.005, "VegFarm", 15*scale, 116*scale )
         vegFarm:initOxygen(self.storage.oxygen, 0.2, -10)
         vegFarm:initStorage('water', -- consumeResource
                 'foodVeg', -- produceResource

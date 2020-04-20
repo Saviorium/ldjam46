@@ -47,18 +47,16 @@ function IOBox:drawBox()
                        scale, 
                        scale)
 
-    love.graphics.setFont(fonts.numbers)
-    love.graphics.setColor(0, 0, 0)
+    love.graphics.setFont(fonts.char)
+    love.graphics.setColor(1, 1, 1)
     local level = 0
     if self.module.resources[self.resource] then
         level = self.module.resources[self.resource]['rate']
     end
-    love.graphics.print(string.format('%1.f',level*100)..'%',
-                        self.curr_pos.x+30*scale,
-                        self.curr_pos.y+18*scale,
-                        0,
-                        scale,
-                        scale
+    love.graphics.print(string.format('%3.f',level*100)..'%',
+                        self.curr_pos.x+33*scale,
+                        self.curr_pos.y+17*scale,
+                        0
                        )
     love.graphics.setColor(255, 255, 255)
 

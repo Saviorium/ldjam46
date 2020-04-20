@@ -37,33 +37,29 @@ end
 
 function Farm:drawFarm()
     love.graphics.draw(self.cam_background,
-            self.x+(5*scale),
-            self.y+(13*scale),
-            0,
-            scale,
-            scale)
+                        self.x+(5*scale),
+                        self.y+(17*scale),
+                        0,
+                        scale,
+                        scale)
     love.graphics.draw(self.cam_image,
-            self.x,
-            self.y,
-            0,
-            scale,
-            scale)
-    love.graphics.print(self.units,
-            self.x+29*scale,
-            self.y+4*scale
-    )
-    love.graphics.print(self.wantedMaxUnits,
-            self.x+55*scale,
-            self.y+3*scale
-    )
+                       self.x,
+                       self.y, 
+                       0, 
+                       scale, 
+                       scale)
+    love.graphics.print(string.format('%2.f', math.min(self.units,99)),
+                        self.x+9*scale,
+                        self.y+3*scale
+                       )
+    love.graphics.print(string.format('%2.f', math.min(self.wantedMaxUnits,99)),
+                        self.x+33*scale,
+                        self.y+3*scale
+                       )
     love.graphics.print(self.maxUnits,
-            self.x+103*scale,
-            self.y+4*scale
-    )
-    love.graphics.print(self.name,
-            self.x+103*scale,
-            self.y+14*scale
-    )
+                        self.x+100*scale,
+                        self.y+3*scale
+                       )
     love.graphics.setColor(0, 255, 0)
     love.graphics.rectangle( 'fill',
             self.x+5*scale,

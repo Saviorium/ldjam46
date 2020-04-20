@@ -56,13 +56,17 @@ function StorageWithShipBox:draw()
                         scale, 
                         scale
                       )
-    love.graphics.print( self.ship.inventory[self.ship_resource],
-                         self.curr_pos.x+145*scale,
-                         self.curr_pos.y+11*scale, 
-                         0, 
-                         scale, 
-                         scale
-                       ) 
+
+    love.graphics.setFont(fonts.numbers)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print(
+        string.format('%4.f', math.min(self.ship.inventory[self.ship_resource], 9999)),
+        self.curr_pos.x+145*scale,
+        self.curr_pos.y+12*scale, 
+        0, 
+        scale, 
+        scale
+    ) 
 end
 
 return StorageWithShipBox

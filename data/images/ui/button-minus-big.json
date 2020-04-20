@@ -1,0 +1,48 @@
+{ "frames": [
+   {
+    "filename": "button-minus-big 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 12, "h": 14 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 12 },
+    "sourceSize": { "w": 10, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "button-minus-big 1.aseprite",
+    "frame": { "x": 12, "y": 0, "w": 12, "h": 14 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 12 },
+    "sourceSize": { "w": 10, "h": 12 },
+    "duration": 100
+   },
+   {
+    "filename": "button-minus-big 2.aseprite",
+    "frame": { "x": 24, "y": 0, "w": 12, "h": 14 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 10, "h": 12 },
+    "sourceSize": { "w": 10, "h": 12 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.17",
+  "image": "button-plus-big.png",
+  "format": "RGBA8888",
+  "size": { "w": 36, "h": 14 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "up", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "selected", "from": 1, "to": 1, "direction": "forward" },
+   { "name": "down", "from": 2, "to": 2, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

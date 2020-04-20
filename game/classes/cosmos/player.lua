@@ -215,7 +215,7 @@ function Player:onCollide()
             self.curr_pos.x = self.curr_pos.x + delta.x
             self.curr_pos.y = self.curr_pos.y + delta.y
             self.collider:move(delta.x, delta.y)
-            if self.cur_speed:len() > 0.1 then 
+            if self.cur_speed:len() > 0.5 then 
                 self.cur_speed = -self.cur_speed * self.bounciness
             end
         end
