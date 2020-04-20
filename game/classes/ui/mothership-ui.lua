@@ -32,13 +32,13 @@ function MotherShipUI:initUI()
     local storageX = 217*scale
     self.uiBoxes = {
         -- IOBoxes
-        OxygenBox_in    = IOBox( x, 15*scale, 'In', 'oxygen', self.motherShip.modules['animalFarm']),
-        VegFoodBox_in   = IOSetting( x, 46*scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
-        MeatFoodBox_out = IOBox( x, 77*scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
+        OxygenBox_in    = IOBox( x, 110 *scale, 'In', 'oxygen', self.motherShip.modules['animalFarm']),
+        VegFoodBox_in   = IOSetting( x, 141 *scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
+        MeatFoodBox_out = IOBox( x, 172 *scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
 
-        WaterBox_in    = IOSetting( x, 110*scale, 'In', 'water', self.motherShip.modules['vegFarm']),
-        OxygenBox_out  = IOBox( x, 141*scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
-        VegFoodBox_out = IOBox( x, 172*scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm']),
+        WaterBox_in    = IOSetting( x, 15 *scale, 'In', 'water', self.motherShip.modules['vegFarm']),
+        OxygenBox_out  = IOBox( x, 46 *scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
+        VegFoodBox_out = IOBox( x, 77 *scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm']),
 
         -- Storage
         oxygenStorage = StorageBox(storageX, 30*scale, 'oxygen', self.motherShip.storage.oxygen)
@@ -46,6 +46,9 @@ function MotherShipUI:initUI()
 end
 
 function MotherShipUI:registerButtons(eventManager)
+    for id, object in pairs(self.buttons) do
+        eventManager:registerObject(object)
+    end
     for id, iobox in pairs(self.uiBoxes) do
         if iobox.registerButtons then
             iobox:registerButtons(eventManager)
