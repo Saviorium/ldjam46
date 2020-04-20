@@ -4,10 +4,10 @@ Button = require "game.classes.ui.button"
 
 ButtonPlus = Class {
     __includes = Button,
-    init = function(self, x, y, callback)
-        local image = love.graphics.newImage("data/images/ui/button-plus.png")
+    init = function(self, x, y, filename, callback)
+        local image = love.graphics.newImage("data/images/ui/"..filename..".png")
         image:setFilter("nearest", "nearest")
-        sprite = Peachy.new("data/images/ui/button-plus.json", image, "up")
+        sprite = Peachy.new("data/images/ui/"..filename..".json", image, "up")
         Button.init(self, x, y, callback, sprite)
     end
 }

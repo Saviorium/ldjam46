@@ -11,7 +11,8 @@ Asteroid = Class {
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
         self.collider:rotate(angle)
-        self.collider:move(x - self.width/2*scale, y - self.height/2*scale)
+        self.collider:scale(scale,scale)
+        self.collider:move(x - self.width/2, y - self.width/2)
         --self:registerCollider(self.hc)
         self.collider.type = 'asteroid'
     end
@@ -87,8 +88,8 @@ end
 function Asteroid:createPoligon(object)
     local polygon = {}
     for _, vertex in ipairs(object.polygon) do
-        table.insert(polygon, vertex.x*scale)
-        table.insert(polygon, vertex.y*scale)
+        table.insert(polygon, vertex.x)
+        table.insert(polygon, vertex.y)
     end
     return self.hc:polygon(unpack(polygon))
 end

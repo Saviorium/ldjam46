@@ -11,14 +11,14 @@ MotherShipUI = Class {
 }
 
 function MotherShipUI:initUI()
-    local button = ButtonPlus(160, 25, function() self.motherShip:addMaxVegFarm() end)
+    local button = Button(160, 25, "button-plus", function() self.motherShip:addMaxVegFarm() end)
     table.insert(self.buttons, button)
 
     local i = 0
     for id, object in pairs(motherShip:getModules()) do
         i = i+1
-        table.insert(self.buttons, ButtonPlus(10, 20 + 20*(i), function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
-        table.insert(self.buttons, ButtonPlus(25, 20 + 20*(i), function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
+        table.insert(self.buttons, Button(10, 20 + 20*(i), "button-plus", function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
+        table.insert(self.buttons, Button(25, 20 + 20*(i), "button-minus", function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
     end
 
 end
