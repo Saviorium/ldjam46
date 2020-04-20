@@ -29,7 +29,9 @@ function MotherShipUI:initUI()
     table.insert(self.buttons, Button(x+111*scale, y+2*scale, "button-plus-big", function() motherShip.modules.animalFarm:addMaxFarm() end))
     table.insert(self.buttons, Button(x+47*scale, y+(101+2)*scale, "button-plus-big", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, 1) end) )
     table.insert(self.buttons, Button(x+58*scale, y+(101+2)*scale, "button-minus-big", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, -1) end) )
-    table.insert(self.buttons, Button(x+111*scale, y+(101+2)*scale, "button-plus-big", function() motherShip.modules.vegFarm:addMaxFarm() end)) 
+    table.insert(self.buttons, Button(x+111*scale, y+(101+2)*scale, "button-plus-big", function() motherShip.modules.vegFarm:addMaxFarm() end))
+
+    table.insert(self.buttons, Button(14*scale, 216*scale, "button-warp", function()  end))
     local x = 141*scale
     local storageX = 217*scale
     self.uiBoxes = {
