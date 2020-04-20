@@ -58,22 +58,22 @@ function Asteroid:randomize()
     if temp == 0 then
       self.HP   = math.random(10,100)
       self.image = Images['empty_'..type]
-      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
     elseif temp == 1 then
       self.HP   = math.random(100,1000)
       self.destroy_func = self.dropIron
       self.image = Images['iron_'..type]
-      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
     elseif temp == 2 then
       self.HP   = math.random(50,400)
       self.destroy_func = self.dropIce
       self.image = Images['ice_'..type]
-      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
     elseif temp == 3 then
       self.HP   = math.random(1000,10000)
       self.destroy_func = self.dropAll
       self.image = Images['all_'..type]
-      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
     end
 end
 
