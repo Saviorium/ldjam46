@@ -1,8 +1,9 @@
+Class = require "lib.hump.class"
 FarmUnit = require "game/classes/ui/farm-unit/farm-unit"
 
 TreeUnit = Class {
     __includes = FarmUnit,
-    init = function(minX, maxX, maxY, minY)
+    init = function(self, minX, maxX, maxY, minY)
         sprite = love.graphics.newImage("data/images/cam/buff.png")
         FarmUnit.init(self, sprite, minX, maxX, maxY, minY)
     end
@@ -14,5 +15,12 @@ end]]
 
 
 function TreeUnit:draw()
-    FarmUnit.draw(self)
+    love.graphics.draw(self.sprite,
+            self.x+(5*scale),
+            self.y+(13*scale),
+            0,
+            scale,
+            scale)
 end
+
+return TreeUnit
