@@ -11,7 +11,7 @@ Asteroid = Class {
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
         self.collider:rotate(angle)
-        self.collider:move(x - self.width, y - self.height)
+        self.collider:move(x - self.width/2*scale, y - self.height/2*scale)
         --self:registerCollider(self.hc)
         self.collider.type = 'asteroid'
     end
@@ -51,9 +51,16 @@ function Asteroid.dropAll(self)
     table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,500),'ice', table.maxn(Loot)+1, self.hc))
 end
 
+function Asteroid:update(dt)
+    PhysicsObject.update(self, dt)
+    self.angle = self.angle + self.rotationSpeed
+    self.collider:rotate(self.rotationSpeed)
+end
+
 function Asteroid:randomize()
     local temp = math.random(0,3)
     local type = math.random(1,5)
+    self.rotationSpeed = math.random(-15,15) / 5000
     if temp == 0 then
       self.HP   = math.random(10,100)
       self.image = Images['empty_'..type]
