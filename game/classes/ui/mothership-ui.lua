@@ -32,9 +32,9 @@ function MotherShipUI:initUI()
     VegFoodBox_in   = IOSetting( x, 46*scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
     MeatFoodBox_out = IOBox( x, 77*scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
 
-    WaterBox_in    = IOSetting( x, 108*scale, 'In', 'water', self.motherShip.modules['vegFarm']),
-    OxygenBox_out  = IOBox( x, 139*scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
-    VegFoodBox_out = IOBox( x, 170*scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm'])
+    WaterBox_in    = IOSetting( x, 110*scale, 'In', 'water', self.motherShip.modules['vegFarm']),
+    OxygenBox_out  = IOBox( x, 141*scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
+    VegFoodBox_out = IOBox( x, 172*scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm'])
     }
 
 end

@@ -53,7 +53,7 @@ function IOBox:drawBox()
     if self.module.resources[self.resource] then
         level = self.module.resources[self.resource]['rate']
     end
-    love.graphics.print((level*100)..'%',
+    love.graphics.print(string.format('%1.f',level*100)..'%',
                         self.curr_pos.x+30*scale,
                         self.curr_pos.y+18*scale,
                         0,
