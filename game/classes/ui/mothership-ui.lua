@@ -50,7 +50,7 @@ function MotherShipUI:initUI()
         oxygenStorage     = StorageWithShipBox(storageX, 33*5*scale, 'oxygen',     self.motherShip.storage.oxygen ,self.playerShip),
 
         -- Upgrades
-        upgradesBox = UpgradesBox(storageX, 33*6*scale, self.playerShip)
+        upgradesBox = UpgradesBox(storageX, 33*6*scale, self.motherShip.storage.iron, self.playerShip)
     }
 end
 

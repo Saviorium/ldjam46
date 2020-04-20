@@ -1,9 +1,10 @@
 Class = require "lib.hump.class"
 
 UpgradesBox = Class {
-    init = function(self, x, y, ship)
+    init = function(self, x, y, resource, ship)
         self.x = x
         self.y = y
+        self.resource = resource
         self.ship = ship
         self.horPadding  = 30 * scale
         self.vertPadding = 30 * scale
@@ -47,11 +48,16 @@ end
 function UpgradesBox:doUpgrade(upgradeName)
     currentLevel = self.ship.upgrade[upgradeName]
     upgradeCost = self.upgrades[upgradeName].costs[currentLevel]
-    if upgradeCost then
-        self.ship.upgrade[upgradeName] = currentLevel + 1
-    else
+    if not upgradeCost then
         print("max upgrade level for " .. upgradeName .. " level: " .. currentLevel .. " reached!")
+        return
     end
+    if self.resource:getValue() < upgradeCost then
+        print("not enough resources to upgrade " .. upgradeName .. " to level " .. currentLevel + 1)
+        return
+    end
+    self.resource:add( -upgradeCost )
+    self.ship.upgrade[upgradeName] = currentLevel + 1
 end
 
 function UpgradesBox:draw()
