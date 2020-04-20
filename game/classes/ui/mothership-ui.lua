@@ -42,9 +42,13 @@ function MotherShipUI:initUI()
         VegFoodBox_in   = IOSetting( x, 46 *scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
         MeatFoodBox_out = IOBox( x, 77 *scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
 
-
         -- Storage
-        oxygenStorage = StorageWithShipBox(storageX, 30*scale, 'oxygen', self.motherShip.storage.oxygen)
+        -- energyStorage     = StorageWithShipBox(storageX, 33*0*scale, 'energy',     self.motherShip.storage.energy),
+        ironStorage       = StorageWithShipBox(storageX, 33*1*scale, 'iron',       self.motherShip.storage.iron),
+        waterStorage      = StorageWithShipBox(storageX, 33*2*scale, 'water',      self.motherShip.storage.water),
+        foodVegStorage    = StorageWithShipBox(storageX, 33*3*scale, 'foodVeg',    self.motherShip.storage.foodVeg),
+        foodAnimalStorage = StorageWithShipBox(storageX, 33*4*scale, 'foodAnimal', self.motherShip.storage.foodAnimal),
+        oxygenStorage     = StorageWithShipBox(storageX, 33*5*scale, 'oxygen',     self.motherShip.storage.oxygen),
     }
 end
 

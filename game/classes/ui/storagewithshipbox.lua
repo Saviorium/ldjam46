@@ -1,4 +1,5 @@
 Class = require "lib.hump.class"
+StorageBox = require "game.classes.ui.storagebox"
 
 StorageWithShipBox = Class {
     __includes = StorageBox,
@@ -26,9 +27,9 @@ function StorageWithShipBox:draw()
     love.graphics.draw(
         self.shipScreen,
         self.curr_pos.x+143*scale,
-        self.curr_pos.y+9*scale, 
-        0, 
-        scale, 
+        self.curr_pos.y+9*scale,
+        0,
+        scale,
         scale
     )
 end
