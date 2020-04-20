@@ -29,8 +29,12 @@ function GUI:draw()
                         141*scale,
                         3*scale
                        )
-    love.graphics.print(string.format('%.1f',self.player.inventory['food']),
-                        187*scale,
+    love.graphics.print(string.format('%.1f',self.player.inventory['foodAnimal']),
+                        237*scale,
+                        3*scale
+                       )
+    love.graphics.print(string.format('%.1f',self.player.inventory['foodVeg']),
+                        282*scale,
                         3*scale
                        )
     love.graphics.print(string.format('%.1f',self.player.inventory['energy']),

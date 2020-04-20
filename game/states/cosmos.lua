@@ -29,8 +29,8 @@ function cosmos:enter() -- Запускается при запуске прил
 						 100, --y
 						 0, --angle
 						 'shuttle', 
-						 4, --speed
-						 10000, --maxVolume
+						 3, --speed
+						 100, --maxVolume
 						 100,  -- HP
 						 self.hc)
 

@@ -122,8 +122,13 @@ function Player:update(dt)
     if self.inventory["oxygen"] >= 0 then
         self.inventory["oxygen"] = self.inventory["oxygen"] - self.oxygenConsume * dt
     end
-    if self.inventory["food"] >= 0 then
-        self.inventory["food"] = self.inventory["food"] - self.foodConsume * dt
+    if self.inventory["foodVeg"] >= 0 and self.inventory["foodAnimal"] >= 0 then
+        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2 * dt
+        self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume/2 * dt
+    elseif self.inventory["foodVeg"] >= 0 then
+        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume * dt
+    elseif self.inventory["foodAnimal"] >= 0 then
+        self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume * dt
     end
 end
 

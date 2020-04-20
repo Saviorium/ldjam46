@@ -7,9 +7,7 @@ StorageWithShipBox = Class {
         StorageBox.init(self, x, y, resource, storageUnit)
         self.ship = ship
         self.buttons = {}
-        if resource == 'foodVeg' or resource == 'foodAnimal' then
-            self.ship_resource = 'food'
-        elseif resource == 'water' then
+        if resource == 'water' then
             self.ship_resource = 'ice'
         else
             self.ship_resource = resource

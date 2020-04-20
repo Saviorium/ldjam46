@@ -5,9 +5,10 @@ PlayerShip = Class {
         self.inventory = {
             iron = 0,
             ice = 0,
-            oxygen = 100,
+            oxygen = 10,
             energy = 100,
-            food = 100
+            foodVeg = 10,
+            foodAnimal = 10
         }
         self.upgrade = {battery  = 1,
                         fire     = 1,
