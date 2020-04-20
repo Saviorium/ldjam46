@@ -26,15 +26,15 @@ function MotherShipUI:initUI()
         table.insert(self.buttons, Button(10*scale, (20 + 20*(i))*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
         table.insert(self.buttons, Button(25*scale, (20 + 20*(i))*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
     end
-    local x = 143*scale
+    local x = 141*scale
     self.IOBoxes = {
-    OxygenBox_in    = IOBox( x, 30*scale, 'In', 'oxygen', self.motherShip.modules['animalFarm']),
-    VegFoodBox_in   = IOSetting( x, 61*scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
-    MeatFoodBox_out = IOBox( x, 92*scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
+    OxygenBox_in    = IOBox( x, 15*scale, 'In', 'oxygen', self.motherShip.modules['animalFarm']),
+    VegFoodBox_in   = IOSetting( x, 46*scale, 'In', 'foodVeg', self.motherShip.modules['animalFarm']),
+    MeatFoodBox_out = IOBox( x, 77*scale, 'Out', 'foodAnimal', self.motherShip.modules['animalFarm']),
 
-    WaterBox_in    = IOSetting( x, 132*scale, 'In', 'water', self.motherShip.modules['vegFarm']),
-    OxygenBox_out  = IOBox( x, 163*scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
-    VegFoodBox_out = IOBox( x, 194*scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm'])
+    WaterBox_in    = IOSetting( x, 108*scale, 'In', 'water', self.motherShip.modules['vegFarm']),
+    OxygenBox_out  = IOBox( x, 139*scale, 'Out', 'oxygen', self.motherShip.modules['vegFarm']),
+    VegFoodBox_out = IOBox( x, 170*scale, 'Out', 'foodVeg', self.motherShip.modules['vegFarm'])
     }
 
 end
@@ -82,10 +82,11 @@ function MotherShipUI:draw()
         love.graphics.print(object:getValue(), 80, 20*i)
         love.graphics.print(object:getMax(), 150, 20*i)
     end
-    i = 0
+    i = -1
     for id, object in pairs(motherShip:getModules()) do
         i = i+1
         love.graphics.print(object:getName()..": "..object:getCurrentUnits().."/"..object:getWantedMaxUnit().."(max: "..object:getMaxUnit()..")", 45*scale, (25 + 20*(i))*scale)
+        object:drawFarm( 15*scale, (15+i*95)*scale )
     end
     for id, object in pairs(self.IOBoxes) do
         object:draw()

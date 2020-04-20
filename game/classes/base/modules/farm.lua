@@ -3,7 +3,7 @@ Module = require "game.classes.base.module"
 
 Farm = Class {
     __includes = Module,
-    init = function(self, initialUnits, maxUnits, growthRate, name)
+    init = function(self, initialUnits, maxUnits, growthRate, name, image)
         Module.init(self)
         self.units = initialUnits
         self.health = 0.5
@@ -14,8 +14,19 @@ Farm = Class {
         self.baseOxygenDamage = 0.01
         self.growthSpeed = growthRate
         self.resources = {}
+        self.cam_image = love.graphics.newImage('data/images/ui/farm-cam.png')
+        self.farm_image = image
     end
 }
+
+function Farm:drawFarm(x, y)
+    love.graphics.draw(self.cam_image,
+                       x,
+                       y, 
+                       0, 
+                       scale, 
+                       scale)
+end
 
 function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, affect)
     self.resources[resource] = {}
