@@ -3,7 +3,7 @@ FarmUnit = require "game/classes/ui/farm-unit/farm-unit"
 
 TreeUnit = Class {
     __includes = FarmUnit,
-    init = function(self, minX, maxX, maxY, minY)
+    init = function(self, minX, maxX, minY, maxY)
         sprite = love.graphics.newImage("data/images/cam/buff.png")
         FarmUnit.init(self, sprite, minX, maxX, maxY, minY)
     end

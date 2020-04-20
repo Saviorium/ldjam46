@@ -1,6 +1,7 @@
 Class = require "lib.hump.class"
 Module = require "game.classes.base.module"
 TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
+CowUnit = require "game/classes/ui/farm-unit/cow-unit"
 tracks          = require "data/tracks"
 
 Farm = Class {
@@ -50,9 +51,9 @@ function Farm:drawFarm()
                         scale)
     love.graphics.draw(self.cam_image,
                        self.x,
-                       self.y, 
-                       0, 
-                       scale, 
+                       self.y,
+                       0,
+                       scale,
                        scale)
     love.graphics.print(string.format('%2.f', math.min(self.units,99)),
                         self.x+9*scale,
@@ -80,17 +81,40 @@ function Farm:drawFarm()
 
 end
 
-function Farm:initUnits(unitType)
-    if unitType == "tree" then
-        for i = 1, self.units do
+function Farm:initUnits(j)
+    if self.name == "VegFarm" then
+        for i = 1, j do
             table.insert(self.farm_units,
-                    TreeUnit(self.x, self.x,
-                            self.y,
-                            self.y)
+                    TreeUnit(self.x+10*scale, self.x+70*scale,
+                            self.y+40*scale,
+                            self.y+43*scale)
+            )
+        end
+    else if self.name == "AnimFarm" then
+        for i = 1, j do
+            table.insert(self.farm_units,
+                    CowUnit(self.x+5*scale, self.x+50*scale,
+                            self.y+40*scale,
+                            self.y+43*scale)
             )
         end
     end
+    end
+end
 
+function Farm:removeUnit(j)
+    if self.name == "VegFarm" then
+        for i = 1, j do
+            table.remove(self.farm_units, #self.farm_units)
+            print("removed "..#self.farm_units.."from trees")
+        end
+    else if self.name == "AnimFarm" then
+        for i = 1, j do
+            table.remove(self.farm_units, #self.farm_units )
+            print("removed "..#self.farm_units.."from cows")
+        end
+    end
+    end
 end
 
 function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, can_heal)
@@ -173,20 +197,22 @@ end
 
 function Farm:growNewUnits(units)
     self.units = self.units + units
-    table.insert(self.farm_units,
-            TreeUnit(self.x, self.x+100,
-                    self.y,
-                    self.y+100)
-    )
+    self:initUnits(units)
 end
 
 function Farm:harvestToStorage(units)
     local unitsToHarvest = math.min(units, self.units)
     self.units = self.units - unitsToHarvest
     self.resources[self.produceResource]['storageUnit']:addAndGetExcess(unitsToHarvest * self.resources[self.produceResource]['produce_by_unit'])
+    self:removeUnit(units)
 end
 
 function Farm:update(dt)
+    if self.name == "AnimFarm" then
+        for id, object in pairs(self.farm_units) do
+            object:update(dt)
+        end
+    end
     Module:update(dt)
     local deltaHP = 0
     for index, resource in pairs(self.resources) do

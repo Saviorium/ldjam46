@@ -22,7 +22,7 @@ MotherShip = Class {
                 self.storage.foodVeg, --outputStorage
                 0.1, --consumptionPerUnit
                 15)--productionPerUnit
-        vegFarm:initUnits("tree")
+        vegFarm:initUnits(vegFarm.units)
 
         local animalFarm = Farm(5, 10, 0.001, "AnimFarm", 15*scale, 15*scale)
         animalFarm:initOxygen(self.storage.oxygen, 0.5, 5)
@@ -33,7 +33,7 @@ MotherShip = Class {
                 0.01, --consumptionPerUnit
                 100     --productionPerUnit)
         )
-        animalFarm:initUnits("tree")
+        animalFarm:initUnits(animalFarm.units)
 
         self.modules = {
             animalFarm = animalFarm,
