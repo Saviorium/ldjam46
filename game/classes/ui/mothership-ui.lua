@@ -21,11 +21,12 @@ function MotherShipUI:initUI()
     local button = Button(160, 25, "button-plus", function() self.motherShip:addMaxVegFarm() end)
     table.insert(self.buttons, button)
 
-    local i = 0
+    local i = -1
     for id, object in pairs(motherShip:getModules()) do
         i = i+1
-        table.insert(self.buttons, Button(10*scale, (20 + 20*(i))*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
-        table.insert(self.buttons, Button(25*scale, (20 + 20*(i))*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
+        local x,y = 15*scale, (15+i*95)*scale
+        table.insert(self.buttons, Button(x+4*scale, y+2*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
+        table.insert(self.buttons, Button(x+15*scale, y+2*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
     end
     local x = 141*scale
     local storageX = 217*scale
@@ -42,7 +43,6 @@ function MotherShipUI:initUI()
         -- Storage
         oxygenStorage = StorageBox(storageX, 30*scale, 'oxygen', self.motherShip.storage.oxygen)
     }
-
 end
 
 function MotherShipUI:registerButtons(eventManager)

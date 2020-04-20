@@ -6,8 +6,8 @@ IOSetting = Class {
     init = function(self, x, y, direction, resource, module)
         IOBox.init(self, x, y, direction, resource, module)
         self.buttons = {}
-        table.insert(self.buttons, Button(x+57*scale, y+14*scale, "button-plus", function() motherShip:changeWantedMaxUnitInFarm(object, 1) end) )
-        table.insert(self.buttons, Button(x+57*scale, y+21*scale, "button-minus", function() motherShip:changeWantedMaxUnitInFarm(object, -1) end) )
+        table.insert(self.buttons, Button(x+57*scale, y+14*scale, "button-plus", function() module:changeSupply(resource, 0.1) end) )
+        table.insert(self.buttons, Button(x+57*scale, y+21*scale, "button-minus", function() module:changeSupply(resource, -0.1) end) )
     end
 }
 

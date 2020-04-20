@@ -26,6 +26,19 @@ function Farm:drawFarm(x, y)
                        0, 
                        scale, 
                        scale)
+    love.graphics.print(self.units,
+                        x+29*scale,
+                        y+4*scale
+                       )
+    love.graphics.print(self.wantedMaxUnits,
+                        x+55*scale,
+                        y+3*scale
+                       )
+    love.graphics.print(self.maxUnits,
+                        x+103*scale,
+                        y+4*scale
+                       )
+
 end
 
 function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption, production, base_affect, affect)
@@ -49,6 +62,9 @@ function Farm:initStorage( consumeResource, produceResource, inputStorage, outpu
     self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit  ,0,'by_unit')
     self.consumeResource = consumeResource
     self.produceResource = produceResource
+end
+function Farm:changeSupply(resource, change)
+    self.resources[resource]['rate'] = self.resources[resource]['rate'] + change
 end
 
 function Farm:setFoodSupply(rate)
