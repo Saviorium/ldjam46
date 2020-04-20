@@ -26,13 +26,15 @@ function StorageBox:drawBox()
                        scale, 
                        scale)
 
-    love.graphics.setFont(fonts.smallNumbers)
+    love.graphics.setFont(fonts.numbers)
     love.graphics.setColor(1, 0, 0)
-    love.graphics.printf(string.format('%d', self.storageUnit:getValue()),
-        self.curr_pos.x+15*scale,
-        self.curr_pos.y+9*scale,
-        7,
-        'right'
+    love.graphics.print(
+        string.format('%d', math.min(self.storageUnit:getValue(),9999)),
+        self.curr_pos.x+48*scale,
+        self.curr_pos.y+12*scale,
+        0,
+        scale,
+        scale
     )
 end
 
