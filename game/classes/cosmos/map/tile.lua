@@ -41,14 +41,14 @@ function Tile:checkAndCreateAsteroids()
                                 math.random(0,360)/math.pi,   --angle
                                 self.hc
                                )
-                if next(self.hc:collisions(temp.collider)) == nil then
+                --if next(self.hc:collisions(temp.collider)) == nil then
                     table.insert(Asteroids,
                                  temp
                                 )
                     bool = 0
-                else
-                  self.hc:remove(temp.collider)
-                end
+                --else
+                --  self.hc:remove(temp.collider)
+                --end
             end
         end
     end

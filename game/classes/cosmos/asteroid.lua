@@ -7,10 +7,11 @@ Asteroid = Class {
     __includes = PhysicsObject,
     init = function(self, x, y, angle, hc)
         self.angle = angle
+        self.hc = hc
+        print(x,y)
         self:randomize()
         PhysicsObject.init(self, x, y, self.image)
-        self.hc = hc
-        self:registerCollider(self.hc)
+        --self:registerCollider(self.hc)
         self.collider.type = 'asteroid'
     end
 }
@@ -51,22 +52,37 @@ end
 
 function Asteroid:randomize()
     local temp = math.random(0,3)
+    local type = math.random(1,5)
     if temp == 0 then
       self.HP   = math.random(10,100)
-      self.image = Images['empty_'..math.random(1,5)]
+      self.image = Images['empty_'..type]
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
     elseif temp == 1 then
       self.HP   = math.random(100,1000)
       self.destroy_func = self.dropIron
-      self.image = Images['iron_'..math.random(1,5)]
+      self.image = Images['iron_'..type]
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
     elseif temp == 2 then
       self.HP   = math.random(50,400)
       self.destroy_func = self.dropIce
-      self.image = Images['ice_'..math.random(1,5)]
+      self.image = Images['ice_'..type]
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
     elseif temp == 3 then
       self.HP   = math.random(1000,10000)
       self.destroy_func = self.dropAll
-      self.image = Images['all_'..math.random(1,5)]
+      self.image = Images['all_'..type]
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..3])
     end
 end
 
+
+function Asteroid:createPoligon(object)
+    local polygon = {}
+    for _, vertex in ipairs(object.polygon) do
+        table.insert(polygon, vertex.x)
+        table.insert(polygon, vertex.y)
+    end
+    print('poligoned')
+    return self.hc:polygon(unpack(polygon))
+end
 return Asteroid
