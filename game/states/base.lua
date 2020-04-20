@@ -1,5 +1,4 @@
 EM = require "game.classes.event-manager"
-ButtonPlus = require "game.classes.ui.button-plus"
 MotherShipUI = require "game.classes.ui.mothership-ui"
 MotherShip = require "game.classes.base.mothership"
 

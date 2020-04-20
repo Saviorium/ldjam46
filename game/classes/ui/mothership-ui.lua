@@ -1,5 +1,4 @@
 Class = require "lib.hump.class"
-ButtonPlus = require "game.classes.ui.button-plus"
 IOBox = require "game.classes.ui.iobox"
 IOSetting = require "game.classes.ui.iosetting"
 
@@ -36,8 +35,10 @@ function MotherShipUI:initUI()
 end
 
 function MotherShipUI:registerButtons(eventManager)
-    for id, object in pairs(self.buttons) do
-        eventManager:registerObject(object)
+    for id, iobox in pairs(self.IOBoxes) do
+        if iobox.registerButtons then
+            iobox:registerButtons(eventManager)
+        end
     end
 end
 

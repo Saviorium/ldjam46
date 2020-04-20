@@ -30,10 +30,10 @@ function Button:isSelected()
 end
 
 function Button:getCollision(x, y)
-    return 	self.x * scale < x and
-            (self.x + self.sprite:getWidth()) * scale > x and
-            self.y * scale < y and
-            (self.y + self.sprite:getHeight()) * scale > y
+    return 	self.x < x and
+            (self.x + self.sprite:getWidth()*scale) > x and
+            self.y < y and
+            (self.y + self.sprite:getHeight()*scale) > y
 end
 
 function Button:mousepressed()
