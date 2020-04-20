@@ -8,30 +8,30 @@ MotherShip = Class {
     init = function(self)
         self.storage = {
             energy     = StorageUnit(3000, 2000, "Energy"),
-            iron       = StorageUnit(3000, 1000, "Iron"),
-            water      = StorageUnit(10000, 5000, "Water"),
+            iron       = StorageUnit(3000, 0, "Iron"),
+            water      = StorageUnit(10000, 500, "Water"),
             foodVeg    = StorageUnit(1000, 50, "Vegetable food"),
-            foodAnimal = StorageUnit(1000, 500, "Animal food"),
-            oxygen     = StorageUnit(10000, 5000, "Oxygen"),
+            foodAnimal = StorageUnit(1000, 50, "Animal food"),
+            oxygen     = StorageUnit(2500, 1500, "Oxygen"),
         }
-        local vegFarm = Farm(5, 10, 0.005, "VegFarm", 15*scale, 116*scale )
+        local vegFarm = Farm(8, 10, 0.015, "VegFarm", 15*scale, 116*scale,20 )
         vegFarm:initOxygen(self.storage.oxygen, 0.2, -5)
         vegFarm:initStorage('water', -- consumeResource
-                'foodVeg', -- produceResource
-                self.storage.water, --inputStorage
-                self.storage.foodVeg, --outputStorage
-                0.05, --consumptionPerUnit
-                15)--productionPerUnit
+                            'foodVeg', -- produceResource
+                            self.storage.water, --inputStorage
+                            self.storage.foodVeg, --outputStorage
+                            0.5, --consumptionPerUnit
+                            15)--productionPerUnit
         vegFarm:initUnits(vegFarm.units)
 
-        local animalFarm = Farm(5, 10, 0.001, "AnimFarm", 15*scale, 15*scale)
+        local animalFarm = Farm(1, 10, 0.001, "AnimFarm", 15*scale, 15*scale,5)
         animalFarm:initOxygen(self.storage.oxygen, 0.5, 1)
         animalFarm:initStorage('foodVeg', -- consumeResource
-                'foodAnimal', -- produceResource
-                self.storage.foodVeg, --inputStorage
-                self.storage.foodAnimal, --outputStorage
-                0.5, --consumptionPerUnit
-                100     --productionPerUnit)
+                                'foodAnimal', -- produceResource
+                                self.storage.foodVeg, --inputStorage
+                                self.storage.foodAnimal, --outputStorage
+                                5, --consumptionPerUnit
+                                20     --productionPerUnit)
         )
         animalFarm:initUnits(animalFarm.units)
 

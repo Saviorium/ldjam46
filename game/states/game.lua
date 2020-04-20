@@ -3,7 +3,7 @@
 MotherShip = require "game.classes.base.mothership"
 PlayerShip = require "game.classes.player-ship"
 Clock = require "game.classes.clock"
-debug_physics = true
+debug_physics = false
 local game = {}
 
 motherShip = nil

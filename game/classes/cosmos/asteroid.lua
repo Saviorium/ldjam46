@@ -33,11 +33,12 @@ function Asteroid:draw()
                        scale,
                        self.width/2,
                        self.height/2 )
-    love.graphics.print(self.HP,
-                        self.curr_pos.x,
-                        self.curr_pos.y
-                       )
-
+    if debug_physics then
+        love.graphics.print(self.HP,
+                            self.curr_pos.x,
+                            self.curr_pos.y
+                           )
+    end
 end
 
 function Asteroid.dropIron(self)
@@ -50,7 +51,7 @@ end
 
 function Asteroid.dropAll(self)
     table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, math.random(100,200),'iron', table.maxn(Loot)+1, self.hc))
-    table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,500),'ice', table.maxn(Loot)+1, self.hc))
+    table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,800),'ice', table.maxn(Loot)+1, self.hc))
 end
 
 function Asteroid:update(dt)

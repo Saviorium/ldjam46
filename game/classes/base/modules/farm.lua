@@ -6,7 +6,7 @@ tracks          = require "data/tracks"
 
 Farm = Class {
     __includes = Module,
-    init = function(self, initialUnits, maxUnits, growthRate, name, x, y)
+    init = function(self, initialUnits, maxUnits, growthRate, name, x, y,level_up)
         Module.init(self)
         self.units = initialUnits
         self.health = 0.5
@@ -23,6 +23,7 @@ Farm = Class {
         self.x = x
         self.y = y
         self.cur_level  = 1
+        self.level_up  = level_up
         self.level  = { costs = {100, 200, 500, 1000, 10000} }
     end
 }
@@ -30,7 +31,7 @@ Farm = Class {
 function Farm:addMaxFarm()
     if self.level.costs[self.cur_level+1] then
         if motherShip.storage['iron'].value >= self.level.costs[self.cur_level+1] then
-            self.maxUnits = self.maxUnits + 5
+            self.maxUnits = self.maxUnits + self.level_up
             self.cur_level = self.cur_level + 1
             motherShip.storage['iron'].value = motherShip.storage['iron'].value - self.level.costs[self.cur_level]
             tracks.play_sound( tracks.list_of_sounds.button )
@@ -133,7 +134,7 @@ end
 
 function Farm:initStorage( consumeResource, produceResource, inputStorage, outputStorage, consumptionPerUnit, productionPerUnit)
 
-    self:initResource(consumeResource, 1, inputStorage , 1, consumptionPerUnit, 0 ,self.growthSpeed, 1)
+    self:initResource(consumeResource, 1, inputStorage , 0.8, consumptionPerUnit, 0 ,self.growthSpeed, 1)
     self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit  ,0, 0)
     self.consumeResource = consumeResource
     self.produceResource = produceResource
@@ -217,13 +218,13 @@ function Farm:update(dt)
     for index, resource in pairs(self.resources) do
         if resource['consume_by_unit'] ~= 0 then
             local cur_rate = 0
-            local deficit = resource['storageUnit']:addAndGetExcess(- resource['rate'] * resource['consume_by_unit'] * self.units)
+            local deficit = resource['storageUnit']:addAndGetExcess(- resource['rate'] * resource['consume_by_unit'] * self.units*dt)
             if deficit >= 0 then
                 cur_rate = resource['rate']
             end
             local cur_status = cur_rate - resource['sensivity']
             if not(resource['can_heal'] == 0 and cur_status > 0) then
-                deltaHP = deltaHP + cur_status *  resource['base_affect'] * self.units
+                deltaHP = deltaHP + cur_status *  resource['base_affect'] * self.units*dt
             end
         end
     end

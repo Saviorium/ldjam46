@@ -22,7 +22,7 @@ Player =
 
         self.maxEnergy = playerShip.upgrade.battery*100
         self.oxygenConsume = 1
-        self.foodConsume = 0.1
+        self.foodConsume = 1
         self.death_o2_timer = 5
         self.death_food_timer = 30
 
@@ -129,11 +129,11 @@ function Player:update(dt)
         self.death_o2_timer = self.death_o2_timer - dt
     end
     if self.inventory["foodVeg"] >= 0 and self.inventory["foodAnimal"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2 * dt
+        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2*35 * dt
         self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume/2 * dt
         self.death_food_timer = 30
     elseif self.inventory["foodVeg"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume * dt
+        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume*35 * dt
         self.death_food_timer = 30
     elseif self.inventory["foodAnimal"] >= 0 then
         self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume * dt
