@@ -223,12 +223,13 @@ function Player:onCollide()
         end
         if shape.type == "drop" then
             local left = self:checkFreeSpace()
+            print(left,shape.count)
             if left > shape.count then
                 self.inventory[shape.resource] = self.inventory[shape.resource] + shape.count
                 shape.count = 0
             elseif left < shape.count and left > 0 then
                 shape.count = shape.count - left
-                self.inventory[shape.resource] = self.inventory[shape.resource] + left_place
+                self.inventory[shape.resource] = self.inventory[shape.resource] + left
             end
         end
         if shape.type == "enterBase" and love.keyboard.isDown(self.buttons["use"]) then

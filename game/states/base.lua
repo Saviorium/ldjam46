@@ -1,6 +1,7 @@
 EM = require "game.classes.event-manager"
 MotherShipUI = require "game.classes.ui.mothership-ui"
 MotherShip = require "game.classes.base.mothership"
+tracks          = require "data/tracks"
 
 local base = {}
 
@@ -27,6 +28,7 @@ end
 function base:keypressed( key )
     if key == "space" then
         StateManager.switch( states.cosmos )
+        tracks.play_sound( tracks.list_of_sounds.ship_start )
     end
 end
 

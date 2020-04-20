@@ -21,7 +21,7 @@ function cosmos:enter() -- Запускается при запуске прил
 	for _,obj in pairs(Loot) do
 		if obj then 
 			obj.hc = self.hc
-			obj:registerCollider(self.hc) 
+			self.hc:register(obj.collider)
 			obj.collider.type = 'drop'
 		end
 	end

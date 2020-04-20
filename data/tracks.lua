@@ -6,23 +6,23 @@ tracks.list_of_sounds = {
 	button = { filepath = "data/music/button.wav",
 			   loopPoint = 0,
 			   bpm = 160,
-			   volume = 0.1
+			   volume = 0.01
 			 },
 
 	error_button = { filepath = "data/music/error_button.wav",
 					   loopPoint = 0,
 					   bpm = 160,
-					   volume = 0.1
+					   volume = 0.01
 					 },
 	ship_start = { filepath = "data/music/ship_start.wav",
 				   loopPoint = 0,
 				   bpm = 160,
-				   volume = 0.1
+				   volume = 0.01
 				 },
 	shoot_1 = { filepath = "data/music/shoot_1.mp3",
 			    loopPoint = 0,
 			    bpm = 160,
-			    volume = 0.1
+			    volume = 0.01
 			  }
 }
 
