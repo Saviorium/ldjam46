@@ -22,11 +22,11 @@ Map = Class {
 }
 
 function Map:draw()
-    for index, tile in pairs(self.tiles) do
-        tile:draw()
-    end
     for index, star in pairs(self.distant_stars) do
         star:draw()
+    end
+    for index, tile in pairs(self.tiles) do
+        tile:draw()
     end
 end
 
