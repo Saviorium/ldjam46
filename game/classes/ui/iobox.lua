@@ -62,22 +62,6 @@ function IOBox:drawBox()
                        )
     love.graphics.setColor(255, 255, 255)
 
-    local count, loc_count = -1, -1
-    for index, resource in pairs(self.module.resources) do
-        count = count + 1
-        loc_count = -1
-        love.graphics.print(index,
-                            (250+count*50)*scale,
-                            (280)*scale
-                           )
-        for ind, par in pairs(resource) do
-            loc_count = loc_count + 1
-            love.graphics.print(par,
-                                (250+count*50)*scale,
-                                (10+loc_count*20)*scale
-                               )
-        end
-    end
 end
 
 function IOBox:draw()

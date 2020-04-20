@@ -107,8 +107,8 @@ function Farm:update(dt)
                 cur_rate = resource['rate'] 
             end
             if cur_rate ~= resource['sensivity'] then
-                if resource['affect'] == 'percent' then
-                    deltaHP_percent = deltaHP_percent - resource['base_affect']*(resource['sensivity'] - resource['rate']) 
+                if resource['affect'] == 'percent' and cur_rate < resource['sensivity'] then
+                    deltaHP_percent = deltaHP_percent - resource['base_affect']*(resource['sensivity'] - cur_rate) 
                     print(deltaHP_by_unit)
                 elseif resource['affect'] == 'by_unit' then
                     deltaHP_by_unit = deltaHP_by_unit + (cur_rate - 1) * self.growthSpeed * self.units
@@ -119,11 +119,10 @@ function Farm:update(dt)
                 end 
             end
         end
-
     end
-
+    self.resources['oxygen']['rate'] = self.resources['oxygen']['storageUnit']:getLevel()
+    print(deltaHP_percent, deltaHP_by_unit)
     hpDelta = deltaHP_percent + deltaHP_by_unit
-
     self:updateHealth(hpDelta)
     local excessUnits = self.units - self:getWantedMaxUnit()
     if excessUnits > 0 then
