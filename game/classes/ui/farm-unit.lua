@@ -1,3 +1,0 @@
-FarmUnit = Class {
-
-}

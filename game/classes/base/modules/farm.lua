@@ -1,5 +1,6 @@
 Class = require "lib.hump.class"
 Module = require "game.classes.base.module"
+TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
 
 Farm = Class {
     __includes = Module,
@@ -17,6 +18,7 @@ Farm = Class {
         self.cam_image = love.graphics.newImage('data/images/ui/farm-cam.png')
         self.cam_background = love.graphics.newImage('data/images/cam/wall_3.png')
         self.farm_image = image
+        self.farm_units = {}
     end
 }
 
@@ -49,6 +51,18 @@ function Farm:drawFarm(x, y)
                         x+103*scale,
                         y+14*scale
                        )
+    for id, object in pairs(self.farm_units) do
+        object:draw()
+    end
+
+end
+
+function Farm:initUnits(unitType)
+    if unitType == "tree" then
+        for i = 1, self.units do
+            table.insert(self.farm_units, TreeUnit(0, 10, 0, 10))
+        end
+    end
 
 end
 
@@ -74,6 +88,7 @@ function Farm:initStorage( consumeResource, produceResource, inputStorage, outpu
     self.consumeResource = consumeResource
     self.produceResource = produceResource
 end
+
 function Farm:changeSupply(resource, change)
     self.resources[resource]['rate'] = self.resources[resource]['rate'] + change
 end
