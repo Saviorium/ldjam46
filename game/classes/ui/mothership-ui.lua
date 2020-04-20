@@ -81,9 +81,11 @@ function MotherShipUI:draw()
         i = math.random(0,1000)
         if i == 1 then
             self.sprite:setTag("loop1")
+            tracks.play_sound( tracks.list_of_sounds.static_1 )
         end
         if i == 2 then
             self.sprite:setTag("loop2")
+            tracks.play_sound( tracks.list_of_sounds.static_2 )
         end
     end
     self.sprite:onLoop(MotherShipUI:onTag(self.sprite))

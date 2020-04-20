@@ -78,7 +78,7 @@ function Asteroid:randomize( x, y )
       self.image = Images['ice_'..type]
       self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
     elseif temp == 3 then
-      self.HP   = math.random(1000,10000)
+      self.HP   = math.random(500,1500)
       self.destroy_func = self.dropAll
       self.image = Images['all_'..type]
       self.collider = self:createPoligon(Images.poligons['asteroid_'..type])

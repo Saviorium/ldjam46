@@ -69,8 +69,8 @@ function Farm:drawFarm()
                        )
     love.graphics.setColor(0, 255, 0)
     love.graphics.rectangle( 'fill',
-            self.x+5*scale,
-            self.y+91*scale,
+                             self.x+5*scale,
+                             self.y+91*scale,
                              (117*scale)*self.health,
                              3*scale
                            )

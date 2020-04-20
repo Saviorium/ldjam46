@@ -19,6 +19,21 @@ tracks.list_of_sounds = {
 				   bpm = 160,
 				   volume = 0.01
 				 },
+	engine 	   = { filepath = "data/music/engine.wav",
+				   loopPoint = 0,
+				   bpm = 160,
+				   volume = 0.001
+				 },
+	static_1 	   = { filepath = "data/music/static_1.ogg",
+				   loopPoint = 0,
+				   bpm = 160,
+				   volume = 0.01
+				 },
+	static_2 	   = { filepath = "data/music/static_2.ogg",
+				   loopPoint = 0,
+				   bpm = 160,
+				   volume = 0.01
+				 },
 	shoot_1 = { filepath = "data/music/shoot_1.mp3",
 			    loopPoint = 0,
 			    bpm = 160,

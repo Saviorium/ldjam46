@@ -175,6 +175,7 @@ function Player:speedUp(speed, angle_x, angle_y, dt)
     self.cur_speed.x = self.cur_speed.x + speed * angle_x * dt
     self.cur_speed.y = self.cur_speed.y + speed * angle_y * dt
     self.inventory["energy"] = self.inventory["energy"] - self.energyOnMove * dt
+    tracks.play_sound( tracks.list_of_sounds.engine )
 end
 
 function Player:fireLazer()
