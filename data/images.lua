@@ -1,3 +1,5 @@
+Peachy = require "lib.peachy.peachy"
+
 local Images = {}
 
 for i=1, 5 do
@@ -26,10 +28,17 @@ Images['IOBox'] = love.graphics.newImage('data/images/ui/io_box.png')
 Images['arrow'] = love.graphics.newImage('data/images/ui/arrow.png')
 Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
 
-
 for ind, obj in pairs(Images) do
     obj:setFilter("nearest", "nearest")
 end
+
+function Images.loadSpritesheet(filename)
+    local image = love.graphics.newImage('data/images/'..filename..'.png')
+    image:setFilter("nearest", "nearest")
+    return Peachy.new("data/images/"..filename..".json", image)
+end
+
+Images['shuttle'] = Images.loadSpritesheet("shuttle")
 
 Images.poligons = {
     asteroid_1 = {

@@ -28,7 +28,7 @@ function cosmos:enter() -- Запускается при запуске прил
 	self.player = Player(100, --x
 					100, --y
 					0, --angle
-					love.graphics.newImage('data/images/shuttle.png'), 
+					'shuttle', 
 					4, --speed
 					10000, --maxVolume
 					100,  -- HP
