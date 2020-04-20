@@ -15,7 +15,7 @@ Player =
         self.sprite:setTag('stop')
         self.sprite:play()
 
-        self.maxVolume = maxVolume
+        self.maxVolume = playerShip.parameters.maxStorage
 
         self.maxEnergy = 100
         self.oxygenConsume = 1
@@ -28,7 +28,7 @@ Player =
         self.turn_speed = 10 / math.pi
         self.speed = speed
         self.strafe_speed = speed / 2
-        self.back_speed = speed / 10
+        self.back_speed = speed / 5
         self.stop_speed = 0.5
         self.bounciness = 0.3
 

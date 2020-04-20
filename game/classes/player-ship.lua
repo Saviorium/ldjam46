@@ -9,8 +9,18 @@ PlayerShip = Class {
             energy = 100,
             food = 100
         }
-        self.upgrades = {}
+        self.parameters = {maxStorage = 1000}
     end
 }
+
+function PlayerShip:checkFreeSpace()
+    local freeSpace = self.maxVolume
+    for type, count in pairs(self.inventory) do
+        if type ~= "energy" then
+            freeSpace = freeSpace - count
+        end
+    end
+    return freeSpace
+end
 
 return PlayerShip
