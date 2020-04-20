@@ -31,7 +31,7 @@ function MotherShipUI:initUI()
     table.insert(self.buttons, Button(x+58*scale, y+(101+2)*scale, "button-minus-big", function() motherShip:changeWantedMaxUnitInFarm(motherShip.modules.vegFarm, -1) end) )
     table.insert(self.buttons, Button(x+111*scale, y+(101+2)*scale, "button-plus-big", function() motherShip.modules.vegFarm:addMaxFarm() end))
 
-    table.insert(self.buttons, Button(14*scale, 216*scale, "button-warp", function()  end))
+    table.insert(self.buttons, Button(14*scale, 216*scale, "button-warp", function() self:winButtonEvent() end))
     local x = 141*scale
     local storageX = 217*scale
     self.uiBoxes = {
@@ -65,6 +65,14 @@ function MotherShipUI:registerButtons(eventManager)
         if iobox.registerButtons then
             iobox:registerButtons(eventManager)
         end
+    end
+end
+
+function MotherShipUI:winButtonEvent()
+    if self.motherShip.storage.iron:getValue() >= 10000 then
+        StateManager.switch(states.end_game,4)
+    else
+        tracks.play_sound( tracks.list_of_sounds.error_button )
     end
 end
 
