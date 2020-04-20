@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "h2o 0.aseprite",
+    "filename": "IRON 0.aseprite",
     "frame": { "x": 0, "y": 0, "w": 44, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -9,7 +9,7 @@
     "duration": 100
    },
    {
-    "filename": "h2o 1.aseprite",
+    "filename": "IRON 1.aseprite",
     "frame": { "x": 44, "y": 0, "w": 44, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -18,7 +18,7 @@
     "duration": 100
    },
    {
-    "filename": "h2o 2.aseprite",
+    "filename": "IRON 2.aseprite",
     "frame": { "x": 88, "y": 0, "w": 44, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -27,7 +27,7 @@
     "duration": 100
    },
    {
-    "filename": "h2o 3.aseprite",
+    "filename": "IRON 3.aseprite",
     "frame": { "x": 132, "y": 0, "w": 44, "h": 34 },
     "rotated": false,
     "trimmed": false,
@@ -39,7 +39,7 @@
  "meta": {
   "app": "http://www.aseprite.org/",
   "version": "1.2.17",
-  "image": "h2o.png",
+  "image": "iron.png",
   "format": "RGBA8888",
   "size": { "w": 176, "h": 34 },
   "scale": "1",
