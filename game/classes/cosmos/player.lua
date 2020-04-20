@@ -14,32 +14,34 @@ Player =
         self.sprite = Images[image]
         self.sprite:setTag('stop')
         self.sprite:play()
+        self.height = Images[image]:getHeight()
+        self.width  = Images[image]:getWidth()
 
-        self.maxVolume = playerShip.parameters.maxStorage
+        self.maxVolume = maxVolume + playerShip.parameters.addMaxStorage
 
-        self.maxEnergy = 100
+        self.maxEnergy = 100 + playerShip.parameters.addMaxEnergy
         self.oxygenConsume = 1
         self.foodConsume = 0.1
 
         self.inventory = playerShip.inventory
 
         self.HP = HP
-        self.angle = andgle
-        self.turn_speed = 10 / math.pi
-        self.speed = speed
-        self.strafe_speed = speed / 2
-        self.back_speed = speed / 5
-        self.stop_speed = 0.5
+        self.angle = andgle 
+        self.turn_speed = (10 + playerShip.parameters.addManeur) / math.pi
+        self.speed = speed + playerShip.parameters.addSpeed
+        self.strafe_speed = speed / 2 + playerShip.parameters.addManeur
+        self.back_speed = speed / 5 + playerShip.parameters.addManeur
+        self.stop_speed = 0.5 + playerShip.parameters.addManeur/10
         self.bounciness = 0.3
 
-        self.rate_of_fire = 1
+        self.rate_of_fire = 1 - playerShip.parameters.addROF
         self.last_fire = 0
 
         self.energyOnMove = 5
         self.energyOnStrafe = 2
         self.enegryOnFireLazer = 80
         self.enegryOnFireGatling = 20
-        self.energyInSecond = 3
+        self.energyInSecond = 3 + playerShip.parameters.addRecharge
 
         self.HC = HC
         self.bullets_handler = Bullets_handler(self.HC)

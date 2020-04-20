@@ -7,14 +7,21 @@ StorageWithShipBox = Class {
         StorageBox.init(self, x, y, resource, storageUnit)
         self.ship = ship
         self.buttons = {}
+        if resource == 'foodVeg' or resource == 'foodAnimal' then
+            self.ship_resource = 'food'
+        elseif resource == 'water' then
+            self.ship_resource = 'ice'
+        else
+            self.ship_resource = resource
+        end
         table.insert(self.buttons, 
                      Button(x+79*scale, 
                             y+2*scale, 
                             "button-arrow-left", 
                             function() 
-                                if self.ship.inventory[resource] > 0 then
+                                if self.ship.inventory[self.ship_resource] > 0 and storageUnit.value < storageUnit.max  then
                                     storageUnit.value = storageUnit.value + 10 
-                                    self.ship.inventory[resource] = self.ship.inventory[resource] - 10  
+                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - 10  
                                 end
                             end) 
                     )
@@ -23,9 +30,9 @@ StorageWithShipBox = Class {
                             y+2*scale,
                             "button-arrow", 
                             function() 
-                                if self.ship.inventory[resource] < self.ship:checkFreeSpace() then
+                                if self.ship.inventory[self.ship_resource] < self.ship:checkFreeSpace() and storageUnit.value >= 10 then
                                     storageUnit.value = storageUnit.value - 10 
-                                    self.ship.inventory[resource] = self.ship.inventory[resource] + 10  
+                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + 10  
                                 end
                             end) 
                     )
@@ -51,7 +58,7 @@ function StorageWithShipBox:draw()
                         scale, 
                         scale
                       )
-    love.graphics.print( self.ship.inventory[self.resource],
+    love.graphics.print( self.ship.inventory[self.ship_resource],
                          self.curr_pos.x+145*scale,
                          self.curr_pos.y+11*scale, 
                          0, 

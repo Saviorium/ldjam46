@@ -8,10 +8,10 @@ MotherShip = Class {
         self.storage = {
             energy     = StorageUnit(3000, 2000, "Energy"),
             iron       = StorageUnit(3000, 100, "Iron"),
-            water      = StorageUnit(300000, 200000, "Water"),
+            water      = StorageUnit(9000, 200000, "Water"),
             foodVeg    = StorageUnit(100, 50, "Vegetable food"),
             foodAnimal = StorageUnit(1000, 500, "Animal food"),
-            oxygen     = StorageUnit(1000000, 1000000, "Oxygen"),
+            oxygen     = StorageUnit(9000, 1000000, "Oxygen"),
         }
         local vegFarm = Farm(5, 10, 0.005, "VegFarm")
         vegFarm:initOxygen(self.storage.oxygen, 0.2, -10)

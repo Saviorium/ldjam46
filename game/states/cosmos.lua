@@ -14,7 +14,7 @@ function cosmos:enter() -- Запускается при запуске прил
     for _,obj in pairs(Asteroids) do
 		if obj then 
 			obj.hc = self.hc 
-			obj:registerCollider(self.hc) 
+			self.hc:register(obj.collider)
 			obj.collider.type = 'asteroid'
 		end
 	end
@@ -26,13 +26,13 @@ function cosmos:enter() -- Запускается при запуске прил
 		end
 	end
 	self.player = Player(100, --x
-					100, --y
-					0, --angle
-					'shuttle', 
-					4, --speed
-					10000, --maxVolume
-					100,  -- HP
-					self.hc)
+						 100, --y
+						 0, --angle
+						 'shuttle', 
+						 4, --speed
+						 10000, --maxVolume
+						 100,  -- HP
+						 self.hc)
 
 	self.camera = Camera(self.player.curr_pos.x, self.player.curr_pos.y)
 	self.map = Map(love.graphics.newImage('data/images/map.png'),

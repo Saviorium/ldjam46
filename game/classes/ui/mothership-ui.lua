@@ -44,11 +44,11 @@ function MotherShipUI:initUI()
 
         -- Storage
         -- energyStorage     = StorageWithShipBox(storageX, 33*0*scale, 'energy',     self.motherShip.storage.energy),
-        ironStorage       = StorageWithShipBox(storageX, 33*1*scale, 'iron',       self.motherShip.storage.iron),
-        waterStorage      = StorageWithShipBox(storageX, 33*2*scale, 'water',      self.motherShip.storage.water),
-        foodVegStorage    = StorageWithShipBox(storageX, 33*3*scale, 'foodVeg',    self.motherShip.storage.foodVeg),
-        foodAnimalStorage = StorageWithShipBox(storageX, 33*4*scale, 'foodAnimal', self.motherShip.storage.foodAnimal),
-        oxygenStorage     = StorageWithShipBox(storageX, 33*5*scale, 'oxygen',     self.motherShip.storage.oxygen),
+        ironStorage       = StorageWithShipBox(storageX, 33*1*scale, 'iron',       self.motherShip.storage.iron, self.playerShip),
+        waterStorage      = StorageWithShipBox(storageX, 33*2*scale, 'water',      self.motherShip.storage.water, self.playerShip),
+        foodVegStorage    = StorageWithShipBox(storageX, 33*3*scale, 'foodVeg',    self.motherShip.storage.foodVeg, self.playerShip),
+        foodAnimalStorage = StorageWithShipBox(storageX, 33*4*scale, 'foodAnimal', self.motherShip.storage.foodAnimal, self.playerShip),
+        oxygenStorage     = StorageWithShipBox(storageX, 33*5*scale, 'oxygen',     self.motherShip.storage.oxygen ,self.playerShip),
     }
 end
 
@@ -91,17 +91,9 @@ function MotherShipUI:draw()
     for id, object in pairs(self.buttons) do
         object:draw()
     end
-    local i = 0
-    for id, object in pairs(motherShip:getStorage()) do
-        i = i+1
-        love.graphics.print(object:getName(), 10, 20*i)
-        love.graphics.print(object:getValue(), 80, 20*i)
-        love.graphics.print(object:getMax(), 150, 20*i)
-    end
     i = -1
     for id, object in pairs(motherShip:getModules()) do
         i = i+1
-        love.graphics.print(object:getName()..": "..object:getCurrentUnits().."/"..object:getWantedMaxUnit().."(max: "..object:getMaxUnit()..")", 45*scale, (25 + 20*(i))*scale)
         object:drawFarm( 15*scale, (15+i*95)*scale )
     end
     for id, object in pairs(self.uiBoxes) do

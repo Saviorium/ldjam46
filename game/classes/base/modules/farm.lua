@@ -112,14 +112,12 @@ end
 
 function Farm:growNewUnits(units)
     self.units = self.units + units
-    print("new "..units.." in "..self.name)
 end
 
 function Farm:harvestToStorage(units)
     local unitsToHarvest = math.min(units, self.units)
     self.units = self.units - unitsToHarvest
     self.resources[self.produceResource]['storageUnit']:addAndGetExcess(unitsToHarvest * self.resources[self.produceResource]['produce_by_unit'])
-    print("killed "..unitsToHarvest.." in "..self.name)
 end
 
 function Farm:update(dt)
@@ -136,10 +134,8 @@ function Farm:update(dt)
             if cur_rate ~= resource['sensivity'] then
                 if resource['affect'] == 'percent' and cur_rate < resource['sensivity'] then
                     deltaHP_percent = deltaHP_percent - resource['base_affect']*(resource['sensivity'] - cur_rate) 
-                    print(deltaHP_by_unit)
                 elseif resource['affect'] == 'by_unit' then
                     deltaHP_by_unit = deltaHP_by_unit + (cur_rate - 1) * self.growthSpeed * self.units
-                    print(deltaHP_by_unit)
                 end
                 if deltaHP_percent > 0 and deltaHP_by_unit > 0 then
                     deltaHP_by_unit = 0
@@ -148,7 +144,7 @@ function Farm:update(dt)
         end
     end
     self.resources['oxygen']['rate'] = self.resources['oxygen']['storageUnit']:getLevel()
-    print(deltaHP_percent, deltaHP_by_unit)
+
     hpDelta = deltaHP_percent + deltaHP_by_unit
     self:updateHealth(hpDelta)
     local excessUnits = self.units - self:getWantedMaxUnit()

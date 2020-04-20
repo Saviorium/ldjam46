@@ -11,8 +11,8 @@ Bullets_handler = Class {
 
 function Bullets_handler:fire( player, bullets_in_shoot, distance_between_bullets, bullets_angle )
     for bullet=1, bullets_in_shoot do
-    	local direction = Vector (math.cos(player.angle), math.sin(player.angle))
-    	local perpendicular = direction:perpendicular()*distance_between_bullets
+    	  local direction = Vector (math.cos(player.angle), math.sin(player.angle))
+    	  local perpendicular = direction:perpendicular()*distance_between_bullets
         local position_x = ((bullet % 2 == 0) and 1 or -1 ) * ((bullets_in_shoot % 2 ~= 0 and bullet == 1) and 0 or 1)*perpendicular.x + player.curr_pos.x
         local position_y = ((bullet % 2 == 0) and 1 or -1 ) * ((bullets_in_shoot % 2 ~= 0 and bullet == 1) and 0 or 1)*perpendicular.y + player.curr_pos.y
         local angle = player.angle +  ((bullet % 2 == 0) and 1 or -1 ) * ((bullets_in_shoot % 2 ~= 0 and bullet == 1) and 0 or 1) * (math.floor(bullet / 2 )) * bullets_angle
