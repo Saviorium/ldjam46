@@ -67,6 +67,9 @@ function Farm:drawFarm()
                         self.x+100*scale,
                         self.y+3*scale
                        )
+    for id, object in pairs(self.farm_units) do
+        object:draw()
+    end
     love.graphics.setColor(0, 255, 0)
     love.graphics.rectangle( 'fill',
                              self.x+5*scale,
@@ -75,10 +78,6 @@ function Farm:drawFarm()
                              3*scale
                            )
     love.graphics.setColor(255, 255, 255)
-    for id, object in pairs(self.farm_units) do
-        object:draw()
-    end
-
 end
 
 function Farm:initUnits(j)
@@ -86,8 +85,8 @@ function Farm:initUnits(j)
         for i = 1, j do
             table.insert(self.farm_units,
                     TreeUnit(self.x+10*scale, self.x+70*scale,
-                            self.y+40*scale,
-                            self.y+43*scale)
+                            self.y+46*scale,
+                            self.y+48*scale)
             )
         end
     else if self.name == "AnimFarm" then

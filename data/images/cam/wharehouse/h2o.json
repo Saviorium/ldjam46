@@ -1,0 +1,57 @@
+{ "frames": [
+   {
+    "filename": "h2o 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 44, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 44, "h": 34 },
+    "sourceSize": { "w": 44, "h": 34 },
+    "duration": 100
+   },
+   {
+    "filename": "h2o 1.aseprite",
+    "frame": { "x": 44, "y": 0, "w": 44, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 44, "h": 34 },
+    "sourceSize": { "w": 44, "h": 34 },
+    "duration": 100
+   },
+   {
+    "filename": "h2o 2.aseprite",
+    "frame": { "x": 88, "y": 0, "w": 44, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 44, "h": 34 },
+    "sourceSize": { "w": 44, "h": 34 },
+    "duration": 100
+   },
+   {
+    "filename": "h2o 3.aseprite",
+    "frame": { "x": 132, "y": 0, "w": 44, "h": 34 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 44, "h": 34 },
+    "sourceSize": { "w": 44, "h": 34 },
+    "duration": 100
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.17",
+  "image": "h2o.png",
+  "format": "RGBA8888",
+  "size": { "w": 176, "h": 34 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
