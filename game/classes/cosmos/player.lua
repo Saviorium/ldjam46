@@ -198,7 +198,7 @@ function Player:fireLazer()
 end
 
 function Player:fireGatling()
-    if self.last_fire > self.rate_of_fire then
+    if self.last_fire > self.rate_of_fire and self.inventory['energy'] > self.enegryOnFireGatling then
         self.last_fire = 0
         self.bullets_handler:fire(self, 2, self.width, 0)
         self.inventory["energy"] = self.inventory["energy"] - self.enegryOnFireGatling
