@@ -78,6 +78,9 @@ end
 
 function MotherShipUI:update(dt)
     self.sprite:update(dt)
+    for _, obj in pairs(self.uiBoxes) do
+        if obj.update then obj:update(dt) end
+    end
 end
 
 function MotherShipUI:onTag(sprite)

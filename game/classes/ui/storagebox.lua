@@ -17,6 +17,23 @@ function StorageBox:initUI()
 end
 
 function StorageBox:update(dt)
+    if self.sprite then 
+        self.sprite:update(dt) 
+        print(motherShip.storage[self.resource].value, motherShip.storage[self.resource].max)
+        if motherShip.storage[self.resource].value > 0 and 
+           motherShip.storage[self.resource].value < motherShip.storage[self.resource].max/4 then
+            self.sprite:setTag('empty')
+        elseif motherShip.storage[self.resource].value < motherShip.storage[self.resource].max/2 and 
+               motherShip.storage[self.resource].value > motherShip.storage[self.resource].max/4 then
+            self.sprite:setTag('some')
+        elseif motherShip.storage[self.resource].value < (motherShip.storage[self.resource].max*3)/4 and 
+               motherShip.storage[self.resource].value > motherShip.storage[self.resource].max/2 then
+            self.sprite:setTag('many')
+        elseif motherShip.storage[self.resource].value < motherShip.storage[self.resource].max and 
+               motherShip.storage[self.resource].value > (motherShip.storage[self.resource].max*3)/4 then
+            self.sprite:setTag('full')
+        end
+    end
 end
 
 function StorageBox:drawBox()

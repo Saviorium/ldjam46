@@ -6,6 +6,11 @@ StorageWithShipBox = Class {
     __includes = StorageBox,
     init = function(self, x, y, resource, storageUnit, ship)
         StorageBox.init(self, x, y, resource, storageUnit)
+
+        self.sprite = Images[resource..'_storage']
+        self.sprite:setTag('empty')
+        self.sprite:play()
+
         self.ship = ship
         self.buttons = {}
         if resource == 'water' then
@@ -53,6 +58,11 @@ end
 
 function StorageWithShipBox:draw()
     self:drawBox()
+    self.sprite:draw( self.curr_pos.x, 
+                      self.curr_pos.y, 
+                      0, 
+                      scale, 
+                      scale)
     for id, object in pairs(self.buttons) do
         object:draw()
     end

@@ -30,6 +30,7 @@ Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
 Images['bigscreen'] = love.graphics.newImage('data/images/ui/big-tablo.png')
 Images['storageBox'] = love.graphics.newImage('data/images/ui/storage-box.png')
 
+
 for ind, obj in pairs(Images) do
     obj:setFilter("nearest", "nearest")
 end
@@ -41,6 +42,12 @@ function Images.loadSpritesheet(filename)
 end
 
 Images['shuttle'] = Images.loadSpritesheet("shuttle")
+
+Images['water_storage'] = Images.loadSpritesheet('cam/wharehouse/h2o')
+Images['oxygen_storage'] = Images.loadSpritesheet('cam/wharehouse/o2')
+Images['iron_storage'] = Images.loadSpritesheet('cam/wharehouse/BOX')
+Images['foodVeg_storage'] = Images.loadSpritesheet('cam/wharehouse/BOX')
+Images['foodAnimal_storage'] = Images.loadSpritesheet('cam/wharehouse/BOX')
 
 Images.poligons = {
     asteroid_1 = {
