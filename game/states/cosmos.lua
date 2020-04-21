@@ -46,6 +46,7 @@ function cosmos:enter() -- Запускается при запуске прил
 end
 
 function cosmos:mousepressed(x, y)
+    self.player:mouse_click()
 end
 
 function cosmos:keypressed( key )

@@ -75,6 +75,10 @@ function Player:draw()
     end
 end
 
+function Player:mouse_click()
+    self:fireGatling()
+end
+
 function Player:update(dt)
     self.sprite:update(dt)
     if self.inventory["energy"] >= self.energyOnMove then
@@ -106,12 +110,6 @@ function Player:update(dt)
         if love.keyboard.isDown(self.buttons["stop"]) then
             self:speedUp(-1, self.cur_speed.x, self.cur_speed.y, dt)
         end
-    end
-    if love.keyboard.isDown(self.buttons["fire1"]) and self.inventory["energy"] > self.enegryOnFireLazer then
-        self:fireLazer()
-    end
-    if love.keyboard.isDown(self.buttons["fire2"]) and self.inventory["energy"] > self.enegryOnFireGatling then
-        self:fireGatling()
     end
     self:setAngle(cursor, dt)
     self:onCollide()
