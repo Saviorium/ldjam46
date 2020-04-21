@@ -143,11 +143,11 @@ function Player:update(dt)
     end
 
     if self.death_food_timer < 0 then
-        StateManager.switch(states.end_game,1)
+        StateManager.switch(states.end_game,3)
     elseif self.death_o2_timer < 0 then
         StateManager.switch(states.end_game,2)
     elseif self.HP < 0 then
-        StateManager.switch(states.end_game,3)
+        StateManager.switch(states.end_game,1)
     end
 end
 

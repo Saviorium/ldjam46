@@ -32,6 +32,9 @@ Images['storageBox'] = love.graphics.newImage('data/images/ui/storage-box.png')
 
 Images['helpSpace'] = love.graphics.newImage('data/images/ui/space2.png')
 Images['helpSpaceToSpace'] = love.graphics.newImage('data/images/ui/space.png')
+Images['ice_drop'] = love.graphics.newImage('data/images/loot/ice.png')
+Images['iron_drop'] = love.graphics.newImage('data/images/loot/iron.png')
+
 
 for ind, obj in pairs(Images) do
     obj:setFilter("nearest", "nearest")

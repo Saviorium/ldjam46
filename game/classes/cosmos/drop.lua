@@ -3,7 +3,7 @@ Class = require "lib.hump.class"
 Drop = Class {
     __includes = PhysicsObject,
     init = function(self, x, y, count, type, index, hc)
-        PhysicsObject.init(self, x, y, love.graphics.newImage('data/images/loot/ice.png'))
+        PhysicsObject.init(self, x, y, Images[type..'_drop'])
         self.count = count
         self.hc = hc
         self:registerCollider(self.hc)

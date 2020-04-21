@@ -29,7 +29,7 @@ function StorageBox:update(dt)
         elseif motherShip.storage[self.resource].value < (motherShip.storage[self.resource].max*3)/4 and 
                motherShip.storage[self.resource].value > motherShip.storage[self.resource].max/2 then
             self.sprite:setTag('many')
-        elseif motherShip.storage[self.resource].value < motherShip.storage[self.resource].max and 
+        elseif motherShip.storage[self.resource].value <= motherShip.storage[self.resource].max and 
                motherShip.storage[self.resource].value > (motherShip.storage[self.resource].max*3)/4 then
             self.sprite:setTag('full')
         end
