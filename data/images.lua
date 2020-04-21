@@ -30,6 +30,8 @@ Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
 Images['bigscreen'] = love.graphics.newImage('data/images/ui/big-tablo.png')
 Images['storageBox'] = love.graphics.newImage('data/images/ui/storage-box.png')
 
+Images['helpSpace'] = love.graphics.newImage('data/images/ui/space2.png')
+Images['helpSpaceToSpace'] = love.graphics.newImage('data/images/ui/space.png')
 
 for ind, obj in pairs(Images) do
     obj:setFilter("nearest", "nearest")

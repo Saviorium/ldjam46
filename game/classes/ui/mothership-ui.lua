@@ -13,6 +13,7 @@ MotherShipUI = Class {
         self.modules = {}
         self.buttons = {}
         self:initUI()
+        self.spaceHelp = Images['helpSpaceToSpace']
 
         local image_screen = love.graphics.newImage("data/images/ui/bgndscreen/screen.png")
         image_screen:setFilter("nearest", "nearest")
@@ -106,6 +107,14 @@ function MotherShipUI:draw()
     for id, object in pairs(self.modules) do
         object:draw()
     end
+
+    love.graphics.draw(
+        self.spaceHelp,
+        127*scale,
+        264*scale, 
+        0, 
+        scale, 
+        scale)
  
     motherShip.modules.animalFarm:drawFarm()
     motherShip.modules.vegFarm:drawFarm()

@@ -13,6 +13,14 @@ function start_game:draw()
                         20*scale,
                         20*scale
                        )
+    love.graphics.draw(
+        Images['helpSpace'],
+        155*scale,
+        264*scale, 
+        0, 
+        scale, 
+        scale
+    )
 end
 
 function start_game:keypressed( key )
