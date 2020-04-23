@@ -15,8 +15,8 @@ function start_game:draw()
                        )
     love.graphics.draw(
         Images['helpSpace'],
-        155*scale,
-        264*scale, 
+        300*scale,
+        280*scale, 
         0, 
         scale, 
         scale

@@ -23,7 +23,7 @@ StorageWithShipBox = Class {
                             y+2*scale, 
                             "button-arrow-left", 
                             function() 
-                                if self.ship.inventory[self.ship_resource] > 0 and storageUnit.value < storageUnit.max  then
+                                if self.ship.inventory[self.ship_resource] - 10 > 0 and storageUnit.value < storageUnit.max  then
                                     storageUnit.value = storageUnit.value + 10 
                                     self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - 10 
                                     tracks.play_sound( tracks.list_of_sounds.button )

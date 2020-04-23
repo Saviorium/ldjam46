@@ -43,6 +43,9 @@ function cosmos:enter() -- Запускается при запуске прил
 	self.gui = GUI(love.graphics.newImage('data/images/guid.png'), 
 				   self.player,
 				   self.baseShip)
+	if not TutorialWatched then
+		self.timer_for_buttons = 5
+	end 
 end
 
 function cosmos:mousepressed(x, y)
@@ -50,6 +53,7 @@ function cosmos:mousepressed(x, y)
 end
 
 function cosmos:keypressed( key )
+	
 end
 
 function cosmos:draw() -- отрисовка каждый кадр
@@ -80,6 +84,9 @@ function cosmos:draw() -- отрисовка каждый кадр
 		end
 		love.graphics.setColor(255, 255, 255)
 	end
+    if self.timer_for_buttons > 0 or love.keyboard.isDown('h') then
+    	self.player:drawHelp()
+    end
     self.camera:detach()
     self.gui:draw()
 end
@@ -97,6 +104,11 @@ function cosmos:update( dt ) -- Каждый кадр
     self.camera:move(dx/2, dy/2)
     self.map:update(dt)
     motherShip:update(dt)
+    if self.timer_for_buttons > 0 then
+    	self.timer_for_buttons = self.timer_for_buttons - dt
+    else
+    	TutorialWatched = true
+    end
 end
 
 return cosmos

@@ -54,7 +54,7 @@ function MotherShipUI:initUI()
         oxygenStorage     = StorageWithShipBox(storageX, 33*5*scale, 'oxygen',     self.motherShip.storage.oxygen ,self.playerShip),
 
         -- Upgrades
-        upgradesBox = UpgradesBox(storageX, 33*6*scale, self.motherShip.storage.iron, self.playerShip)
+        upgradesBox = UpgradesBox((14+64)*scale, 216*scale, self.motherShip.storage.iron, self.playerShip)
     }
 end
 
@@ -108,13 +108,12 @@ function MotherShipUI:draw()
         object:draw()
     end
 
-    love.graphics.draw(
-        self.spaceHelp,
-        127*scale,
-        264*scale, 
-        0, 
-        scale, 
-        scale)
+    love.graphics.draw( self.spaceHelp,
+                        127*scale,
+                        270*scale, 
+                        0, 
+                        scale, 
+                        scale)
  
     motherShip.modules.animalFarm:drawFarm()
     motherShip.modules.vegFarm:drawFarm()

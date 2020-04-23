@@ -7,7 +7,7 @@ UpgradesBox = Class {
         self.y = y
         self.resource = resource
         self.ship = ship
-        self.horPadding  = 30 * scale
+        self.horPadding  = 50 * scale
         self.vertPadding = 30 * scale
         self.buttons = self:initButtons()
     end
@@ -27,9 +27,9 @@ function UpgradesBox:initButtons()
         upgradeBattery  = self:buildUpgradeButton(self.x+self.horPadding*0, self.y+self.vertPadding*0, "battery"),
         upgradeFire     = self:buildUpgradeButton(self.x+self.horPadding*1, self.y+self.vertPadding*0, "fire"),
         upgradeManeur   = self:buildUpgradeButton(self.x+self.horPadding*2, self.y+self.vertPadding*0, "maneur"),
-        upgradeRecharge = self:buildUpgradeButton(self.x+self.horPadding*0, self.y+self.vertPadding*1, "recharge"),
-        upgradeSpace    = self:buildUpgradeButton(self.x+self.horPadding*1, self.y+self.vertPadding*1, "space"),
-        upgradeSpeed    = self:buildUpgradeButton(self.x+self.horPadding*2, self.y+self.vertPadding*1, "speed"),
+        upgradeRecharge = self:buildUpgradeButton(self.x+self.horPadding*3, self.y+self.vertPadding*0, "recharge"),
+        upgradeSpace    = self:buildUpgradeButton(self.x+self.horPadding*4, self.y+self.vertPadding*0, "space"),
+        upgradeSpeed    = self:buildUpgradeButton(self.x+self.horPadding*5, self.y+self.vertPadding*0, "speed"),
     }
 end
 
@@ -66,6 +66,13 @@ end
 function UpgradesBox:draw()
     for id, object in pairs(self.buttons) do
         object:draw()
+        love.graphics.setFont(fonts.char)
+        local upgradeName = string.lower(string.sub(id,8,-1))
+        love.graphics.print( string.sub(id,8,-1)..'\n'..self.upgrades[upgradeName].costs[self.ship.upgrade[upgradeName]]..' iron',
+                             object.x,
+                             object.y+30*scale, 
+                             0)
+        love.graphics.setFont(fonts.numbers)
     end
 end
 
