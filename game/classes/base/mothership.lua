@@ -9,12 +9,12 @@ MotherShip = Class {
         self.storage = {
             energy     = StorageUnit(3000, 2000, "Energy"),
             iron       = StorageUnit(3000, 0, "Iron"),
-            water      = StorageUnit(10000, 1500, "Water"),
+            water      = StorageUnit(5000, 1500, "Water"),
             foodVeg    = StorageUnit(1000, 50, "Vegetable food"),
             foodAnimal = StorageUnit(1000, 50, "Animal food"),
             oxygen     = StorageUnit(2500, 1500, "Oxygen"),
         }
-        local vegFarm = Farm(8, 10, 0.15, "VegFarm", 15*scale, 116*scale,20 )
+        local vegFarm = Farm(8, 10, 0.15, "VegFarm", 15*scale, 116*scale,5 )
         vegFarm:initOxygen(self.storage.oxygen, 0.2, -5)
         vegFarm:initStorage('water', -- consumeResource
                             'foodVeg', -- produceResource
@@ -24,7 +24,7 @@ MotherShip = Class {
                             15)--productionPerUnit
         vegFarm:initUnits(vegFarm.units)
 
-        local animalFarm = Farm(1, 10, 0.1, "AnimFarm", 15*scale, 15*scale,5)
+        local animalFarm = Farm(1, 10, 0.1, "AnimFarm", 15*scale, 15*scale,2)
         animalFarm:initOxygen(self.storage.oxygen, 0.5, 1)
         animalFarm:initStorage('foodVeg', -- consumeResource
                                 'foodAnimal', -- produceResource

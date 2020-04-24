@@ -6,6 +6,9 @@ StorageBoxCam = Class {
         self.resource = resource
         self.storageUnit = storageUnit
         self:initUI()
+        self.sprite = Images[resource..'_storage']
+        self.sprite:setTag('empty')
+        self.sprite:play()
     end
 }
 
@@ -15,17 +18,28 @@ function StorageBoxCam:initUI()
 end
 
 function StorageBoxCam:update(dt)
+    self.sprite:update(dt) 
+    if motherShip.storage[self.resource].value > 0 and 
+       motherShip.storage[self.resource].value < motherShip.storage[self.resource].max/4 then
+        self.sprite:setTag('empty')
+    elseif motherShip.storage[self.resource].value < motherShip.storage[self.resource].max/2 and 
+           motherShip.storage[self.resource].value > motherShip.storage[self.resource].max/4 then
+        self.sprite:setTag('some')
+    elseif motherShip.storage[self.resource].value < (motherShip.storage[self.resource].max*3)/4 and 
+           motherShip.storage[self.resource].value > motherShip.storage[self.resource].max/2 then
+        self.sprite:setTag('many')
+    elseif motherShip.storage[self.resource].value <= motherShip.storage[self.resource].max and 
+           motherShip.storage[self.resource].value > (motherShip.storage[self.resource].max*3)/4 then
+        self.sprite:setTag('full')
+    end
 end
 
 function StorageBoxCam:drawBox()
-    love.graphics.draw(
-        self.image_back,
-        self.curr_pos.x,
-        self.curr_pos.y,
-        0, 
-        scale, 
-        scale
-    )
+    self.sprite:draw( self.curr_pos.x, 
+                      self.curr_pos.y, 
+                      0, 
+                      scale, 
+                      scale)
 end
 
 function StorageBoxCam:draw()

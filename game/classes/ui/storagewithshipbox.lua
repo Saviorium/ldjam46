@@ -7,10 +7,6 @@ StorageWithShipBox = Class {
     init = function(self, x, y, resource, storageUnit, ship)
         StorageBox.init(self, x, y, resource, storageUnit)
 
-        self.sprite = Images[resource..'_storage']
-        self.sprite:setTag('empty')
-        self.sprite:play()
-
         self.ship = ship
         self.buttons = {}
         if resource == 'water' then
@@ -23,7 +19,7 @@ StorageWithShipBox = Class {
                             y+2*scale, 
                             "button-arrow-left", 
                             function() 
-                                if self.ship.inventory[self.ship_resource] - 10 > 0 and storageUnit.value < storageUnit.max  then
+                                if self.ship.inventory[self.ship_resource] - 10 >= 0 and storageUnit.value < storageUnit.max  then
                                     storageUnit.value = storageUnit.value + 10 
                                     self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - 10 
                                     tracks.play_sound( tracks.list_of_sounds.button )
@@ -37,7 +33,7 @@ StorageWithShipBox = Class {
                             y+2*scale,
                             "button-arrow", 
                             function() 
-                                if self.ship.inventory[self.ship_resource] < self.ship:checkFreeSpace() and storageUnit.value >= 10 then
+                                if  self.ship:checkFreeSpace() >= 10 and storageUnit.value >= 10 then
                                     storageUnit.value = storageUnit.value - 10 
                                     self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + 10 
                                     tracks.play_sound( tracks.list_of_sounds.button )
@@ -58,11 +54,6 @@ end
 
 function StorageWithShipBox:draw()
     self:drawBox()
-    self.sprite:draw( self.curr_pos.x, 
-                      self.curr_pos.y, 
-                      0, 
-                      scale, 
-                      scale)
     for id, object in pairs(self.buttons) do
         object:draw()
     end

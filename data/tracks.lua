@@ -38,7 +38,12 @@ tracks.list_of_sounds = {
 			    loopPoint = 0,
 			    bpm = 160,
 			    volume = 0.01
-			  }
+			  },
+	vacuum_get = { filepath = "data/music/vacuum_get.wav",
+				   loopPoint = 0,
+				   bpm = 160,
+				   volume = 0.01
+				 }
 }
 
 function tracks.set_next_track( index, loaded_tracks )

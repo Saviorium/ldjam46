@@ -46,6 +46,9 @@ Player =
         self.enegryOnFireGatling = 20
         self.energyInSecond = 2 + playerShip.upgrade.recharge
 
+        self.playingSound = nil
+        self.soundTimer = 0
+
         self.HC = HC
         self.bullets_handler = Bullets_handler(self.HC)
         self:registerCollider(self.HC)
@@ -147,6 +150,12 @@ function Player:update(dt)
     elseif self.HP < 0 then
         StateManager.switch(states.end_game,1)
     end
+
+    if self.playingSound then
+        if not self.playingSound:isPlaying() then
+            self.playingSound = nil
+        end
+    end
 end
 
 function Player:debugDraw()
@@ -211,6 +220,7 @@ function Player:checkFreeSpace()
     for type, count in pairs(self.inventory) do
         if type ~= "energy" then
             freeSpace = freeSpace - count
+            print(count,type)
         end
     end
     return freeSpace
@@ -229,7 +239,6 @@ function Player:onCollide()
         if shape.type == "asteroid" or shape.type == "solid" then
             if self.cur_speed:len() > 10 then
                 self.HP = self.HP - self.cur_speed:len()
-                print(self.HP)
             end
             self.curr_pos.x = self.curr_pos.x + delta.x
             self.curr_pos.y = self.curr_pos.y + delta.y
@@ -240,13 +249,18 @@ function Player:onCollide()
         end
         if shape.type == "drop" then
             local left = self:checkFreeSpace()
-            print(left,shape.count)
             if left > shape.count then
                 self.inventory[shape.resource] = self.inventory[shape.resource] + shape.count
                 shape.count = 0
+                if not self.playingSound then
+                    self.playingSound = tracks.play_sound( tracks.list_of_sounds.vacuum_get )
+                end            
             elseif left < shape.count and left > 0 then
                 shape.count = shape.count - left
                 self.inventory[shape.resource] = self.inventory[shape.resource] + left
+                if not self.playingSound then
+                    self.playingSound = tracks.play_sound( tracks.list_of_sounds.vacuum_get )
+                end
             end
         end
         if shape.type == "enterBase" and love.keyboard.isDown(self.buttons["use"]) then

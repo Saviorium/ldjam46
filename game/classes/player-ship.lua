@@ -25,6 +25,7 @@ function PlayerShip:checkFreeSpace()
     for type, count in pairs(self.inventory) do
         if type ~= "energy" then
             freeSpace = freeSpace - count
+            print(count,type, freeSpace)
         end
     end
     return freeSpace
