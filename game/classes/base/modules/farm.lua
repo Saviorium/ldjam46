@@ -171,7 +171,7 @@ end
 
 function Farm:changeWantedMax(changeTo)
     print(string.format(self:getName().." + %d", changeTo))
-    if (self.wantedMaxUnits + changeTo <= self.maxUnits) and (self.wantedMaxUnits + changeTo >= 0) then
+    if (self.wantedMaxUnits + changeTo <= self.maxUnits) and (self.wantedMaxUnits + changeTo >= 1) then
         print(string.format(self:getName().." = %d", changeTo))
         self.wantedMaxUnits = self.wantedMaxUnits + changeTo
         tracks.play_sound( tracks.list_of_sounds.button )
