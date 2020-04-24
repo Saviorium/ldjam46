@@ -255,4 +255,36 @@ function Player:onCollide()
     end
 end
 
+function Player:drawHelp()
+    local x, y = self.curr_pos.x-self.width, self.curr_pos.y-self.height
+    love.graphics.print( self.buttons.up..' to move forward',
+                        x,
+                        y-16*scale,
+                        0)
+    love.graphics.print( self.buttons.down..' to slow down',
+                        x,
+                        y+16*scale,
+                        0)
+    love.graphics.print( self.buttons.right..' to strafe right',
+                        x+16*scale,
+                        y,
+                        0)
+    love.graphics.print( 'To strafe left '..self.buttons.left,
+                        x-9*(12*scale),
+                        y,
+                        0) 
+    love.graphics.print( 'Left mouse click to fire',
+                        x,
+                        y+27*scale,
+                        0)
+    love.graphics.print( self.buttons.stop..' to stop slowly',
+                        x,
+                        y-27*scale,
+                        0)
+    love.graphics.print( 'Press H to get help',
+                        x,
+                        y+36*scale,
+                        0)
+end
+
 return Player
