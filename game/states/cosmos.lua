@@ -85,7 +85,7 @@ function cosmos:draw() -- отрисовка каждый кадр
 		love.graphics.setColor(255, 255, 255)
 	end
     if self.timer_for_buttons > 0 or love.keyboard.isDown('h') then
-    	self.player:drawHelp()
+    	-- self.player:drawHelp() -- sawa, pochini!
     end
     self.camera:detach()
     self.gui:draw()

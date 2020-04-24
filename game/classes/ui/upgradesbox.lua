@@ -7,7 +7,7 @@ UpgradesBox = Class {
         self.y = y
         self.resource = resource
         self.ship = ship
-        self.horPadding  = 50 * scale
+        self.horPadding  = 36 * scale
         self.vertPadding = 30 * scale
         self.buttons = self:initButtons()
     end
@@ -68,9 +68,9 @@ function UpgradesBox:draw()
         object:draw()
         love.graphics.setFont(fonts.char)
         local upgradeName = string.lower(string.sub(id,8,-1))
-        love.graphics.print( string.sub(id,8,-1)..'\n'..self.upgrades[upgradeName].costs[self.ship.upgrade[upgradeName]]..' iron',
-                             object.x,
-                             object.y+30*scale, 
+        love.graphics.print( self.upgrades[upgradeName].costs[self.ship.upgrade[upgradeName]],
+                             object.x+12*scale,
+                             object.y+2*scale, 
                              0)
         love.graphics.setFont(fonts.numbers)
     end

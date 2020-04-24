@@ -47,11 +47,11 @@ function MotherShipUI:initUI()
 
         -- Storage
         -- energyStorage     = StorageWithShipBox(storageX, 33*0*scale, 'energy',     self.motherShip.storage.energy),
-        ironStorage       = StorageWithShipBox(storageX, 33*1*scale, 'iron',       self.motherShip.storage.iron, self.playerShip),
-        waterStorage      = StorageWithShipBox(storageX, 33*2*scale, 'water',      self.motherShip.storage.water, self.playerShip),
-        foodVegStorage    = StorageWithShipBox(storageX, 33*3*scale, 'foodVeg',    self.motherShip.storage.foodVeg, self.playerShip),
-        foodAnimalStorage = StorageWithShipBox(storageX, 33*4*scale, 'foodAnimal', self.motherShip.storage.foodAnimal, self.playerShip),
-        oxygenStorage     = StorageWithShipBox(storageX, 33*5*scale, 'oxygen',     self.motherShip.storage.oxygen ,self.playerShip),
+        foodVegStorage    = StorageWithShipBox(storageX, 33*1*scale, 'foodVeg',    self.motherShip.storage.foodVeg, self.playerShip),
+        foodAnimalStorage = StorageWithShipBox(storageX, 33*2*scale, 'foodAnimal', self.motherShip.storage.foodAnimal, self.playerShip),
+        oxygenStorage     = StorageWithShipBox(storageX, 33*3*scale, 'oxygen',     self.motherShip.storage.oxygen ,self.playerShip),
+        waterStorage      = StorageBox        (storageX, 33*4*scale, 'water',      self.motherShip.storage.water, self.playerShip),
+        ironStorage       = StorageBox        (storageX, 33*5*scale, 'iron',       self.motherShip.storage.iron, self.playerShip),
 
         -- Upgrades
         upgradesBox = UpgradesBox((14+64)*scale, 216*scale, self.motherShip.storage.iron, self.playerShip)
