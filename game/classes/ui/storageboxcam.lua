@@ -18,18 +18,15 @@ function StorageBoxCam:initUI()
 end
 
 function StorageBoxCam:update(dt)
-    self.sprite:update(dt) 
-    if motherShip.storage[self.resource].value > 0 and 
-       motherShip.storage[self.resource].value < motherShip.storage[self.resource].max/4 then
+    self.sprite:update(dt)
+    local resourcePercent = 100 * ( motherShip.storage[self.resource].value / motherShip.storage[self.resource].max )
+    if resourcePercent < 5 then
         self.sprite:setTag('empty')
-    elseif motherShip.storage[self.resource].value < motherShip.storage[self.resource].max/2 and 
-           motherShip.storage[self.resource].value > motherShip.storage[self.resource].max/4 then
+    elseif resourcePercent < 20 then
         self.sprite:setTag('some')
-    elseif motherShip.storage[self.resource].value < (motherShip.storage[self.resource].max*3)/4 and 
-           motherShip.storage[self.resource].value > motherShip.storage[self.resource].max/2 then
+    elseif resourcePercent < 60 then
         self.sprite:setTag('many')
-    elseif motherShip.storage[self.resource].value <= motherShip.storage[self.resource].max and 
-           motherShip.storage[self.resource].value > (motherShip.storage[self.resource].max*3)/4 then
+    else 
         self.sprite:setTag('full')
     end
 end

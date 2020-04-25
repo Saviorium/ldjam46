@@ -86,8 +86,8 @@ function Farm:initUnits(j)
         for i = 1, j do
             table.insert(self.farm_units,
                     TreeUnit(self.x+10*scale, self.x+70*scale,
-                            self.y+46*scale,
-                            self.y+48*scale)
+                            self.y+45*scale,
+                            self.y+47*scale)
             )
         end
     else if self.name == "AnimFarm" then
