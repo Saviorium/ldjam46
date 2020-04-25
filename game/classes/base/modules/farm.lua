@@ -106,12 +106,10 @@ function Farm:removeUnit(j)
     if self.name == "VegFarm" then
         for i = 1, j do
             table.remove(self.farm_units, #self.farm_units)
-            print("removed "..#self.farm_units.."from trees")
         end
     else if self.name == "AnimFarm" then
         for i = 1, j do
             table.remove(self.farm_units, #self.farm_units )
-            print("removed "..#self.farm_units.."from cows")
         end
     end
     end
@@ -170,9 +168,7 @@ function Farm:getWantedMaxUnit()
 end
 
 function Farm:changeWantedMax(changeTo)
-    print(string.format(self:getName().." + %d", changeTo))
     if (self.wantedMaxUnits + changeTo <= self.maxUnits) and (self.wantedMaxUnits + changeTo >= 1) then
-        print(string.format(self:getName().." = %d", changeTo))
         self.wantedMaxUnits = self.wantedMaxUnits + changeTo
         tracks.play_sound( tracks.list_of_sounds.button )
     else

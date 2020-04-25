@@ -39,7 +39,6 @@ function Map:update( dt )
                   star.curr_pos.y - self.player.curr_pos.y
                  ):len() > 1000*scale then
             self.distant_stars[index] = Star(self.player, self.hc)
-            print('Nulled '..index)
         end
         star:move()
     end

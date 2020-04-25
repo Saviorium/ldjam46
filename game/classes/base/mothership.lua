@@ -45,7 +45,6 @@ MotherShip = Class {
 function MotherShip:addMaxVegFarm()
     value = self.modules.vegFarm.maxUnits + 1
     self.modules.vegFarm.maxUnits = value
-    print(string.format("veg farm is now %d", value))
 end
 
 function MotherShip:addResources(type, value)
@@ -54,7 +53,6 @@ end
 
 function MotherShip:changeWantedMaxUnitInFarm(farm, changeTo)
     farm:changeWantedMax(changeTo)
-    print(string.format("button %d"..farm:getName(), changeTo))
 end
 
 function MotherShip:update(dt)
