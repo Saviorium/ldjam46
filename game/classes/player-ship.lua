@@ -43,7 +43,7 @@ end
 function PlayerShip:getFreeSpaceText()
     local max = self:getMaxVolume()
     local taken = max - self:getFreeSpace()
-    return taken .. "/" .. max
+    return string.format('%4.f', math.min(math.max(taken, 0),9999)) .. "/" .. string.format('%4.f', math.min(math.max(max, 0),9999))
 end
 
 return PlayerShip
