@@ -53,9 +53,9 @@ Images['shuttle'] = Images.loadSpritesheet("shuttle")
 
 Images['water_storage'] = Images.loadSpritesheet('cam/wharehouse/h2o')
 Images['oxygen_storage'] = Images.loadSpritesheet('cam/wharehouse/o2')
-Images['iron_storage'] = Images.loadSpritesheet('cam/wharehouse/BOX')
-Images['foodVeg_storage'] = Images.loadSpritesheet('cam/wharehouse/BOX')
-Images['foodAnimal_storage'] = Images.loadSpritesheet('cam/wharehouse/BOX')
+Images['iron_storage'] = Images.loadSpritesheet('cam/wharehouse/box')
+Images['foodVeg_storage'] = Images.loadSpritesheet('cam/wharehouse/box')
+Images['foodAnimal_storage'] = Images.loadSpritesheet('cam/wharehouse/box')
 
 Images.poligons = {
     asteroid_1 = {
