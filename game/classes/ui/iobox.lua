@@ -13,7 +13,7 @@ IOBox = Class {
 function IOBox:initUI()
     self.image_back = Images['IOBox']
     self.image_arrow = Images['arrow']
-    self.angel_of_arrow = (self.direction == 'Out' and math.pi or 0)
+    self.angle_of_arrow = (self.direction == 'Out' and math.pi or 0)
     self.image_resource = Images[self.resource]
     self.screen = Images['screen']
 end
@@ -35,9 +35,9 @@ function IOBox:drawBox()
                        scale, 
                        scale)
     love.graphics.draw(self.image_arrow,
-                       self.curr_pos.x+ (self.angel_of_arrow==0 and 32*scale or 55*scale),
-                       self.curr_pos.y+ (self.angel_of_arrow==0 and 5*scale  or 13*scale), 
-                       self.angel_of_arrow, 
+                       self.curr_pos.x+ (self.angle_of_arrow==0 and 32*scale or 55*scale),
+                       self.curr_pos.y+ (self.angle_of_arrow==0 and 5*scale  or 13*scale), 
+                       self.angle_of_arrow, 
                        scale, 
                        scale)
     love.graphics.draw(self.screen,

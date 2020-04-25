@@ -33,7 +33,7 @@ StorageWithShipBox = Class {
                             y+2*scale,
                             "button-arrow", 
                             function() 
-                                if  self.ship:checkFreeSpace() >= 10 and storageUnit.value >= 10 then
+                                if  self.ship:getFreeSpace() >= 10 and storageUnit.value >= 10 then
                                     storageUnit.value = storageUnit.value - 10 
                                     self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + 10 
                                     tracks.play_sound( tracks.list_of_sounds.button )
@@ -68,7 +68,7 @@ function StorageWithShipBox:draw()
     love.graphics.setFont(fonts.numbers)
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(
-        string.format('%4.f', math.min(self.ship.inventory[self.ship_resource], 9999)),
+        string.format('%4.f', math.min(math.max(self.ship.inventory[self.ship_resource], 0), 9999)),
         self.curr_pos.x+145*scale,
         self.curr_pos.y+12*scale, 
         0, 

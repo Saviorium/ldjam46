@@ -7,8 +7,8 @@ UpgradesBox = Class {
         self.y = y
         self.resource = resource
         self.ship = ship
-        self.horPadding  = 36 * scale
-        self.vertPadding = 30 * scale
+        self.horPadding  = 36
+        self.vertPadding = 30
         self.buttons = self:initButtons()
     end
 }
@@ -34,7 +34,7 @@ function UpgradesBox:initButtons()
 end
 
 function UpgradesBox:buildUpgradeButton(x, y, upgradeName)
-    return Button(x, y, "upgrade-" .. upgradeName,
+    return Button(x*scale, y*scale, "upgrade-" .. upgradeName,
         function()
             self:doUpgrade(upgradeName)
         end)

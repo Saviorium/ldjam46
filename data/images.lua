@@ -30,6 +30,9 @@ Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
 Images['bigscreen'] = love.graphics.newImage('data/images/ui/big-tablo.png')
 Images['storageBox'] = love.graphics.newImage('data/images/ui/storage-box.png')
 
+Images['shipInfoBox'] = love.graphics.newImage('data/images/ui/ship-info-box.png')
+Images['shipIcon'] = love.graphics.newImage('data/images/ui/icon-ship.png')
+
 Images['helpSpace'] = love.graphics.newImage('data/images/ui/space2.png')
 Images['helpSpaceToSpace'] = love.graphics.newImage('data/images/ui/space.png')
 Images['ice_drop'] = love.graphics.newImage('data/images/loot/ice.png')

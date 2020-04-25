@@ -10,24 +10,40 @@ PlayerShip = Class {
             foodVeg = 10,
             foodAnimal = 10
         }
-        self.upgrade = {battery  = 1,
-                        fire     = 1,
-                        maneur   = 1,
-                        recharge = 1,
-                        space    = 1,
-                        speed    = 1
-                       } 
+        self.upgrade = {
+            battery  = 1,
+            fire     = 1,
+            maneur   = 1,
+            recharge = 1,
+            space    = 1,
+            speed    = 1
+        }
+        self.hp = 100
     end
 }
 
-function PlayerShip:checkFreeSpace()
-    local freeSpace = self.upgrade.space*100
+function PlayerShip:getMaxVolume()
+    return self.upgrade.space*100
+end
+
+function PlayerShip:getMaxEnergy()
+    return self.upgrade.battery*100
+end
+
+function PlayerShip:getFreeSpace()
+    local freeSpace = self:getMaxVolume()
     for type, count in pairs(self.inventory) do
         if type ~= "energy" then
             freeSpace = freeSpace - count
         end
     end
     return freeSpace
+end
+
+function PlayerShip:getFreeSpaceText()
+    local max = self:getMaxVolume()
+    local taken = max - self:getFreeSpace()
+    return taken .. "/" .. max
 end
 
 return PlayerShip

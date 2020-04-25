@@ -7,7 +7,7 @@ tracks          = require "data/tracks"
 Player =
     Class {
     __includes = PhysicsObject,
-    init = function(self, x, y, andgle, image, speed, maxVolume, HP, HC)
+    init = function(self, x, y, angle, image, playerShip, hardonColliderInstance)
         self.curr_pos = Vector(x, y)
         self.cur_speed = Vector(0, 0)
         self.size = 15
@@ -18,22 +18,25 @@ Player =
         self.height = Images[image]:getHeight()
         self.width  = Images[image]:getWidth()
 
-        self.maxVolume = playerShip.upgrade.space*100
+        self.playerShip = playerShip
+        self.maxVolume = self.playerShip:getMaxVolume()
 
-        self.maxEnergy = playerShip.upgrade.battery*100
+        self.maxEnergy = self.playerShip:getMaxEnergy()
         self.oxygenConsume = 1
         self.foodConsume = 1
         self.death_o2_timer = 5
         self.death_food_timer = 30
 
-        self.inventory = playerShip.inventory
+        self.inventory = self.playerShip.inventory
 
-        self.HP = HP
-        self.angle = andgle 
+        self.HP = self.playerShip.hp
+        self.angle = angle
+
+        self.base_speed = 3
         self.turn_speed = (10 + playerShip.upgrade.maneur) / math.pi
-        self.speed = speed + playerShip.upgrade.speed
-        self.strafe_speed = speed / 2 + playerShip.upgrade.maneur
-        self.back_speed = speed / 5 + playerShip.upgrade.maneur
+        self.speed = self.base_speed + playerShip.upgrade.speed
+        self.strafe_speed = self.base_speed / 2 + playerShip.upgrade.maneur
+        self.back_speed = self.base_speed / 5 + playerShip.upgrade.maneur
         self.stop_speed = 0.5 + playerShip.upgrade.maneur/10
         self.bounciness = 0.3
 
@@ -42,14 +45,14 @@ Player =
 
         self.energyOnMove = 5
         self.energyOnStrafe = 2
-        self.enegryOnFireLazer = 80
+        self.enegryOnFireLaser = 80
         self.enegryOnFireGatling = 20
-        self.energyInSecond = 2 + playerShip.upgrade.recharge
+        self.energyRecharge = 2 + playerShip.upgrade.recharge
 
         self.playingSound = nil
         self.soundTimer = 0
 
-        self.HC = HC
+        self.HC = hardonColliderInstance
         self.bullets_handler = Bullets_handler(self.HC)
         self:registerCollider(self.HC)
         self.collider.type = "player"
@@ -121,7 +124,7 @@ function Player:update(dt)
 
     self.last_fire = self.last_fire + dt
     if self.inventory["energy"] <= self.maxEnergy then
-        self.inventory["energy"] = self.inventory["energy"] + self.energyInSecond * dt
+        self.inventory["energy"] = self.inventory["energy"] + self.energyRecharge * dt
     end
     if self.inventory["oxygen"] >= 0 then
         self.inventory["oxygen"] = self.inventory["oxygen"] - self.oxygenConsume * dt
@@ -215,14 +218,8 @@ function Player:fireGatling()
     end
 end
 
-function Player:checkFreeSpace()
-    local freeSpace = self.maxVolume
-    for type, count in pairs(self.inventory) do
-        if type ~= "energy" then
-            freeSpace = freeSpace - count
-        end
-    end
-    return freeSpace
+function Player:getFreeSpace()
+    return self.playerShip:getFreeSpace()
 end
 
 function Player:enterBase()
@@ -247,16 +244,16 @@ function Player:onCollide()
             end
         end
         if shape.type == "drop" then
-            local left = self:checkFreeSpace()
-            if left > shape.count then
+            local spaceLeft = self:getFreeSpace()
+            if spaceLeft > shape.count then
                 self.inventory[shape.resource] = self.inventory[shape.resource] + shape.count
                 shape.count = 0
                 if not self.playingSound then
                     self.playingSound = tracks.play_sound( tracks.list_of_sounds.vacuum_get )
                 end            
-            elseif left < shape.count and left > 0 then
-                shape.count = shape.count - left
-                self.inventory[shape.resource] = self.inventory[shape.resource] + left
+            elseif spaceLeft < shape.count and spaceLeft > 0 then
+                shape.count = shape.count - spaceLeft
+                self.inventory[shape.resource] = self.inventory[shape.resource] + spaceLeft
                 if not self.playingSound then
                     self.playingSound = tracks.play_sound( tracks.list_of_sounds.vacuum_get )
                 end

@@ -3,7 +3,7 @@ IOBox = require "game.classes.ui.iobox"
 IOSetting = require "game.classes.ui.iosetting"
 StorageBox = require "game.classes.ui.storagebox"
 StorageWithShipBox = require "game.classes.ui.storagewithshipbox"
-UpgradesBox = require "game.classes.ui.upgradesbox"
+ShipInfoBox = require "game.classes.ui.shipinfobox"
 tracks          = require "data/tracks"
 
 MotherShipUI = Class {
@@ -53,8 +53,8 @@ function MotherShipUI:initUI()
         waterStorage      = StorageBox        (storageX, 33*4*scale, 'water',      self.motherShip.storage.water, self.playerShip),
         ironStorage       = StorageBox        (storageX, 33*5*scale, 'iron',       self.motherShip.storage.iron, self.playerShip),
 
-        -- Upgrades
-        upgradesBox = UpgradesBox((14+64)*scale, 216*scale, self.motherShip.storage.iron, self.playerShip)
+        -- Ship inf and upgrades
+        shipInfoBox = ShipInfoBox(81, 217, self.playerShip, self.motherShip),
     }
 end
 
