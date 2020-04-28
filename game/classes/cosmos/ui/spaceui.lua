@@ -86,7 +86,7 @@ function SpaceUI:drawMap()
 
     temp = Vector(self.baseShip.curr_pos.x - self.player.curr_pos.x, self.baseShip.curr_pos.y - self.player.curr_pos.y)
     if temp:len() <= 900 * scale then
-        love.graphics.setColor(255, 0, 255)
+        love.graphics.setColor(0.7, 0.2, 0.9)
         love.graphics.circle("fill", (364 + temp.x / 80) * scale, (264 + temp.y / 80) * scale, 2 * scale)
     else
         temp = temp:normalized()

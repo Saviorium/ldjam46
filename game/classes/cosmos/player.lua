@@ -111,7 +111,7 @@ function Player:update(dt)
             )
         end
         if love.keyboard.isDown(self.buttons["stop"]) then
-            self:speedUp(-1, self.cur_speed.x, self.cur_speed.y, dt)
+            self:speedUp(-self.stop_speed, self.cur_speed.x, self.cur_speed.y, dt)
         end
     end
 
