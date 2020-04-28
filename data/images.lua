@@ -38,6 +38,7 @@ Images['helpSpaceToSpace'] = love.graphics.newImage('data/images/ui/space.png')
 Images['ice_drop'] = love.graphics.newImage('data/images/loot/ice.png')
 Images['iron_drop'] = love.graphics.newImage('data/images/loot/iron.png')
 Images['space_ui'] = love.graphics.newImage('data/images/space-ui.png')
+Images['space_ui_bg'] = love.graphics.newImage('data/images/space-ui-bg.png')
 
 
 for ind, obj in pairs(Images) do

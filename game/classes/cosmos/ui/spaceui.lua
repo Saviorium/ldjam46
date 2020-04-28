@@ -5,13 +5,29 @@ SpaceUI =
     Class {
     init = function(self, player, baseShip)
         self.image = Images['space_ui']
+        self.background = Images['space_ui_bg']
         self.playerShip = player.playerShip
         self.player = player
         self.baseShip = baseShip
+
+        self.blinkRate = 1 -- per second
+        self.blinkState = 0
+        self.critical = { food = false, oxygen = false, space = false, energy = false, hp = false }
     end
 }
 
+function SpaceUI:update(dt)
+    self.blinkState = (self.blinkState + dt * self.blinkRate) % 1
+
+    self.critical.food = self.playerShip:getFood() < 10
+    self.critical.oxygen = self.playerShip:getOxygen() < 20
+    self.critical.space = self.playerShip:getFreeSpace() < 1
+    self.critical.energy = self.playerShip:getEnergy() < 9
+    self.critical.hp = self.playerShip:getHP() < 10
+end
+
 function SpaceUI:draw()
+    self:drawBlinkingBackground()
     love.graphics.setFont(fonts.char)
     love.graphics.draw(self.image, 0, 0, 0, scale, scale)
     love.graphics.print(string.format("%3.f", math.clamp(0, self.playerShip:getFood(), 9999)), 70 * scale, 6 * scale)
@@ -21,6 +37,35 @@ function SpaceUI:draw()
     love.graphics.print(string.format("%3.f", math.clamp(0, self.playerShip:getHP(), 9999)), 328 * scale, 6 * scale)
     self:drawMap()
     love.graphics.setFont(fonts.char)
+end
+
+function SpaceUI:drawBlinkingBackground()
+    love.graphics.draw(self.background, 0, 0, 0, scale, scale)
+    love.graphics.setColor(0.81, 0.27, 0.28)
+    print(serpent.block(self.critical))
+    if self.blinkState > 0.5 then
+        if self.critical.food then
+            self:drawRect(65, 3, 33, 18)
+        end
+        if self.critical.oxygen then
+            self:drawRect(122, 3, 33, 18)
+        end
+        if self.critical.energy then
+            self:drawRect(266, 3, 33, 18)
+        end
+        if self.critical.hp then
+            self:drawRect(323, 3, 33, 18)
+        end
+    end
+
+    if self.critical.space then
+        self:drawRect(179, 3, 63, 18)
+    end
+    love.graphics.setColor(1, 1, 1)
+end
+
+function SpaceUI:drawRect(x, y, w, h)
+    love.graphics.rectangle("fill", x * scale, y * scale, w * scale, h * scale)
 end
 
 function SpaceUI:drawMap()

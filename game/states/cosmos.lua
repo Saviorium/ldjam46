@@ -106,6 +106,7 @@ function cosmos:update( dt ) -- Каждый кадр
     else
         TutorialWatched = true
     end
+    self.gui:update(dt)
 end
 
 return cosmos
