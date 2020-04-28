@@ -42,7 +42,6 @@ Images['space_ui'] = love.graphics.newImage('data/images/space-ui.png')
 Images['space_ui_bg'] = love.graphics.newImage('data/images/space-ui-bg.png')
 
 Images['arrow-sheet'] = love.graphics.newImage('data/images/ui/arrow-sheet.png')
-Images['arrow-sheet']:setFilter("nearest", "nearest")
 
 for ind, obj in pairs(Images) do
     obj:setFilter("nearest", "nearest")
