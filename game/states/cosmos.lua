@@ -2,7 +2,7 @@ Player = require "game/classes/cosmos/player"
 BaseShip = require "game/classes/cosmos/base-ship"
 Asteroid = require "game/classes/cosmos/asteroid"
 Map = require "game/classes/cosmos/map/map"
-GUI = require "game/classes/cosmos/gui"
+SpaceUI = require "game/classes/cosmos/ui/spaceui"
 Camera = require "lib.hump.camera"
 HC = require 'lib/hardoncollider'
 fonts = require "data.fonts"
@@ -39,9 +39,7 @@ function cosmos:enter() -- Запускается при запуске прил
                    self.baseShip,
                    self.hc)
     self.baseShip = BaseShip(0, 0, self.hc)
-    self.gui = GUI(love.graphics.newImage('data/images/guid.png'),
-                   self.player,
-                   self.baseShip)
+    self.gui = SpaceUI(self.player, self.baseShip)
     if not TutorialWatched then
         self.timer_for_buttons = 5
     end 

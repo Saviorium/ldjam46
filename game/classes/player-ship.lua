@@ -35,6 +35,22 @@ function PlayerShip:getMaxEnergy()
     return self.upgrade.battery*100
 end
 
+function PlayerShip:getFood()
+    return self.inventory.foodVeg + self.inventory.foodAnimal
+end
+
+function PlayerShip:getOxygen()
+    return self.inventory.oxygen
+end
+
+function PlayerShip:getEnergy()
+    return self.inventory.energy
+end
+
+function PlayerShip:getHP()
+    return self.hp
+end
+
 function PlayerShip:getFreeSpace()
     local freeSpace = self:getMaxVolume()
     for type, count in pairs(self.inventory) do
@@ -91,7 +107,7 @@ end
 function PlayerShip:getFreeSpaceText()
     local max = self:getMaxVolume()
     local taken = max - self:getFreeSpace()
-    return string.format('%4.f', math.min(math.max(taken, 0),9999)) .. "/" .. string.format('%4.f', math.min(math.max(max, 0),9999))
+    return string.format('%4.f', math.clamp(0, taken, 9999)) .. "/" .. string.format('%4.f', math.clamp(0, max, 9999))
 end
 
 return PlayerShip

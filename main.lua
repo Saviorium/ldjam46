@@ -1,5 +1,6 @@
 StateManager = require "lib.hump.gamestate"
-require 'conf'
+require "conf"
+require "game.utils"
 
 serpent = require "lib.debug.serpent"
 states = {
