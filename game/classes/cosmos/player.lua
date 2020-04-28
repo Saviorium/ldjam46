@@ -22,10 +22,6 @@ Player =
         self.maxVolume = self.playerShip:getMaxVolume()
 
         self.maxEnergy = self.playerShip:getMaxEnergy()
-        self.oxygenConsume = 1
-        self.foodConsume = 1
-        self.death_o2_timer = 5
-        self.death_food_timer = 30
 
         self.inventory = self.playerShip.inventory
 
@@ -117,6 +113,7 @@ function Player:update(dt)
             self:speedUp(-1, self.cur_speed.x, self.cur_speed.y, dt)
         end
     end
+
     self:setAngle(cursor, dt)
     self:onCollide()
     self:move(self.cur_speed)
@@ -126,39 +123,13 @@ function Player:update(dt)
     if self.inventory["energy"] <= self.maxEnergy then
         self.inventory["energy"] = self.inventory["energy"] + self.energyRecharge * dt
     end
-    if self.inventory["oxygen"] >= 0 then
-        self.inventory["oxygen"] = self.inventory["oxygen"] - self.oxygenConsume * dt
-        self.death_o2_timer = 5
-    else
-        self.death_o2_timer = self.death_o2_timer - dt
-    end
-    if self.inventory["foodVeg"] >= 0 and self.inventory["foodAnimal"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2*35 * dt
-        self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume/2 * dt
-        self.death_food_timer = 30
-    elseif self.inventory["foodVeg"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume*35 * dt
-        self.death_food_timer = 30
-    elseif self.inventory["foodAnimal"] >= 0 then
-        self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume * dt
-        self.death_food_timer = 30
-    else
-        self.death_food_timer = self.death_food_timer - dt
-    end
-
-    if self.death_food_timer < 0 then
-        StateManager.switch(states.end_game,3)
-    elseif self.death_o2_timer < 0 then
-        StateManager.switch(states.end_game,2)
-    elseif self.HP < 0 then
-        StateManager.switch(states.end_game,1)
-    end
 
     if self.playingSound then
         if not self.playingSound:isPlaying() then
             self.playingSound = nil
         end
     end
+    playerShip:update(dt)
 end
 
 function Player:debugDraw()
@@ -178,6 +149,8 @@ function Player:debugDraw()
     love.graphics.line(x, y, current_cursor.x, current_cursor.y)
     love.graphics.setColor(255, 255, 255)
 end
+
+
 
 function Player:setAngle(cursor, dt)
     local x = self.curr_pos.x
@@ -235,6 +208,9 @@ function Player:onCollide()
         if shape.type == "asteroid" or shape.type == "solid" then
             if self.cur_speed:len() > 10 then
                 self.HP = self.HP - self.cur_speed:len()
+                if self.HP < 0 then
+                    StateManager.switch(states.end_game,1)
+                end
             end
             self.curr_pos.x = self.curr_pos.x + delta.x
             self.curr_pos.y = self.curr_pos.y + delta.y
