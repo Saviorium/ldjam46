@@ -4,7 +4,7 @@ IOSetting = require "game.classes.ui.iosetting"
 StorageBox = require "game.classes.ui.storagebox"
 StorageWithShipBox = require "game.classes.ui.storagewithshipbox"
 ShipInfoBox = require "game.classes.ui.shipinfobox"
-tracks          = require "data/tracks"
+tracks = require "data/tracks"
 
 MotherShipUI = Class {
     init = function(self, motherShip, playerShip)
@@ -59,10 +59,10 @@ function MotherShipUI:initUI()
 end
 
 function MotherShipUI:registerButtons(eventManager)
-    for id, object in pairs(self.buttons) do
+    for _, object in pairs(self.buttons) do
         eventManager:registerObject(object)
     end
-    for id, iobox in pairs(self.uiBoxes) do
+    for _, iobox in pairs(self.uiBoxes) do
         if iobox.registerButtons then
             iobox:registerButtons(eventManager)
         end
@@ -104,7 +104,7 @@ function MotherShipUI:draw()
     end
     self.sprite:onLoop(MotherShipUI:onTag(self.sprite))
     self.sprite:draw(0, 0, 0, scale, scale)
-    for id, object in pairs(self.modules) do
+    for _, object in pairs(self.modules) do
         object:draw()
     end
 
@@ -118,10 +118,10 @@ function MotherShipUI:draw()
     motherShip.modules.animalFarm:drawFarm()
     motherShip.modules.vegFarm:drawFarm()
 
-    for id, object in pairs(self.uiBoxes) do
+    for _, object in pairs(self.uiBoxes) do
         object:draw()
     end
-    for id, object in pairs(self.buttons) do
+    for _, object in pairs(self.buttons) do
         object:draw()
     end
 end

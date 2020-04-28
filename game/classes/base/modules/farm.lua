@@ -2,7 +2,7 @@ Class = require "lib.hump.class"
 Module = require "game.classes.base.module"
 TreeUnit = require "game/classes/ui/farm-unit/tree-unit"
 CowUnit = require "game/classes/ui/farm-unit/cow-unit"
-tracks          = require "data/tracks"
+tracks = require "data/tracks"
 
 Farm = Class {
     __includes = Module,
@@ -205,13 +205,13 @@ end
 
 function Farm:update(dt)
     if self.name == "AnimFarm" then
-        for id, object in pairs(self.farm_units) do
+        for _, object in pairs(self.farm_units) do
             object:update(dt)
         end
     end
     Module:update(dt)
     local deltaHP = 0
-    for index, resource in pairs(self.resources) do
+    for _, resource in pairs(self.resources) do
         if resource['consume_by_unit'] ~= 0 then
             local cur_rate = 0
             local deficit = resource['storageUnit']:addAndGetExcess(- resource['rate'] * resource['consume_by_unit'] * self.units*dt)

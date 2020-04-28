@@ -26,7 +26,8 @@ Images['water'] = love.graphics.newImage('data/images/ui/icon-water.png')
 
 Images['IOBox'] = love.graphics.newImage('data/images/ui/io_box.png')
 Images['arrow'] = love.graphics.newImage('data/images/ui/arrow.png')
-Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
+Images['screen_with_buttons'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
+Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen-no-buttons.png')
 Images['bigscreen'] = love.graphics.newImage('data/images/ui/big-tablo.png')
 Images['storageBox'] = love.graphics.newImage('data/images/ui/storage-box.png')
 
@@ -40,6 +41,8 @@ Images['iron_drop'] = love.graphics.newImage('data/images/loot/iron.png')
 Images['space_ui'] = love.graphics.newImage('data/images/space-ui.png')
 Images['space_ui_bg'] = love.graphics.newImage('data/images/space-ui-bg.png')
 
+Images['arrow-sheet'] = love.graphics.newImage('data/images/ui/arrow-sheet.png')
+Images['arrow-sheet']:setFilter("nearest", "nearest")
 
 for ind, obj in pairs(Images) do
     obj:setFilter("nearest", "nearest")
