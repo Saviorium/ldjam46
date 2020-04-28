@@ -11,12 +11,12 @@ PlayerShip = Class {
             foodAnimal = 10
         }
         self.upgrade = {
-            battery  = 22,
-            fire     = 22,
-            maneur   = 21,
-            recharge = 21,
-            space    = 21,
-            speed    = 21
+            battery  = 1,
+            fire     = 1,
+            maneur   = 1,
+            recharge = 1,
+            space    = 1,
+            speed    = 1
         }
         self.hp = 100
         self.oxygenConsume = 2

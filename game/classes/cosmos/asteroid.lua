@@ -61,29 +61,29 @@ function Asteroid:update(dt)
 end
 
 function Asteroid:randomize( x, y )
-    local temp = 0 --math.random(0,3)
+    local temp = math.random(0,3)
     local type = math.random(1,5)
     self.rotationSpeed = math.random(-15,15) / 5000
-    -- if temp == 0 then
+    if temp == 0 then
       self.HP   = math.random(10,100)
       self.image = Images['empty_'..type]
       self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
-    -- elseif temp == 1 then
-    --   self.HP   = math.random(100,1000)
-    --   self.destroy_func = self.dropIron
-    --   self.image = Images['iron_'..type]
-    --   self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
-    -- elseif temp == 2 then
-    --   self.HP   = math.random(50,400)
-    --   self.destroy_func = self.dropIce
-    --   self.image = Images['ice_'..type]
-    --   self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
-    -- elseif temp == 3 then
-    --   self.HP   = math.random(500,1500)
-    --   self.destroy_func = self.dropAll
-    --   self.image = Images['all_'..type]
-    --   self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
-    -- end
+    elseif temp == 1 then
+      self.HP   = math.random(100,1000)
+      self.destroy_func = self.dropIron
+      self.image = Images['iron_'..type]
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
+    elseif temp == 2 then
+      self.HP   = math.random(50,400)
+      self.destroy_func = self.dropIce
+      self.image = Images['ice_'..type]
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
+    elseif temp == 3 then
+      self.HP   = math.random(500,1500)
+      self.destroy_func = self.dropAll
+      self.image = Images['all_'..type]
+      self.collider = self:createPoligon(Images.poligons['asteroid_'..type])
+    end
     self.collider:move(x - Images.poligons['asteroid_'..type].x, y - Images.poligons['asteroid_'..type].y)
 end
 
