@@ -23,7 +23,7 @@ PlayerShip = Class {
         self.foodConsume = 1
         self.death_o2_timer = 5
         self.death_food_timer = 30
-        self.energyRecharge = 2 * math.pow(1.2, self.upgrade.recharge)
+        self.energyRecharge = 2 * math.pow(1.5, self.upgrade.recharge)
     end
 }
 
