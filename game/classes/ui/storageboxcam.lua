@@ -20,7 +20,7 @@ end
 function StorageBoxCam:update(dt)
     self.sprite:update(dt)
     local resourcePercent = 100 * ( motherShip.storage[self.resource].value / motherShip.storage[self.resource].max )
-    if resourcePercent < 5 then
+    if resourcePercent < 0.1 then
         self.sprite:setTag('empty')
     elseif resourcePercent < 20 then
         self.sprite:setTag('some')
