@@ -19,7 +19,7 @@ function IOSetting:registerButtons(eventManager)
 end
 
 function IOSetting:update(dt)
-    
+    self.image_arrow:update(dt)
 end
 
 function IOSetting:draw()

@@ -13,7 +13,7 @@ IOBox = Class {
 
 function IOBox:initUI()
     self.image_back = Images['IOBox']
-    self.image_arrow = Peachy.new("data/images/ui/arrow-sheet.json", Images['arrow-sheet'], "alert")
+    self.image_arrow = Peachy.new("data/images/ui/arrow-sheet.json", Images['arrow-sheet'], "normal")
     self.angle_of_arrow = (self.direction == 'Out' and math.pi or 0)
     self.image_resource = Images[self.resource]
     self.screen = Images['screen']
@@ -40,19 +40,15 @@ function IOBox:drawBox()
     if self.direction == "In" then
         local res = self.module.resources[self.resource]
         local critical = self.module:isCritical(self.resource)
-        print(self.resource.." "..self.image_arrow.tagName.." "..self.image_arrow.frameIndex.." "..res['storageUnit'].value)
 
-        if (self.image_arrow.tagName ~= "normal") and critical then
+        if (self.image_arrow.tagName ~= "normal") and not critical then
             self.image_arrow:setTag("normal")
-            print("normal")
         end
-        if (self.image_arrow.tagName ~= "alert") and not critical then
+        if (self.image_arrow.tagName ~= "alert") and  critical then
             self.image_arrow:setTag("alert")
-            print("alert")
         end
         if (self.image_arrow.tagName ~= "empty") and res['storageUnit'].value <= 0 then
             self.image_arrow:setTag("empty")
-            print("empty")
         end
     end
     self.image_arrow:draw(self.curr_pos.x + (self.angle_of_arrow==0 and 32*scale or 55*scale),
