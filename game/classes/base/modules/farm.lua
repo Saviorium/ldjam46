@@ -203,6 +203,14 @@ function Farm:harvestToStorage(units)
     self:removeUnit(units)
 end
 
+function Farm:isCritical(resource)
+    if resource == 'oxygen' then
+        return self.resources[resource]['rate'] < self.resources[resource]['sensivity'] + 10
+    else
+        return self.resources[resource]['storageUnit'].value < 5 * self.resources[resource]['rate'] * self.resources[resource]['consume_by_unit'] * self.units
+    end
+end
+
 function Farm:update(dt)
     if self.name == "AnimFarm" then
         for _, object in pairs(self.farm_units) do
@@ -213,10 +221,10 @@ function Farm:update(dt)
     local deltaHP = 0
     for _, resource in pairs(self.resources) do
         if resource['consume_by_unit'] ~= 0 then
-            local cur_rate = 0
+            local cur_rate = resource['rate']
             local deficit = resource['storageUnit']:addAndGetExcess(- resource['rate'] * resource['consume_by_unit'] * self.units*dt)
-            if deficit >= 0 then
-                cur_rate = resource['rate']
+            if deficit < 0 then
+                resource['rate'] = 0
             end
             local cur_status = cur_rate - resource['sensivity']
             if not(resource['can_heal'] == 0 and cur_status > 0) then

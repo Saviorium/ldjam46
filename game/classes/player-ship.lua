@@ -11,19 +11,19 @@ PlayerShip = Class {
             foodAnimal = 10
         }
         self.upgrade = {
-            battery  = 1,
-            fire     = 1,
-            maneur   = 1,
-            recharge = 1,
-            space    = 1,
-            speed    = 1
+            battery  = 10,
+            fire     = 10,
+            maneur   = 10,
+            recharge = 10,
+            space    = 10,
+            speed    = 10
         }
         self.hp = 100
         self.oxygenConsume = 2
         self.foodConsume = 1
         self.death_o2_timer = 5
         self.death_food_timer = 30
-        self.energyRecharge = 2 + self.upgrade.recharge
+        self.energyRecharge = 2 * math.pow(1.2, self.upgrade.recharge)
     end
 }
 

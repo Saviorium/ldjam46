@@ -38,7 +38,7 @@ Player =
 
         self.fullHp = 100
 
-        self.rate_of_fire = 1 - playerShip.upgrade.fire*0.1
+        self.rate_of_fire = 1 * math.pow(0.9, playerShip.upgrade.fire)
         self.last_fire = 0
 
         self.energyOnMove = 5

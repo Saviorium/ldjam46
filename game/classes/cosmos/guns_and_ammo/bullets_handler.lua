@@ -37,7 +37,10 @@ function Bullets_handler:update( dt )
         bullet:update( dt )
         for shape, delta in pairs(self.hc:collisions(bullet.collider)) do
           if shape.type == 'asteroid' then 
-              Asteroids[shape.index].HP = Asteroids[shape.index].HP - bullet.damage
+              Asteroids[shape.index].HP = 
+              Asteroids[shape.index].HP - 
+              bullet.damage
+              print(Asteroids[shape.index].HP, bullet.damage, shape, shape.index, Asteroids)
               if Asteroids[shape.index].HP < 0 then
                   table.insert(Destroyed_Asteroids, Asteroids[shape.index]) 
                   Asteroids[shape.index]:destroy()
