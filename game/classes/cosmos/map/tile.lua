@@ -19,11 +19,6 @@ function Tile:draw()
                        0, 
                        scale, 
                        scale )
-    love.graphics.rectangle( 'line',
-                             self.curr_pos.x,
-                             self.curr_pos.y, 
-                             self.width, 
-                             self.height )
 end
 
 function Tile:checkAndCreateAsteroids()
