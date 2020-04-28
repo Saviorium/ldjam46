@@ -207,7 +207,8 @@ function Farm:isCritical(resource)
     if resource == 'oxygen' then
         return self.resources[resource]['rate'] < self.resources[resource]['sensivity'] + 0,1
     else
-        return self.resources[resource]['storageUnit'].value < 5 * self.resources[resource]['rate'] * self.resources[resource]['consume_by_unit'] * self.units
+        return self.resources[resource]['storageUnit'].value < 15 * self.resources[resource]['rate'] * self.resources[resource]['consume_by_unit'] * self.units
+            or self.resources[resource]['rate'] <= self.resources[resource]['sensivity']
     end
 end
 
