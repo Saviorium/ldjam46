@@ -42,9 +42,9 @@ end
 function SpaceUI:drawBlinkingBackground()
     love.graphics.draw(self.background, 0, 0, 0, scale, scale)
     love.graphics.setColor(0.81, 0.27, 0.28)
-    print(serpent.block(self.critical))
     if self.blinkState > 0.5 then
         if self.critical.food then
+            print("blink food")
             self:drawRect(65, 3, 33, 18)
         end
         if self.critical.oxygen then
@@ -99,11 +99,11 @@ function SpaceUI:drawMap()
         )
     end
 
-    love.graphics.setColor(0, 0, 255)
+    love.graphics.setColor(0.4, 0.6, 1)
     for ind, obj in pairs(asteroids_in_view) do
         love.graphics.circle("fill", (365 + obj.x) * scale, (265 + obj.y) * scale, 1 * scale)
     end
-    love.graphics.setColor(0, 255, 0)
+    love.graphics.setColor(0.3, 0.8, 0.1)
     for ind, obj in pairs(loot_in_view) do
         love.graphics.circle("fill", (365 + obj.x) * scale, (265 + obj.y) * scale, 1 * scale)
     end
