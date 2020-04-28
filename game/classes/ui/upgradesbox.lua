@@ -47,20 +47,22 @@ function UpgradesBox:registerButtons(eventManager)
 end
 
 function UpgradesBox:doUpgrade(upgradeName)
-    currentLevel = self.ship.upgrade[upgradeName]
-    upgradeCost = self.upgrades[upgradeName].costs[currentLevel]
-    if not upgradeCost then
-        print("max upgrade level for " .. upgradeName .. " level: " .. currentLevel .. " reached!")
+    if self.ship.upgrade[upgradeName] then
+        currentLevel = self.ship.upgrade[upgradeName]
+        upgradeCost = self.upgrades[upgradeName].costs[currentLevel]
+        if not upgradeCost then
+            tracks.play_sound( tracks.list_of_sounds.error_button )
+            return
+        end
+        if self.resource:getValue() < upgradeCost then
+            tracks.play_sound( tracks.list_of_sounds.error_button )
+            return
+        end
+        self.resource:add( -upgradeCost )
+        self.ship.upgrade[upgradeName] = currentLevel + 1
+    else
         tracks.play_sound( tracks.list_of_sounds.error_button )
-        return
     end
-    if self.resource:getValue() < upgradeCost then
-        print("not enough resources to upgrade " .. upgradeName .. " to level " .. currentLevel + 1)
-        tracks.play_sound( tracks.list_of_sounds.error_button )
-        return
-    end
-    self.resource:add( -upgradeCost )
-    self.ship.upgrade[upgradeName] = currentLevel + 1
 end
 
 function UpgradesBox:draw()
@@ -68,10 +70,12 @@ function UpgradesBox:draw()
         object:draw()
         love.graphics.setFont(fonts.char)
         local upgradeName = string.lower(string.sub(id,8,-1))
-        love.graphics.print( self.upgrades[upgradeName].costs[self.ship.upgrade[upgradeName]],
-                             object.x+12*scale,
-                             object.y+2*scale, 
-                             0)
+        if self.upgrades[upgradeName].costs[self.ship.upgrade[upgradeName]] then
+            love.graphics.print( self.upgrades[upgradeName].costs[self.ship.upgrade[upgradeName]],
+                                 object.x+12*scale,
+                                 object.y+2*scale, 
+                                 0)
+        end
         love.graphics.setFont(fonts.numbers)
     end
 end
