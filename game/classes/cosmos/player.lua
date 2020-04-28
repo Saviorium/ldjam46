@@ -25,7 +25,6 @@ Player =
 
         self.inventory = self.playerShip.inventory
 
-        self.HP = self.playerShip.hp
         self.angle = angle
 
         self.base_speed = 3
@@ -35,6 +34,9 @@ Player =
         self.back_speed = self.base_speed / 5 + playerShip.upgrade.maneur
         self.stop_speed = 0.5 + playerShip.upgrade.maneur/10
         self.bounciness = 0.3
+        self.collisionDmgMultiplier = 2
+
+        self.fullHp = 100
 
         self.rate_of_fire = 1 - playerShip.upgrade.fire*0.1
         self.last_fire = 0
@@ -199,6 +201,10 @@ function Player:enterBase()
     self.inventory.ice = iceExcess
     local ironExcess = motherShip:addResources("iron", self.inventory.iron)
     self.inventory.iron = ironExcess
+    
+    self.playerShip.inventory.energy = self.playerShip:getMaxEnergy()
+    self.playerShip.hp = self.fullHp
+
     StateManager.switch(states.base)
 end
 
@@ -206,8 +212,8 @@ function Player:onCollide()
     for shape, delta in pairs(self.HC:collisions(self.collider)) do
         if shape.type == "asteroid" or shape.type == "solid" then
             if self.cur_speed:len() > 10 then
-                self.HP = self.HP - self.cur_speed:len()
-                if self.HP < 0 then
+                self.playerShip.hp = self.playerShip.hp - (self.cur_speed:len() * self.collisionDmgMultiplier)
+                if self.playerShip.hp < 0 then
                     StateManager.switch(states.end_game,1)
                 end
             end
@@ -236,7 +242,6 @@ function Player:onCollide()
         end
         if shape.type == "enterBase" and love.keyboard.isDown(self.buttons["use"]) then
             self:enterBase()
-            self.playerShip.inventory.energy = self.playerShip:getMaxEnergy()
         end
     end
 end

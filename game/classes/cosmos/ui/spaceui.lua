@@ -23,7 +23,7 @@ function SpaceUI:update(dt)
     self.critical.oxygen = self.playerShip:getOxygen() < 20
     self.critical.space = self.playerShip:getFreeSpace() < 1
     self.critical.energy = self.playerShip:getEnergy() < 9
-    self.critical.hp = self.playerShip:getHP() < 10
+    self.critical.hp = self.playerShip:getHP() < 25
 end
 
 function SpaceUI:draw()
@@ -44,7 +44,6 @@ function SpaceUI:drawBlinkingBackground()
     love.graphics.setColor(0.81, 0.27, 0.28)
     if self.blinkState > 0.5 then
         if self.critical.food then
-            print("blink food")
             self:drawRect(65, 3, 33, 18)
         end
         if self.critical.oxygen then
