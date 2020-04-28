@@ -208,7 +208,6 @@ function Farm:isCritical(resource)
         return self.resources[resource]['rate'] < self.resources[resource]['sensivity'] + 0,1
     else
         return self.resources[resource]['storageUnit'].value < 15 * self.resources[resource]['rate'] * self.resources[resource]['consume_by_unit'] * self.units
-            or self.resources[resource]['rate'] <= self.resources[resource]['sensivity']
     end
 end
 
@@ -222,10 +221,10 @@ function Farm:update(dt)
     local deltaHP = 0
     for _, resource in pairs(self.resources) do
         if resource['consume_by_unit'] ~= 0 then
-            local cur_rate = resource['rate']
+            local cur_rate = 0
             local deficit = resource['storageUnit']:addAndGetExcess(- resource['rate'] * resource['consume_by_unit'] * self.units*dt)
-            if deficit < 0 then
-                resource['rate'] = 0
+            if deficit >= 0 then
+                cur_rate = resource['rate']
             end
             local cur_status = cur_rate - resource['sensivity']
             if not(resource['can_heal'] == 0 and cur_status > 0) then
