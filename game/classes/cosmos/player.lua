@@ -77,7 +77,7 @@ function Player:draw()
 end
 
 function Player:mouse_click()
-    self:fireGatling()
+
 end
 
 function Player:update(dt)
@@ -113,6 +113,9 @@ function Player:update(dt)
         end
     end
 
+    if love.mouse.isDown(1) then
+        self:fireGatling()
+    end
     self:setAngle(cursor, dt)
     self:onCollide()
     self:move(self.cur_speed)
@@ -125,7 +128,7 @@ function Player:update(dt)
             self.playingSound = nil
         end
     end
-    self.playerShip:update(dt)
+    self.playerShip:update(false, dt)
 end
 
 function Player:debugDraw()

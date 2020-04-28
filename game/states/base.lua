@@ -45,7 +45,7 @@ function base:update( dt )
     for id, object in pairs(self.objects) do
         object:update( dt )
     end
-    playerShip:update(dt)
+    playerShip:update(true, dt)
 end
 
 return base

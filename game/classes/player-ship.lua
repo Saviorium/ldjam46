@@ -61,9 +61,14 @@ function PlayerShip:getFreeSpace()
     return freeSpace
 end
 
-function PlayerShip:update(dt)
-    self:consumeOxygen(dt)
-    self:consumeFood(dt)
+function PlayerShip:update(base, dt)
+    if base then
+        self:consumeOxygenFromMotherShip(dt)
+        self:consumeFoodFromMotherShip(dt)
+    else
+        self:consumeOxygenFromShip(dt)
+        self:consumeFoodFromShip(dt)
+    end
     self:restoreEnergy(dt)
 
     if self.death_food_timer < 0 then
@@ -79,25 +84,50 @@ function PlayerShip:restoreEnergy(dt)
     end
 end
 
-function PlayerShip:consumeOxygen(dt)
-    if self.inventory["oxygen"] >= 0 then
-        self.inventory["oxygen"] = self.inventory["oxygen"] - self.oxygenConsume * dt
+function PlayerShip:consumeOxygenFromMotherShip(dt)
+    if motherShip.storage.oxygen.value >= 0 then
+        motherShip.storage.oxygen.value = motherShip.storage.oxygen.value - self.oxygenConsume * dt
         self.death_o2_timer = 5
     else
         self.death_o2_timer = self.death_o2_timer - dt
     end
 end
 
-function PlayerShip:consumeFood(dt)
-    if self.inventory["foodVeg"] >= 0 and self.inventory["foodAnimal"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2 * dt
-        self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume/2 * dt
+function PlayerShip:consumeFoodFromMotherShip(dt)
+    if motherShip.storage.foodVeg.value >= 0 and motherShip.storage.foodAnimal.value >= 0 then
+        motherShip.storage.foodVeg.value = motherShip.storage.foodVeg.value - self.foodConsume/2 * dt
+        motherShip.storage.foodAnimal.value = motherShip.storage.foodAnimal.value - self.foodConsume/2 * dt
         self.death_food_timer = 30
-    elseif self.inventory["foodVeg"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume * dt
+    elseif motherShip.storage.foodVeg.value >= 0 then
+        motherShip.storage.foodVeg.value = motherShip.storage.foodVeg.value - self.foodConsume * dt
         self.death_food_timer = 30
-    elseif self.inventory["foodAnimal"] >= 0 then
-        self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume * dt
+    elseif motherShip.storage.foodAnimal.value >= 0 then
+        motherShip.storage.foodAnimal.value = motherShip.storage.foodAnimal.value - self.foodConsume * dt
+        self.death_food_timer = 30
+    else
+        self.death_food_timer = self.death_food_timer - dt
+    end
+end
+
+function PlayerShip:consumeOxygenFromShip(dt)
+    if self.inventory.oxygen >= 0 then
+        self.inventory.oxygen = self.inventory.oxygen - self.oxygenConsume * dt
+        self.death_o2_timer = 5
+    else
+        self.death_o2_timer = self.death_o2_timer - dt
+    end
+end
+
+function PlayerShip:consumeFoodFromShip(dt)
+    if self.inventory.foodVeg >= 0 and self.inventory.foodAnimal >= 0 then
+        self.inventory.foodVeg = self.inventory.foodVeg - self.foodConsume/2 * dt
+        self.inventory.foodAnimal = self.inventory.foodAnimal - self.foodConsume/2 * dt
+        self.death_food_timer = 30
+    elseif self.inventory.foodVeg >= 0 then
+        self.inventory.foodVeg = self.inventory.foodVeg - self.foodConsume * dt
+        self.death_food_timer = 30
+    elseif self.inventory.foodAnimal >= 0 then
+        self.inventory.foodAnimal = self.inventory.foodAnimal - self.foodConsume * dt
         self.death_food_timer = 30
     else
         self.death_food_timer = self.death_food_timer - dt
