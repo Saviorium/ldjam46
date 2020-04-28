@@ -12,6 +12,7 @@ playerShip = nil
 clock = nil
 
 Asteroids = nil
+Destroyed_Asteroids = nil
 Loot = nil
 
 function game:enter()
@@ -19,7 +20,7 @@ function game:enter()
     playerShip = PlayerShip()
 
     clock = Clock({ year = 2013, month = 09, day = 13}, 60*60*24)
-
+	Destroyed_Asteroids = {}
     Asteroids = {}
     Loot = {}
 

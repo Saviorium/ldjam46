@@ -43,7 +43,6 @@ Player =
         self.energyOnStrafe = 2
         self.enegryOnFireLaser = 80
         self.enegryOnFireGatling = 20
-        self.energyRecharge = 2 + playerShip.upgrade.recharge
 
         self.playingSound = nil
         self.soundTimer = 0
@@ -120,16 +119,13 @@ function Player:update(dt)
     self.bullets_handler:update(dt)
 
     self.last_fire = self.last_fire + dt
-    if self.inventory["energy"] <= self.maxEnergy then
-        self.inventory["energy"] = self.inventory["energy"] + self.energyRecharge * dt
-    end
 
     if self.playingSound then
         if not self.playingSound:isPlaying() then
             self.playingSound = nil
         end
     end
-    playerShip:update(dt)
+    self.playerShip:update(dt)
 end
 
 function Player:debugDraw()
@@ -237,6 +233,7 @@ function Player:onCollide()
         end
         if shape.type == "enterBase" and love.keyboard.isDown(self.buttons["use"]) then
             self:enterBase()
+            self.playerShip.inventory.energy = self.playerShip:getMaxEnergy()
         end
     end
 end

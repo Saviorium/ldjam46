@@ -74,11 +74,11 @@ end
 
 function PlayerShip:consumeFood(dt)
     if self.inventory["foodVeg"] >= 0 and self.inventory["foodAnimal"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2*35 * dt
+        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume/2 * dt
         self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume/2 * dt
         self.death_food_timer = 30
     elseif self.inventory["foodVeg"] >= 0 then
-        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume*35 * dt
+        self.inventory["foodVeg"] = self.inventory["foodVeg"] - self.foodConsume * dt
         self.death_food_timer = 30
     elseif self.inventory["foodAnimal"] >= 0 then
         self.inventory["foodAnimal"] = self.inventory["foodAnimal"] - self.foodConsume * dt

@@ -42,16 +42,16 @@ function Asteroid:draw()
 end
 
 function Asteroid.dropIron(self)
-    table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(10,100),'iron', table.maxn(Loot)+1, self.hc))
+    table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, (self.HP/5) + math.random(10,100),'iron', table.maxn(Loot)+1, self.hc))
 end
 
 function Asteroid.dropIce(self)
-    table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, math.random(50,400),'ice', table.maxn(Loot)+1, self.hc))
+    table.insert(Loot,Drop(self.curr_pos.x, self.curr_pos.y, (self.HP/2) + math.random(50,200),'ice', table.maxn(Loot)+1, self.hc))
 end
 
 function Asteroid.dropAll(self)
-    table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, math.random(100,200),'iron', table.maxn(Loot)+1, self.hc))
-    table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, math.random(100,800),'ice', table.maxn(Loot)+1, self.hc))
+    table.insert(Loot,Drop(self.curr_pos.x+10, self.curr_pos.y+10, (self.HP/10) + math.random(100,200),'iron', table.maxn(Loot)+1, self.hc))
+    table.insert(Loot,Drop(self.curr_pos.x-10, self.curr_pos.y-10, (self.HP/5) + math.random(100,400),'ice', table.maxn(Loot)+1, self.hc))
 end
 
 function Asteroid:update(dt)

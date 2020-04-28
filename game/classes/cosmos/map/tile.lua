@@ -19,11 +19,25 @@ function Tile:draw()
                        0, 
                        scale, 
                        scale )
+    love.graphics.rectangle( 'line',
+                             self.curr_pos.x,
+                             self.curr_pos.y, 
+                             self.width, 
+                             self.height )
 end
 
 function Tile:checkAndCreateAsteroids()
     local bool = 1
     for _,asteroid in pairs(Asteroids) do
+        if asteroid.curr_pos.x > self.curr_pos.x 
+       and asteroid.curr_pos.x < self.curr_pos.x + self.width
+       and asteroid.curr_pos.y > self.curr_pos.y 
+       and asteroid.curr_pos.y < self.curr_pos.y + self.height then
+            bool = 0
+            return
+        end
+    end
+    for _,asteroid in pairs(Destroyed_Asteroids) do
         if asteroid.curr_pos.x > self.curr_pos.x 
        and asteroid.curr_pos.x < self.curr_pos.x + self.width
        and asteroid.curr_pos.y > self.curr_pos.y 
