@@ -1,4 +1,4 @@
-$appname = "ld46"
+$appname = "space-cows"
 $love_dir = ".\pkg\love"
 $build_dir = ".\pkg"
 
