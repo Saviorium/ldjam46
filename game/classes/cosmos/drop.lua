@@ -22,7 +22,7 @@ end
 
 function Drop:onCollide()
     for shape, delta in pairs(self.hc:collisions(self.collider)) do
-      if self.collider.count == 0 then
+      if self.collider.count <= 0 then
         self:destroy()
         return
       end
