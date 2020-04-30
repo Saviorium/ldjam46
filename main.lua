@@ -14,7 +14,7 @@ states = {
 strings = {''}
 
 function love.load()
-    love.window.setTitle("Space Cowa and Big Problems")
+    love.window.setTitle("Space Cows and Big Problems")
     love.graphics.setDefaultFilter("nearest", "nearest")
     StateManager.switch( states.start_game )
 end

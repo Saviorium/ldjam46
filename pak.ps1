@@ -1,5 +1,5 @@
 $appname = "space-cows"
-$love_dir = ".\pkg\love"
+$love_dir = "..\..\love-11.3-win64"
 $build_dir = ".\pkg"
 
 # create ./pkg directory if it not exists
