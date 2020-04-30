@@ -7,7 +7,7 @@ StorageBox = Class {
         self.resource = resource
         self.storageUnit = storageUnit
         self:initUI()
-        self.storageScreen = Images['bigscreen']
+        self.storageScreen = Peachy.new("data/images/ui/big-tablo-sheet.json", Images['bigscreen_alert'], "normal")
         self.storageBoxCam = StorageBoxCam(x, y, resource, storageUnit)
     end
 }
@@ -18,18 +18,32 @@ end
 
 function StorageBox:update(dt)
     self.storageBoxCam:update(dt)
+    self.storageScreen:update(dt/4)
+end
+
+function StorageBox:changeTag(level, min, mid)
+    if self.storageScreen.tagName ~= "alert" and level <= mid and  math.modf(level) > min then
+        self.storageScreen:setTag("alert")
+    elseif self.storageScreen.tagName ~= "empty" and math.modf(level) == min then
+        self.storageScreen:setTag("empty")
+    elseif self.storageScreen.tagName ~= "normal" and level > mid then
+        self.storageScreen:setTag("normal")
+    end
 end
 
 function StorageBox:drawBox()
     self.storageBoxCam:draw()
-    love.graphics.draw(
-        self.storageScreen,
-        self.curr_pos.x+45*scale,
-        self.curr_pos.y+9*scale, 
-        0, 
-        scale, 
-        scale
-    )
+    local level = self.storageUnit:getLevel()*100
+    if self.resource == "oxygen" then
+        self:changeTag(level, 0, 50)
+    end
+    if self.resource == "water" then
+        self:changeTag(level, 0, 10)
+    end
+    if self.resource == "foodVeg" then
+        self:changeTag(level, 0, 2)
+    end
+    self.storageScreen:draw(self.curr_pos.x+45*scale, self.curr_pos.y+9*scale, 0, scale, scale)
     love.graphics.setFont(fonts.numbers)
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(

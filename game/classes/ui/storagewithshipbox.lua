@@ -61,7 +61,7 @@ StorageWithShipBox = Class {
                                 end
                             end) 
                     )
-        self.shipScreen = Images['bigscreen']
+        self.shipScreen = Peachy.new("data/images/ui/big-tablo-sheet.json", Images['bigscreen_alert'], "alert")
     end
 }
 
@@ -71,19 +71,39 @@ function StorageWithShipBox:registerButtons(eventManager)
     end
 end
 
+function StorageWithShipBox:update(dt)
+    self.shipScreen:update(dt/4)
+    self.storageScreen:update(dt/4)
+end
+
 function StorageWithShipBox:draw()
     self:drawBox()
     for _, object in pairs(self.buttons) do
         object:draw()
     end
-    love.graphics.draw( self.shipScreen,
-                        self.curr_pos.x+143*scale,
-                        self.curr_pos.y+9*scale, 
-                        0, 
-                        scale, 
-                        scale
-                      )
+    if (self.ship_resource == "foodVeg" or self.ship_resource == "foodAnimal") then
+        if self.shipScreen.tagName == "normal"
+                and self.ship.inventory["foodAnimal"] == 0 and self.ship.inventory["foodVeg"] == 0 then
+            self.shipScreen:setTag("alert")
+        elseif self.shipScreen.tagName == "alert" and (self.ship.inventory["foodVeg"]>0 or self.ship.inventory["foodAnimal"]>0) then
+            self.shipScreen:setTag("normal")
+        end
+    end
 
+    if  self.ship_resource == "oxygen" then
+        if self.shipScreen.tagName == "normal"
+                and self.ship.inventory[self.ship_resource]==0 then
+            self.shipScreen:setTag("alert")
+        elseif self.shipScreen.tagName == "alert" and self.ship.inventory[self.ship_resource]>0 then
+            self.shipScreen:setTag("normal")
+        end
+    end
+
+    self.shipScreen:draw(self.curr_pos.x+143*scale,
+            self.curr_pos.y+9*scale,
+            0,
+            scale,
+            scale)
     love.graphics.setFont(fonts.numbers)
     love.graphics.setColor(1, 1, 1)
     love.graphics.print(

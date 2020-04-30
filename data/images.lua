@@ -29,6 +29,7 @@ Images['arrow'] = love.graphics.newImage('data/images/ui/arrow.png')
 Images['screen_with_buttons'] = love.graphics.newImage('data/images/ui/4digit-screen.png')
 Images['screen'] = love.graphics.newImage('data/images/ui/4digit-screen-no-buttons.png')
 Images['bigscreen'] = love.graphics.newImage('data/images/ui/big-tablo.png')
+Images['bigscreen_alert'] = love.graphics.newImage('data/images/ui/big-tablo-sheet.png')
 Images['storageBox'] = love.graphics.newImage('data/images/ui/storage-box.png')
 
 Images['shipInfoBox'] = love.graphics.newImage('data/images/ui/ship-info-box.png')
