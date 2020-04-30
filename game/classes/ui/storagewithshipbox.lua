@@ -18,10 +18,20 @@ StorageWithShipBox = Class {
                      Button(x+79*scale, 
                             y+2*scale, 
                             "button-arrow-left", 
-                            function() 
+                            function()
                                 if self.ship.inventory[self.ship_resource] - 10 >= 0 and storageUnit.value < storageUnit.max  then
-                                    storageUnit.value = storageUnit.value + 10 
-                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - 10 
+                                    storageUnit.value = storageUnit.value + 10
+                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - 10
+                                    tracks.play_sound( tracks.list_of_sounds.button )
+                                elseif self.ship.inventory[self.ship_resource] > 0 and math.modf(storageUnit.value)+1 < storageUnit.max  then
+                                    local freeSpace = storageUnit.max - math.modf(storageUnit.value)+1
+                                    if freeSpace > self.ship.inventory[self.ship_resource] then
+                                        storageUnit.value = storageUnit.value + self.ship.inventory[self.ship_resource]
+                                        self.ship.inventory[self.ship_resource] = 0
+                                    else
+                                        storageUnit.value = storageUnit.max-1 + storageUnit.value%1
+                                        self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] - freeSpace
+                                    end
                                     tracks.play_sound( tracks.list_of_sounds.button )
                                 else
                                     tracks.play_sound( tracks.list_of_sounds.error_button )
@@ -32,10 +42,19 @@ StorageWithShipBox = Class {
                      Button(x+125*scale, 
                             y+2*scale,
                             "button-arrow", 
-                            function() 
+                            function()
                                 if  self.ship:getFreeSpace() >= 10 and storageUnit.value >= 10 then
-                                    storageUnit.value = storageUnit.value - 10 
-                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + 10 
+                                    storageUnit.value = storageUnit.value - 10
+                                    self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + 10
+                                    tracks.play_sound( tracks.list_of_sounds.button )
+                                elseif math.modf(self.ship:getFreeSpace()) > 0 and storageUnit.value >= 1 then
+                                    if math.modf(self.ship:getFreeSpace()) > storageUnit.value then
+                                        self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + math.modf(storageUnit.value)
+                                        storageUnit.value = storageUnit.value%1
+                                    else
+                                        storageUnit.value = storageUnit.value - self.ship:getFreeSpace()
+                                        self.ship.inventory[self.ship_resource] = self.ship.inventory[self.ship_resource] + self.ship:getFreeSpace()
+                                    end
                                     tracks.play_sound( tracks.list_of_sounds.button )
                                 else
                                     tracks.play_sound( tracks.list_of_sounds.error_button )
@@ -47,14 +66,14 @@ StorageWithShipBox = Class {
 }
 
 function StorageWithShipBox:registerButtons(eventManager)
-    for id, object in pairs(self.buttons) do
+    for _, object in pairs(self.buttons) do
         eventManager:registerObject(object)
     end
 end
 
 function StorageWithShipBox:draw()
     self:drawBox()
-    for id, object in pairs(self.buttons) do
+    for _, object in pairs(self.buttons) do
         object:draw()
     end
     love.graphics.draw( self.shipScreen,
