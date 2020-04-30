@@ -36,8 +36,6 @@ Player =
         self.bounciness = 0.3
         self.collisionDmgMultiplier = 2
 
-        self.fullHp = 100
-
         self.rate_of_fire = 1 * math.pow(0.9, playerShip.upgrade.fire)
         self.last_fire = 0
 
@@ -45,6 +43,8 @@ Player =
         self.energyOnStrafe = 2
         self.enegryOnFireLaser = 80
         self.enegryOnFireGatling = 20
+
+        self.playerShip:onStartToSpace()
 
         self.playingSound = nil
         self.soundTimer = 0
@@ -201,9 +201,6 @@ function Player:enterBase()
     self.inventory.ice = iceExcess
     local ironExcess = motherShip:addResources("iron", self.inventory.iron)
     self.inventory.iron = ironExcess
-    
-    self.playerShip.inventory.energy = self.playerShip:getMaxEnergy()
-    self.playerShip.hp = self.fullHp
 
     StateManager.switch(states.base)
 end

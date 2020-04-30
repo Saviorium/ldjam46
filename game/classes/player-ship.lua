@@ -19,11 +19,13 @@ PlayerShip = Class {
             speed    = 1
         }
         self.hp = 100
+        self.fullHp = 100
         self.oxygenConsume = 2
         self.foodConsume = 1
         self.death_o2_timer = 5
         self.death_food_timer = 30
-        self.energyRecharge = 2 * math.pow(1.5, self.upgrade.recharge)
+        self.energyRecharge = 2
+        self.energyRechargeUpgradeMultiplier = 1.25
     end
 }
 
@@ -81,6 +83,7 @@ end
 function PlayerShip:restoreEnergy(dt)
     if self.inventory["energy"] <= self:getMaxEnergy() then
         self.inventory["energy"] = self.inventory["energy"] + self.energyRecharge * dt
+        print(self.energyRecharge)
     end
 end
 
@@ -138,6 +141,13 @@ function PlayerShip:getFreeSpaceText()
     local max = self:getMaxVolume()
     local taken = max - self:getFreeSpace()
     return string.format('%4.f', math.clamp(0, taken, 9999)) .. "/" .. string.format('%4.f', math.clamp(0, max, 9999))
+end
+
+function PlayerShip:onStartToSpace()
+    self.energyRecharge = 2 * math.pow(self.energyRechargeUpgradeMultiplier, self.upgrade.recharge)
+    
+    self.inventory.energy = self:getMaxEnergy()
+    self.hp = self.fullHp
 end
 
 return PlayerShip

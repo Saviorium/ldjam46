@@ -20,9 +20,11 @@ function cosmos:enter() -- Запускается при запуске прил
     end
     for _,obj in pairs(Loot) do
         if obj then
-            obj.hc = self.hc
-            self.hc:register(obj.collider)
-            obj.collider.type = 'drop'
+            if obj.collider then
+                obj.hc = self.hc
+                self.hc:register(obj.collider)
+                obj.collider.type = 'drop'
+            end
         end
     end
     self.player = Player(
