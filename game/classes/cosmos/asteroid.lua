@@ -21,6 +21,7 @@ Asteroid = Class {
 function Asteroid:destroy()
     if self.destroy_func then self.destroy_func(self) end
     self.hc:remove(self.collider)
+    self.collider = nil
 end
 
 function Asteroid:draw()

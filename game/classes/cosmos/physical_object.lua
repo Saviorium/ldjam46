@@ -18,8 +18,10 @@ function PhysicsObject:registerCollider(hc_instance)
 end
 
 function PhysicsObject:update( dt )
-  self:move( self.cur_speed )
-  self:onCollide()
+  if self.collider then
+    self:move( self.cur_speed )
+    self:onCollide()
+  end
 end
 
 function PhysicsObject:move( moveVector )

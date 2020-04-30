@@ -36,7 +36,7 @@ function Bullets_handler:update( dt )
     for b_i, bullet in pairs(self.bullets_on_screen) do
         bullet:update( dt )
         for shape, delta in pairs(self.hc:collisions(bullet.collider)) do
-          if shape.type == 'asteroid' then 
+          if shape.type == 'asteroid' and Asteroids[shape.index] then 
               Asteroids[shape.index].HP = 
               Asteroids[shape.index].HP - 
               bullet.damage
