@@ -83,7 +83,6 @@ end
 function PlayerShip:restoreEnergy(dt)
     if self.inventory["energy"] <= self:getMaxEnergy() then
         self.inventory["energy"] = self.inventory["energy"] + self.energyRecharge * dt
-        print(self.energyRecharge)
     end
 end
 
