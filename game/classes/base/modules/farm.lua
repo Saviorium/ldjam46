@@ -14,7 +14,7 @@ Farm = Class {
         self.wantedMaxUnits = maxUnits
         self.name = name
         self.foodSupplyRate = 1.1
-        self.baseOxygenDamage = 0.01
+        self.baseOxygenDamage = 1
         self.growthSpeed = growthRate
         self.resources = {}
         self.cam_image = love.graphics.newImage('data/images/ui/farm-cam.png')
@@ -127,13 +127,13 @@ function Farm:initResource(resource, rate, supplyUnit, sensitivity, consumption,
 end
 
 function Farm:initOxygen(supplyUnit, sensitivity, consumption)
-    self:initResource('oxygen', 1, supplyUnit, sensitivity, consumption, 0,20,0)
+    self:initResource('oxygen', 1, supplyUnit, sensitivity, consumption, 0, self.baseOxygenDamage, 0)
 end
 
 function Farm:initStorage( consumeResource, produceResource, inputStorage, outputStorage, consumptionPerUnit, productionPerUnit)
 
     self:initResource(consumeResource, 1, inputStorage , 0.8, consumptionPerUnit, 0 ,self.growthSpeed, 1)
-    self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit  ,0, 0)
+    self:initResource(produceResource, 1, outputStorage, 1  , 0, productionPerUnit, 0, 0)
     self.consumeResource = consumeResource
     self.produceResource = produceResource
 end
