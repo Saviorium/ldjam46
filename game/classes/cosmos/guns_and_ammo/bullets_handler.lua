@@ -40,7 +40,6 @@ function Bullets_handler:update( dt )
               Asteroids[shape.index].HP = 
               Asteroids[shape.index].HP - 
               bullet.damage
-              print(Asteroids[shape.index].HP, bullet.damage, shape, shape.index, Asteroids)
               if Asteroids[shape.index].HP < 0 then
                   table.insert(Destroyed_Asteroids, Asteroids[shape.index]) 
                   Asteroids[shape.index]:destroy()
